@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.bitc.team5.mapper.ReplyMapper">
+<mapper namespace="com.bitc.team5.mapper.ShopMapper">
 	<!--<select id="selectBoardList" resultType="com.bitc.dto.RestBoardDto">
 		<![CDATA[
 			SELECT
@@ -16,14 +16,80 @@
 		]]>
 	</select>-->
 	
-	<insert id="create" parameterType="com.bitc.team5.dto.reviewDto">
+<!--	<insert id="create" parameterType="com.bitc.team5.dto.reviewDto">
 		<![CDATA[
 			INSERT INTO review
 				( userId, pw , content , date)
 			VALUES
 				( #{userId}, #{pw} , #{content} , #{date} )
 		]]>
-	</insert>
+	</insert>-->
+	
+	
+	 <!-- 메뉴별 화면 -->
+   <select id="selectProductList" parameterType="int" resultType="com.bitc.team5.dto.ShopDto">
+      
+      <![CDATA[
+         SELECT
+            *
+         FROM
+            product 
+    	where
+             product_cate_id = #{productCateId}
+      
+      
+      ]]>
+      
+   </select>
+
+
+   
+<!-- 상세화면 -->
+    <select id="selectProductDetail" parameterType="int" resultType="com.bitc.team5.dto.ShopDto">
+      <![CDATA[
+         SELECT
+            *
+         FROM
+            product
+         WHERE
+              product_id = #{productId}
+         
+      ]]>
+      
+   </select>
+   
+    <!--  <select id="selectBoardFileList" parameterType="int" resultType="com.bitc.dto.ProjectDto">
+      <![CDATA[
+         SELECT
+            file_idx, product_idx, original_file_name, stored_file_path,
+            FORMAT(ROUND(file_size / 1024), 0) AS file_size
+         FROM
+            product_file
+         WHERE
+            product_idx = #{productIdx}
+
+      ]]>
+   </select>
+   -->
+   <!-- 지정한 글번호에 첨부된 파일 목록 불러오기 -->
+  <!-- <select id="selectBoardFileInfo" parameterType="map" resultType="com.bitc.dto.ProjectDto">
+      <![CDATA[
+         SELECT
+            original_file_name, stored_file_path, file_size
+         FROM
+            product_file
+         WHERE
+            product_idx = #{productIdx}
+         
+      ]]>
+   </select>
+	-->
+	
+	
+	
+	
+	
+	
 	
 	<!--<select id="selectBoardDetail" parameterType="int" resultType="com.bitc.dto.RestBoardDto">
 		<![CDATA[

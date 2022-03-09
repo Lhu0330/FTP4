@@ -188,7 +188,7 @@ $(document).ready(function(){
 
 </head>
 <body>
-	<header th:include="/header :: header"></header>
+	<header th:include="layout/header :: header"></header>
 	
 	<main>
 	<!-- 아이템 썸네일 구매  -->
@@ -236,7 +236,7 @@ $(document).ready(function(){
 	
 				<div class="aboutItem" style="width: 450px;"> 
 					<div class="설명">
-						<h1>이름</h1>
+						<h1 >이름</h1>
 						<hr>
 						<h2>가격</h2>
 						<br>
@@ -401,7 +401,7 @@ $(document).ready(function(){
 	</main>
 	
 	
-	<footer th:include="/footer:: footer"></footer>
+	<footer th:include="layout/footer:: footer"></footer>
 	
 
 	
