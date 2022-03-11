@@ -88,7 +88,7 @@ public class ProductFileUtils {
 //					현재 메서드의 첫번째 매개변수로 받아온 게시물 번호를 저장
 //					boardFile.setNoticeBoardFileIdx(boardIdx);
 					// 게시물 저장 과정에서 fk와 연동되어있는 noticeidx가 noticeboardFileidx로 저장되어 생긴 문제
-					boardFile.setProductId(boardIdx);
+					boardFile.setBoardIdx(boardIdx);
 //					현재 파일의 크기를 가져와서 저장(byte 단위)
 					
 //					MultipartFile 클래스의 getSize() 메서드의 반환타입이 long이기 때문에 SQL문에서 1메가가 넘어가는 경우 1,xxx로 표시되어 문자열로 인식이 되기 때문에 그대로 사용하지 못하고 문자열로 변환하여 사용
