@@ -55,9 +55,37 @@ public class UsersController {
 //		return "redirect:/productStockList";
 //	}
 	
+	// 상품등록 
 	@RequestMapping(value="/jr41/ProductInserting", method=RequestMethod.POST)
 	public String insertBoard(ShopDto restBoard, MultipartHttpServletRequest multiFiles) throws Exception {
+		
+		
+		//productId 만들기
+//		Calendar cal = Calendar.getInstance();
+//		int year = cal.get(Calendar.YEAR);
+//		String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
+//		String ymd = ym +  new DecimalFormat("00").format(cal.get(Calendar.DATE));
+//		String subNum = "";
+//		 
+//		for(int i = 1; i <= 3; i ++) {
+//			subNum += (int)(Math.random() * 10);
+//		}
+//		
+//		String orderCode = ymd + "_" + subNum;
+//		
+//		restBoard.setProductId(orderCode);
+////		Gson gson = new Gson();
+////		CartDto[] cartArray = gson.fromJson(data, CartDto[].class);
+////		List<CartDto> cartList = new ArrayList<CartDto>();
+////		
+////		for (CartDto item : cartArray) {
+////			item.setOrderCode(orderCode);
+////			cartList.add(item);
+////		}
+////		
+//		
 		productService.insertBoard(restBoard, multiFiles);
+		
 		
 		return "redirect:/admin/productStockList";
 	}

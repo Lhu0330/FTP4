@@ -33,7 +33,7 @@
          SELECT
             *
          FROM
-            product 
+            admin_product
     	where
              product_cate_id = #{productCateId}
       
@@ -45,18 +45,52 @@
 
    
 <!-- 상세화면 -->
-    <select id="selectProductDetail" parameterType="int" resultType="com.bitc.team5.dto.ShopDto">
+    <select id="selectProductDetail" parameterType="long" resultType="com.bitc.team5.dto.ShopDto">
       <![CDATA[
          SELECT
             *
          FROM
-            product
+            admin_product
          WHERE
-              product_id = #{productId}
+             product_id = #{productId}
          
       ]]>
       
    </select>
+   
+      <!-- 지정한 글번호에 첨부된 파일 목록 불러오기 -->
+	<!-- (file_size / 1024) -> kb로 표현할라고  -->
+	<select id="selectBoardFileList" parameterType="long" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path,
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				product_file
+			WHERE
+				product_id = #{productId} 
+			
+				
+			
+		]]>
+	</select>
+	
+	<!-- 상세설명 이미지 -->
+		<select id="selectBoardFileList2" parameterType="int" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path,
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				product_file
+			WHERE
+				product_id = #{productId} and file_type = 'D'
+			
+		]]>
+	</select>
+	
+	
+   
    
     <!--  <select id="selectBoardFileList" parameterType="int" resultType="com.bitc.dto.ProjectDto">
       <![CDATA[

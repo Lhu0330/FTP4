@@ -35,12 +35,22 @@ public class ShopController {
 		  return mv;
 		}
 	
-
-		
+//
+//	// 상품 상세화면
+//	
+//		@RequestMapping(value="/jr41/adminProductDetail/{idx}", method=RequestMethod.GET)
+//		public ModelAndView selectAdminProductDetail(@PathVariable("idx") int idx) throws Exception {
+//			ModelAndView mv = new ModelAndView("admin/AdminproductDetail");
+//				
+//			ShopDto AdminProduct = productService.selectAdminProductDetail(idx);
+//			mv.addObject("AdminProductList", AdminProduct);
+//			
+//			return mv;
+//		}
 	
 	 //제품 상세 화면
 	@RequestMapping(value="/shop/detail/{productId}", method=RequestMethod.GET)
-	public ModelAndView openBoardDetail(@PathVariable("productId") int productId) throws Exception {
+	public ModelAndView openBoardDetail(@PathVariable("productId") long productId) throws Exception {
 		ModelAndView mv = new ModelAndView("shop/detail");
 		
 		ShopDto board = shopService.selectProductDetail(productId);

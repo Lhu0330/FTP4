@@ -8,7 +8,7 @@ import lombok.Data;
 public class ShopDto {
 	
 	private int idx;
-	private int productId;
+	private long productId;
 	private int productCateId;
 	private int storeId;
 	private String productName;
@@ -24,6 +24,7 @@ public class ShopDto {
 	
 	
 	private List<AdminProductFileDto> fileList;
+	private List<AdminProductFileDto> fileList2;
 
 
 

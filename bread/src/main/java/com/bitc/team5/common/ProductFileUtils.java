@@ -54,6 +54,7 @@ public class ProductFileUtils {
 		String contentType;
 		
 		while(iterator.hasNext()) {
+			// 클라이언트에서 업로드한 MultipartHttpServletRequest 타입의 객체에서 key를 이용하여 데이터를 하나 가져옴
 			String name = iterator.next();
 //			지정한 파일명을 가지고 있는 파일의 모든 정보를 가져옴
 			List<MultipartFile> list = multiFiles.getFiles(name);
@@ -97,6 +98,16 @@ public class ProductFileUtils {
 					boardFile.setOriginalFileName(mFile.getOriginalFilename());
 //					새로 생성된 파일명과 실제 디스크에 저장될 경로를 합하여 저장
 					boardFile.setStoredFilePath(path + "/" + newFileName);
+					
+					//썸네일인지 -> t  상세이미지 -> d
+					if (name.equals("productImg")) {
+						boardFile.setFileType("T");
+					}
+					else {
+						boardFile.setFileType("D");
+					}
+					
+					
 					
 //					데이터베이스에 저장할 목록에 저장
 					fileList.add(boardFile);

@@ -1,8 +1,11 @@
 package com.bitc.team5.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bitc.team5.dto.AdminProductFileDto;
 import com.bitc.team5.dto.ShopDto;
 import com.bitc.team5.mapper.ShopMapper;
 import com.github.pagehelper.Page;
@@ -58,9 +61,22 @@ public class ShopServiceImpl  implements ShopService {
 
 		 // 상품상세화면
 		@Override
-		public ShopDto selectProductDetail(int productId) throws Exception {
+		public ShopDto selectProductDetail(long productId) throws Exception {
 			
 			ShopDto board = shopMapper.selectProductDetail(productId);
+			
+//			첨부파일 (썸네일 )
+			List<AdminProductFileDto> fileList = shopMapper.selectBoardFileList(productId);
+			
+			board.setFileList(fileList);
+			
+			
+//		//	첨부파일 (상세화면 )
+//			List<AdminProductFileDto> fileList2 = shopMapper.selectBoardFileList2(productId);
+//			
+//			board.setFileList(fileList2);
+//			
+			
 			
 			return board;
 			

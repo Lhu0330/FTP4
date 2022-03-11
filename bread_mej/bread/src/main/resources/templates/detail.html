@@ -188,12 +188,9 @@ $(document).ready(function(){
 
 </head>
 <body>
-	<header th:include="layout/header :: header"></header>
+	<header th:include="/header :: header"></header>
 	
 	<main>
-	
-		
-	
 	<!-- 아이템 썸네일 구매  -->
 		<div class="mt-5 pt-2 detailPanel">
 			<div class="row d-flex justify-content-between itemDetail">
@@ -202,18 +199,18 @@ $(document).ready(function(){
 				      <div id="myCarousel" class="carousel slide" data-interval="false">
 				    
 				      <div class="carousel-inner" role="listbox">
-				          <div class="item active" th:each ="files : ${board.fileList[0]}">
-				           	 <img src="homeimage1.jpg"   th:src="@{${files.storedFilePath}}" class="d-block w-100" alt="XZ" style="width: 450px; height: 400px">
+				          <div class="item active">
+				            <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100"  alt="XZ" style="width: 450px; height: 400px">
 				          </div>
- 				          <div class="item" th:each ="files : ${board.fileList}" >
- 				             <img src="homeimage1.jpg"  th:src="@{${files.storedFilePath}}" class="d-block w-100"  alt="XZ" style="width: 450px; height: 400px"> -->
- 				          </div> 
-<!-- 				          <div class="item"> -->
-<!-- 				         	 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" alt="XZ" style="width: 450px; height: 400px"> -->
-<!-- 				          </div> -->
-<!-- 				          <div class="item"> -->
-<!-- 				             <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" alt="XZ" style="width: 450px; height: 400px"> -->
-<!-- 				          </div> -->
+				          <div class="item">
+				             <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100"  alt="XZ" style="width: 450px; height: 400px">
+				          </div>
+				          <div class="item">
+				         	 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" alt="XZ" style="width: 450px; height: 400px">
+				          </div>
+				          <div class="item">
+				             <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" alt="XZ" style="width: 450px; height: 400px">
+				          </div>
 				        
 				          
 				          <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -228,12 +225,9 @@ $(document).ready(function(){
 				        
 				        <div id="thumbCarousel">
 				          <div data-target="#myCarousel" data-slide-to="0" class="thumb active"> <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" alt="XZ" style="width: 40px; height: 40px"></div>
-				       
-				          <div data-target="#myCarousel" data-slide-to="1" class="thumb" th:each ="files : ${board.fileList}">
-				           <img src="homeimage1.jpg" th:src="@{${files.storedFilePath}}" class="d-block w-100"alt="XZ" style="width: 4px; height: 40px">
-				           </div>
-<!-- 				          <div data-target="#myCarousel" data-slide-to="2" class="thumb"> <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" alt="XZ" style="width: 40px; height: 40px"></div> -->
-<!-- 				          <div data-target="#myCarousel" data-slide-to="3" class="thumb"> <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" alt="XZ" style="width: 40px; height: 40px"></div> -->
+				          <div data-target="#myCarousel" data-slide-to="1" class="thumb"> <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100"alt="XZ" style="width: 4px; height: 40px"></div>
+				          <div data-target="#myCarousel" data-slide-to="2" class="thumb"> <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" alt="XZ" style="width: 40px; height: 40px"></div>
+				          <div data-target="#myCarousel" data-slide-to="3" class="thumb"> <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" alt="XZ" style="width: 40px; height: 40px"></div>
 				        </div>
 				      
 				      </div>
@@ -242,9 +236,9 @@ $(document).ready(function(){
 	
 				<div class="aboutItem" style="width: 450px;"> 
 					<div class="설명">
-						<h1 th:text="${board.productName}">이름</h1>
+						<h1>이름</h1>
 						<hr>
-						<h2 th:text="${board.productPrice}">가격</h2>
+						<h2>가격</h2>
 						<br>
 						<h5>배송비</h5>
 						<br>
@@ -287,11 +281,7 @@ $(document).ready(function(){
 	    	   
 	    	   <div class="mt-5 detailProductImg" style="text-align: center" >
 	    	   
-	    	    
-	    	    <div class="item" th:each ="files : ${board.fileList}">
- 				             <img src="homeimage1.jpg"  th:src="@{${files.storedFilePath}}"  alt="XZ" style="width: 500px; height: 700px">
- 				 </div> 
-	    	   
+	    	    <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="XZ" style="width: 500px; height: 700px;">
 	    	   
 	    	   </div>
 	   		</div>	    
@@ -411,7 +401,7 @@ $(document).ready(function(){
 	</main>
 	
 	
-	<footer th:include="layout/footer:: footer"></footer>
+	<footer th:include="/footer:: footer"></footer>
 	
 
 	

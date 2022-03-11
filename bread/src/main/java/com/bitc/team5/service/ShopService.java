@@ -11,7 +11,7 @@ public interface ShopService {
 	
 	
  // 상품상세 화면 
-	ShopDto selectProductDetail(int productId) throws Exception;
+	ShopDto selectProductDetail( long productId) throws Exception;
 	
 //	 //메인화면 	
 //		List<ProjectDto> selectJrList() throws Exception;

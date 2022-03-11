@@ -51,93 +51,85 @@
 </head>
 <body>
 <!-- 		<th:block th:include="admin/users-js"></th:block> -->
-			<section>
+	<section>
 		<div class="container-fluid">
 			<div class="row mb-5 mt-5">
 				<div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
 					<div class="row">
 							<form id="frm" method="post" action="/jr41/ProductInserting" th:action="@{/jr41/ProductInserting}" enctype="multipart/form-data">
+									<!-- 상품번호 -->
+									
+									<!-- 카테고리 -->									
 									<div class="row my-3">
-										<div class="col-sm-1  my-auto">
-											<h6 class="text-center">상품번호</h6>
-										</div>
-										<div class="col-sm-5 my-auto">
-											<input type="text" id="productIdx" name="productIdx" class="col-sm-9 form-control" placeholder="상품번호를 입력해주세요" disabled >
-										</div>
-										
-									</div>
-									<div class="row my-3">
-										<div class="col-sm-1  my-auto">
+										<div class="col-sm-4  my-auto">
 											<h6 class="text-center">카테고리</h6>
 										</div>
 										<div class="col-sm-5 my-auto">
 											<div class="dropdown">	
-												<select id="productCategoryIdx" name="productCategoryIdx" class="form-control">
-												    <option> 1</option>
+												<select id="productCateId" name="productCateId" class="form-control">
+												    <option >1</option>
+												    <option >2</option>
 												</select>
 											</div>
 										</div>
-										<div class="col-sm-1 my-auto">
+									</div>
+										<!-- 가격 -->																			
+									<div class="row my-3">
+										<div class="col-sm-4 my-auto">
 											<h6 class="text-center">가격</h6>
 										</div>
 										<div class="col-sm-5 my-auto">
-											<input type="text" id="productPrice" name="productPrice" class="col-sm-9 form-control" placeholder="가격 입력해주세요">
+												<input type="text" id="productPrice" name="productPrice" class="col-sm-9 form-control" placeholder="가격 입력해주세요">
 										</div>
 									</div>
-									<div class="row my-3">
-										<div class="col-sm-1  my-auto">
-										
-										</div>
-										<div class="col-sm-5 my-auto">
-										
-										</div>
-										<div class="col-sm-1 my-auto">
+										<!-- 재고량 -->				
+									<div class="row my-3">										
+										<div class="col-sm-4 my-auto">
 											<h6 class="text-center">상품수량</h6>
 										</div>
 										<div class="col-sm-5 my-auto">
 											<input type="text" id="productStockCnt" name="productStockCnt" class="col-sm-9 form-control" placeholder="상품수량을 입력해주세요">
 										</div>
-									</div>
-									<div class="row my-3">
-										<div class="col-sm-1  my-auto">
-											
+									</div>	
+										<!-- 대포이미지 -->		
+									<div class="row my-3">										
+										<div class="col-sm-4 my-auto">
+											<h6 class="text-center">썸네일</h6>
 										</div>
-										<div class="col-sm-5 my-auto">
-											
-										</div>
-										<div class="col-sm-1 my-auto">
-											<h6 class="text-center">대표이미지</h6>
-										</div>
-										<div class="col-sm-5 my-auto">
-											<input type="file" id="productImg" name="productImg" class="col-sm-9 form-control" multiple >
-										</div>
-									</div>
-									<div class="row my-3">
-										<div class="col-sm-1  my-auto">
-											<h6 class="text-center">상품명</h6>
-										</div>
-										<div class="col-sm-11 my-auto">
-											<input type="text" id="productName" name="productName" class="col-sm-9 form-control" placeholder="상품명을 입력해주세요">
+										<div class="col-sm-8 my-auto">
+											<input type="file" id="productImg" name="productImg" class="form-control" multiple >
 										</div>
 									</div>	
-									<div class="row">
-										<div class="col-sm-1">
-											<h6 class="text-center">내용</h6>
+									<!-- 상품명 -->	
+									<div class="row my-3">
+										<div class="col-sm-4  my-auto">
+											<h6 class="text-center">상품명</h6>
 										</div>
-										<div class="col-sm-11">
+										<div class="col-sm-8 my-auto">
+											<input type="text" id="productName" name="productName" class="col-sm-9 form-control" placeholder="상품명을 입력해주세요">
+										</div>
+									</div>
+									<!-- 상품설명 -->
+										
+									<div class="row my-3">
+										<div class="col-sm-4">
+											<h6 class="text-center ">상품설명</h6>
+										</div>
+										<div class="col-sm-12 ">
 											<textarea rows="10" class="form-control h-5" id="productDescription" name="productDescription" placeholder="내용을 입력하세요" ></textarea>
 										</div>
 									</div>
-<!-- 									<div class="row my-3 mt-3 my-auto"> -->
-<!-- 										<div class="col-sm-1"> -->
-<!-- 											<h6 class="text-center">첨부</h6> -->
-<!-- 										</div> -->
-<!-- 										<div class="col-sm-11"> -->
-<!-- 											<input type="file" id="files" name="files" class="col-sm-9 form-control" placeholder="제목을 입력해주세요" multiple> -->
-<!-- 										</div> -->
-<!-- 										<div class="col-sm-1"> -->
-<!-- 										</div> -->
-<!-- 									</div> -->
+										<!-- 상품설명이미지첨부 -->
+									<div class="row my-3">										
+										<div class="col-sm-4 my-auto">
+											<h6 class="text-center">상품설명 이미지 첨부</h6>
+										</div>
+										<div class="col-sm-8 my-auto">
+											<input type="file" id="files" name="files" class="form-control" placeholder="제목을 입력해주세요" multiple>
+										</div>
+									</div>	
+									
+									
 									<div class="row mt-5 mx-auto ">
 										<div class="col text-center">
 											<button type="submit" id="productIn" name="prodcutIn" class="btn btn-secondary">등록</button>

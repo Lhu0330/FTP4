@@ -18,7 +18,7 @@
 		]]>
 	</select>-->
 	
-
+<!-- 사용자 렁오기-->
 	<select id="getUsers" resultType="com.bitc.team5.dto.UsersDto">
 		<![CDATA[
 			SELECT
@@ -31,6 +31,7 @@
 		]]>
 	</select>
 
+<!-- 상품 들고오기 -->
 	<select id="selectProductList" resultType="com.bitc.team5.dto.ShopDto">
 		<![CDATA[
 		
@@ -43,21 +44,22 @@
 		]]>
 	</select>
 	
+	<!-- 상품 등록-->
 	<insert id="insertBoard" parameterType="com.bitc.team5.dto.ShopDto" useGeneratedKeys="true" keyProperty="idx">
 		<![CDATA[
 			INSERT INTO admin_product
-				(product_cate_id, product_name, product_price, product_description, product_stock_cnt)
+				(product_id , product_cate_id, product_name, product_price, product_description, product_stock_cnt)
 			VALUES
-				(#{productCateId}, #{productName}, #{productPrice}, #{productDescription}, #{productStockCnt})
+				(#{productId}, #{productCateId}, #{productName}, #{productPrice}, #{productDescription}, #{productStockCnt})
 		]]>
 	</insert>
 	
-	
+	<!-- 상품 썽네일 등록 -->
 
 	<insert id="insertBoardFileList" parameterType="com.bitc.team5.dto.AdminProductFileDto">
 		<![CDATA[
 			INSERT INTO product_file
-				( board_idx, original_file_name, stored_file_path, file_size, creator_id)
+				( board_idx, original_file_name, stored_file_path, file_size, creator_id, file_type, product_id)
 			VALUES
 		]]>
 		<foreach collection="list" item="item" separator=",">
@@ -65,7 +67,10 @@
 			#{item.originalFileName},
 			#{item.storedFilePath},
 			#{item.fileSize},
-			'nickname5')
+			'nickname5',
+			#{item.fileType},
+			#{item.productId} )
+			
 		</foreach>
 	</insert>
 	
