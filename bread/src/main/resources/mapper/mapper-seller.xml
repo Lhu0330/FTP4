@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.bitc.team5.mapper.SellerMapper">
 
 
@@ -48,9 +47,9 @@
 	<insert id="insertBoard" parameterType="com.bitc.team5.dto.ShopDto" useGeneratedKeys="true" keyProperty="idx">
 		<![CDATA[
 			INSERT INTO admin_product
-				(product_id , product_cate_id, product_name, product_price, product_description, product_stock_cnt)
+				(product_id , product_cate_id, product_name, product_price, product_description, product_stock_cnt, store_id)
 			VALUES
-				(#{productId}, #{productCateId}, #{productName}, #{productPrice}, #{productDescription}, #{productStockCnt})
+				(#{productId}, #{productCateId}, #{productName}, #{productPrice}, #{productDescription}, #{productStockCnt}, #{storeId})
 		]]>
 	</insert>
 	
@@ -157,21 +156,3 @@
 	</update >-->
 	
 </mapper>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

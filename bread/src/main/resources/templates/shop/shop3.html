@@ -141,7 +141,10 @@
 							<div class="마켓" th:text="${list.productName}"> </div>
 							<div class="price" th:text="${list.productPrice}"></div>
 							<div class="detail" th:text="${list.productDescription}"></div>
- 					  <a href="/shop/detail/"  class="card-text nav-link link-dark" th:text="${list.productName}" th:attrappend="href=${list.productId}"></a> 
+							<a  th:href="@{|/shop/detail/${list.productCateId}/${list.productId}|}"  th:text="${list.productName}"  class="card-text nav-link link-dark"></a>
+							
+
+<!--  					  <a href="/shop/detail/"  class="card-text nav-link link-dark" th:text="${list.productName}" th:attrappend="href=${list.productId}"></a>  -->
 						
 						</div>
 						
@@ -181,6 +184,9 @@
 	
 	
 	<footer th:include="layout/footer:: footer"></footer>
+	
+
+	
 	
 
 	

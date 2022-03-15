@@ -67,8 +67,9 @@ public class ShopServiceImpl  implements ShopService {
 			
 //			첨부파일 (썸네일 )
 			List<AdminProductFileDto> fileList = shopMapper.selectBoardFileList(productId);
-			
+			List<AdminProductFileDto> fileList2 = shopMapper.selectBoardFileList2(productId);
 			board.setFileList(fileList);
+			board.setFileList2(fileList2);
 			
 			
 //		//	첨부파일 (상세화면 )
@@ -91,6 +92,7 @@ public class ShopServiceImpl  implements ShopService {
 		 * List<ProjectDto> fileList = projectMapper.selectBoardFileList(productIdx);
 		 * board.setFileList(fileList); return board; }
 		 */
+
 
 
 }

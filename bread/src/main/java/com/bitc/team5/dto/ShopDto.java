@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 public class ShopDto {
 	
-	private int idx;
-	private long productId;
+	private int idx; // 게시글번호 
+	private long productId; //상품코드
 	private int productCateId;
 	private int storeId;
 	private String productName;
@@ -25,7 +25,6 @@ public class ShopDto {
 	
 	private List<AdminProductFileDto> fileList;
 	private List<AdminProductFileDto> fileList2;
-
 
 
 }

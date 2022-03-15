@@ -11,29 +11,26 @@ import com.github.pagehelper.Page;
 @Mapper
 public interface ShopMapper {
 
-	// ë©”ë‰´ë³„ ìƒí’ˆ ë¦¬ìŠ¤íŠ¸
-	Page<ShopDto> selectProductList(int productCateId) throws Exception;
+	// ¸Ş´ºº° »óÇ° ¸®½ºÆ®
+		Page<ShopDto> selectProductList(int productCateId) throws Exception;
 
-		//ìƒì„¸ë³´ê¸° 
-	public ShopDto selectProductDetail(long productId) throws Exception;
-		//ì´ì§€ë¯¸ ë¶ˆëŸ¬ì˜¤ê¸°
-	List<AdminProductFileDto> selectBoardFileList(long productId);
-	
-	// List<AdminProductFileDto> selectBoardFileList2(long productId);
-	
-//
-////	DBì— ì—°ê²°í•˜ì—¬ ê²Œì‹œê¸€ì˜ ì²¨ë¶€íŒŒì¼ ì •ë³´ë¥¼ DBì— ì €ì¥í•˜ëŠ” ë©”ì„œë“œ
-//	void insertBoardFileList(List<ProductFileDto> list) throws Exception;
-//	
-////	DBì— ì—°ê²°í•˜ì—¬ ê²Œì‹œê¸€ì˜ ì²¨ë¶€íŒŒì¼ ì •ë³´ë¥¼ ê°€ì ¸ì˜¤ëŠ” ë©”ì„œë“œ
-//	List<ProjectDto> selectBoardFileList(int productIdx) throws Exception;	
-//	
-//	
-//	ProductFileDto selectBoardFileInfo(int fileIdx, int boardIdx) throws Exception;
+			//»ó¼¼º¸±â 
+		public ShopDto selectProductDetail(long productId) throws Exception;
+		
+		//ÀÌÁö¹Ì ºÒ·¯¿À±â
+		List<AdminProductFileDto> selectBoardFileList(long productId);
+		
+		List<AdminProductFileDto> selectBoardFileList2(long productId);
+		
+	//
+////		DB¿¡ ¿¬°áÇÏ¿© °Ô½Ã±ÛÀÇ Ã·ºÎÆÄÀÏ Á¤º¸¸¦ DB¿¡ ÀúÀåÇÏ´Â ¸Ş¼­µå
+//		void insertBoardFileList(List<ProductFileDto> list) throws Exception;
+	//	
+////		DB¿¡ ¿¬°áÇÏ¿© °Ô½Ã±ÛÀÇ Ã·ºÎÆÄÀÏ Á¤º¸¸¦ °¡Á®¿À´Â ¸Ş¼­µå
+//		List<ProjectDto> selectBoardFileList(int productIdx) throws Exception;	
+	//	
+	//	
+//		ProductFileDto selectBoardFileInfo(int fileIdx, int boardIdx) throws Exception;
 
-
-
-
-	
 
 }

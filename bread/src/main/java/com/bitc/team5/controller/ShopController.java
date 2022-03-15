@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.bitc.team5.dto.ShopDto;
@@ -35,29 +36,70 @@ public class ShopController {
 		  return mv;
 		}
 	
-//
-//	// 상품 상세화면
-//	
-//		@RequestMapping(value="/jr41/adminProductDetail/{idx}", method=RequestMethod.GET)
-//		public ModelAndView selectAdminProductDetail(@PathVariable("idx") int idx) throws Exception {
-//			ModelAndView mv = new ModelAndView("admin/AdminproductDetail");
-//				
-//			ShopDto AdminProduct = productService.selectAdminProductDetail(idx);
-//			mv.addObject("AdminProductList", AdminProduct);
-//			
-//			return mv;
-//		}
 	
-	 //제품 상세 화면
-	@RequestMapping(value="/shop/detail/{productId}", method=RequestMethod.GET)
+	 // 판매상세화면
+//	@RequestMapping(value="/shop/detail/{productId}", method=RequestMethod.GET)
+//	public ModelAndView openBoardDetail(@PathVariable("productId") long productId) throws Exception {
+//		ModelAndView mv = new ModelAndView("shop/detail");
+//		
+//		ShopDto board = shopService.selectProductDetail(productId);
+//		mv.addObject("board", board);
+//		
+//		return mv;
+//	}
+	
+	
+	 //판매1 상세 화면
+	@ResponseBody
+	@RequestMapping(value="/shop/detail/1/{productId}", method=RequestMethod.GET)
 	public ModelAndView openBoardDetail(@PathVariable("productId") long productId) throws Exception {
 		ModelAndView mv = new ModelAndView("shop/detail");
 		
 		ShopDto board = shopService.selectProductDetail(productId);
 		mv.addObject("board", board);
 		
+		
+	      
 		return mv;
 	}
+	
+	
+	
+	
+	@RequestMapping(value="/shop/detail/2/{productId}", method=RequestMethod.GET)
+	public ModelAndView openBoardDetail2(@PathVariable("productId") long productId) throws Exception {
+		ModelAndView mv = new ModelAndView("shop/detail2");
+		
+		ShopDto board = shopService.selectProductDetail(productId);
+		mv.addObject("board", board);
+		
+
+	      
+		return mv;
+	}
+	
+	
+	
+//	@ResponseBody
+//	@RequestMapping(value="/shop/market/3/{productId}", method=RequestMethod.GET)
+//	public ModelAndView openBoardDetail(@PathVariable("productId") long productId) throws Exception {
+//		ModelAndView mv = new ModelAndView("shop/detail3");
+//		
+//		ShopDto board = shopService.selectProductDetail(productId);
+//		mv.addObject("board", board);
+//		
+//		JSONObject resMap = new JSONObject();
+//		
+//
+//	      
+//		return mv;
+//	}
+	
+	
+	
+	
+	
+	
 	
 
 }

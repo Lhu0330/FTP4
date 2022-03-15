@@ -12,28 +12,28 @@ import com.bitc.team5.dto.UsersDto;
 @Mapper
 public interface SellerMapper {
 
-
 	//UserDto selectUserDetail(int seq) throws Exception;
 
-	List<UsersDto> getUsers() throws Exception;
+		List<UsersDto> getUsers() throws Exception;
 
-	List<ShopDto> selectProductList() throws Exception;
+		List<ShopDto> selectProductList() throws Exception;
 
-	
+		
 
 
-	// ìƒí’ˆë“±ë¡ 
-	public void insertBoard(ShopDto restBoard) throws Exception;
-	
-	// ì´ë¯¸ì§€ì €ì¥
-	void insertBoardFileList(List<AdminProductFileDto> list) throws Exception;
+		// »óÇ°µî·Ï 
+		public void insertBoard(ShopDto restBoard) throws Exception;
+		
+		// ÀÌ¹ÌÁöÀúÀå
+		void insertBoardFileList(List<AdminProductFileDto> list) throws Exception;
 
-	 // ìƒì„¸í™”ë©´ 
-	public ShopDto selectBoardDetail(int idx);
+		 // »ó¼¼È­¸é 
+		public ShopDto selectBoardDetail(int idx);
 
-	List<AdminProductFileDto> selectBoardFileList(int idx) throws Exception;	
+		List<AdminProductFileDto> selectBoardFileList(int idx) throws Exception;	
 
-	AdminProductFileDto selectBoardFileInfo(@Param("fileIdx") int fileIdx, @Param("boardIdx") int boardIdx) throws Exception;
+		AdminProductFileDto selectBoardFileInfo(@Param("fileIdx") int fileIdx, @Param("boardIdx") int boardIdx) throws Exception;
 
+		
 	
 }

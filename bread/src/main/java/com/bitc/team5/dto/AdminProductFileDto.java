@@ -2,19 +2,16 @@ package com.bitc.team5.dto;
 
 import lombok.Data;
 
-// ë¡¬ë³µì´ë€?
-// ë°ì´í„° ë² ì´ìŠ¤ì™€ ë§¤í•‘ë˜ëŠ” dto ê°ì²´ë¥¼ ìƒì„± ì‹œ getter/setterë¥¼ ìë™ìœ¼ë¡œ ìƒì„±í•´ì¤Œ
 
-// getter/setter/toString ë©”ì„œë“œë¥¼ ìë™ìœ¼ë¡œ ìƒì„±í•´ ì¤Œ
 @Data
 public class AdminProductFileDto {
 
-	private int fileIdx;
-	private int boardIdx;
+	private int fileIdx; // ¿Ã¸±ÆÄÀÏ¹øÈ£ seq
+	private int boardIdx; //°Ô½Ã±Û¹øÈ£ 
 	private long productId;
 	private String originalFileName;
 	private String storedFilePath;
-//	ì›ë˜ëŠ” long íƒ€ì…ìœ¼ë¡œ ì‚¬ìš©í•´ì•¼ í•˜ì§€ë§Œ sqlì—ì„œ ì‚¬ìš©ìê°€ ì•Œì•„ë³´ê¸° ì‰½ë„ë¡ kbë¶€í„° í™•ì¸í•˜ëŠ” í˜•íƒœë¡œ ë³€ê²½í•˜ëŠ” ìˆ˜ì‹ì´ ë“¤ì–´ê°€ë©´ì„œ fileSizeê°€ String íƒ€ì…ìœ¼ë¡œ ë³€í™˜ë˜ì–´ DTOì—ì„œë„ String íƒ€ì…ìœ¼ë¡œ ë°ì´í„°ë¥¼ ì‚¬ìš©í•¨
+//	¿ø·¡´Â long Å¸ÀÔÀ¸·Î »ç¿ëÇØ¾ß ÇÏÁö¸¸ sql¿¡¼­ »ç¿ëÀÚ°¡ ¾Ë¾Æº¸±â ½±µµ·Ï kbºÎÅÍ È®ÀÎÇÏ´Â ÇüÅÂ·Î º¯°æÇÏ´Â ¼ö½ÄÀÌ µé¾î°¡¸é¼­ fileSize°¡ String Å¸ÀÔÀ¸·Î º¯È¯µÇ¾î DTO¿¡¼­µµ String Å¸ÀÔÀ¸·Î µ¥ÀÌÅÍ¸¦ »ç¿ëÇÔ
 	private String fileSize;
 	private String fileType;
 	private String deletedYn;

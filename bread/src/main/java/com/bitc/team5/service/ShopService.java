@@ -10,7 +10,7 @@ public interface ShopService {
 	Page<ShopDto> selectProductList(int pageNum, int productCateId) throws Exception;
 	
 	
- // 상품상세 화면 
+// 상품상세 화면 
 	ShopDto selectProductDetail( long productId) throws Exception;
 	
 //	 //메인화면 	

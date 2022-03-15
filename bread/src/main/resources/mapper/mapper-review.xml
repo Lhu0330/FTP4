@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.bitc.team5.mapper.ReplyMapper">
+	
+<!--댓글 리스트-->
+	 <select id="list" parameterType="Map" resultType="com.bitc.team5.dto.ReplyDto">
+    
+   	  <![CDATA[
+         		
+        select *
+         from (
+        
+         	select @ROWNUM:=@ROWNUM+1 rnum, rno, no , content, user_id, date
+        	from(
+        		select *
+        		from reply
+        		where no = #{no} 
+
+        		)tb_reply1 , (SELECT @ROWNUM:=0) R
+        )tb_reply2
+        where rnum between #{pageObject.startRow} and #{pageObject.endRow}		
+        	
+        	 
+       	]]>
+       	
+        
+    </select>
+	
+	
+	 <select id="getRow" parameterType="int" resultType="java.lang.Integer">
+	 
+    
+   	  <![CDATA[
+         		
+        select count(*)
+         from reply 
+         where no = #{no}
+         
+       	]]>
+       	
+        
+    </select>
+    
+    <insert id="write">
+      
+        <![CDATA[
+        	 insert into reply( no, user_id, content, date)
+       		 values (  #{no},  #{userId}, #{content}, NOW())
+        
+       	]]>
+      
+       </insert>
+    
+    <!-- 댓글 수정  세션의 아이디와 댓글의 아이디가 같아야한다 -->
+     <update id="update">
+    	<![CDATA[
+    	
+    		  update reply 
+    		  set content = #{content}
+    		  where rno = #{rno}
+    	
+    	   	]]>
+      
+    </update>
+    
+       <delete id="delete">
+    
+     	<![CDATA[
+     		 delete from reply 
+     		 where rno = #{rno}
+     	
+     	]]>
+       
+    	</delete>
+    
+    
+<!--	
+ 	
+       
+ 
+    <select id="read" resultType="com.bitc.team5.dto.ReplyDto">
+    
+   	  <![CDATA[
+         		
+        select * from reply where rno = #{rno}
+         
+       	]]>
+       	
+        
+    </select>
+    
+ 
+    
+   -->
+	
+
+</mapper>

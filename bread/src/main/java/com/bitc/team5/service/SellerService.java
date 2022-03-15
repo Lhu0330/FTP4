@@ -9,23 +9,22 @@ import com.bitc.team5.dto.ShopDto;
 import com.bitc.team5.dto.UsersDto;
 
 public interface SellerService {
+	 // 蜡历格钒
+		public List<UsersDto> getUsers() throws Exception;
 
-	 // 鞙犾爛氇╇煭
-	public List<UsersDto> getUsers() throws Exception;
+	 //惑前格废 	
 
- //靸來拡氇╇ 	
-
-	public List<ShopDto> selectProductList() throws Exception;
-
+		public List<ShopDto> selectProductList() throws Exception;
 
 
- // 靸來拡 霌彪 
-	public void insertBoard(ShopDto restBoard, MultipartHttpServletRequest multiFiles ) throws Exception;
 
-	 //靸侅劯頇旊┐
-	public ShopDto selectAdminProductDetail(int idx) throws Exception;
+	 // 惑前 殿废 
+		public void insertBoard(ShopDto restBoard, MultipartHttpServletRequest multiFiles ) throws Exception;
 
-	AdminProductFileDto selectBoardFileInfo(int fileIdx, int boardIdx) throws Exception;
+		 //惑技拳搁
+		public ShopDto selectAdminProductDetail(int idx) throws Exception;
+
+		AdminProductFileDto selectBoardFileInfo(int fileIdx, int boardIdx) throws Exception;
 
 
 	

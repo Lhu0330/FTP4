@@ -34,7 +34,7 @@ public class UsersController {
 		return mv;
 	}
 	
-	// ìƒí’ˆ ìƒì„¸í™”ë©´
+	// »óÇ° »ó¼¼È­¸é
 	
 	@RequestMapping(value="/jr41/adminProductDetail/{idx}", method=RequestMethod.GET)
 	public ModelAndView selectAdminProductDetail(@PathVariable("idx") int idx) throws Exception {
@@ -55,12 +55,12 @@ public class UsersController {
 //		return "redirect:/productStockList";
 //	}
 	
-	// ìƒí’ˆë“±ë¡ 
+	// »óÇ°µî·Ï 
 	@RequestMapping(value="/jr41/ProductInserting", method=RequestMethod.POST)
 	public String insertBoard(ShopDto restBoard, MultipartHttpServletRequest multiFiles) throws Exception {
 		
 		
-		//productId ë§Œë“¤ê¸°
+		//productId ¸¸µé±â
 //		Calendar cal = Calendar.getInstance();
 //		int year = cal.get(Calendar.YEAR);
 //		String ym = year + new DecimalFormat("00").format(cal.get(Calendar.MONTH) + 1);
@@ -116,7 +116,7 @@ public class UsersController {
 	
 
 	
-//	íŒŒì¼ ë‹¤ìš´ë¡œë“œ ë¶€ë¶„
+//	ÆÄÀÏ ´Ù¿î·Îµå ºÎºĞ
 //
 	@RequestMapping("/board/downloadProductFile.do")
 	public void downloadBoardFile(@RequestParam("fileIdx") int fileIdx, @RequestParam("boardIdx") int boardIdx, HttpServletResponse response) throws Exception {
@@ -143,5 +143,6 @@ public class UsersController {
 			response.getOutputStream().close();
 		}
 	}
+	
 	
 }
