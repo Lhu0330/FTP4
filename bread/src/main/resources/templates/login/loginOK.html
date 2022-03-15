@@ -13,28 +13,27 @@
 <script>
 $(document).ready(function() {
 	var userId = $("#userId").val();
+	var userAuth = $("#userAuth").val();
+	
 	$("#btn-home").on("click", function() {
 		location.href="/login/logout";
 	});
 	
-	
 	$("#btn-edit").on("click", function() {
-		
-		var userAuth = $("#userAuth").val();
 		console.log(userAuth);
 		console.log(userId);
-		if (userAuth == "U" || "Y") {
-				var frm = $("#frm")[0];
-				frm.action="/login/userDetail/" + userId;
-				frm.submit();
-			}
-			else if (userAuth == "S") {
-				var frm = $("#frm")[0];
-				frm.action="/login/sellerDetail/" + userId;
-				frm.submit();
-			}
-		});
+		if (userAuth == "U" || userAuth == "Y") {
+			var frm = $("#frm")[0];
+			frm.action="/login/userDetail/" + userId;
+			frm.submit();
+		}
+		else if (userAuth == "S") {
+			var frm = $("#frm")[0];
+			frm.action="/login/sellerDetail/" + userId;
+			frm.submit();
+		}
 	});
+});
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -115,6 +114,8 @@ $(document).ready(function() {
 
 </head>
 <body>
+	<input type="text" id="userAuth" th:value="${userAuth}">
+	
 	<header th:include="/header :: header"></header>
 	
 	<main class="container my-5">
