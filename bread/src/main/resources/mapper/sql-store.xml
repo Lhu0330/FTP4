@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitc.team5.mapper.StoreMapper">
+	<!--판매자 등록-->
+	<insert id="registerSeller" parameterType="com.bitc.team5.dto.StoreDto">
+		<![CDATA[ 
+			INSERT INTO store
+				(store_name, store_desc, store_addr)
+			VALUES
+				(#{storeName}, #{storeDesc}, #{storeAddr})
+		]]>
+	</insert>
+
+	<!--판매자 상세정보-->
+	<select id="selectMemberDetail" parameterType="String" resultType="com.bitc.team5.dto.LoginDto">
+		<![CDATA[ 
+			SELECT
+				idx, store_name, store_desc, store_addr
+			FROM
+				store
+			WHERE
+				idx = #{idx}
+		]]>
+	</select>
+</mapper>
