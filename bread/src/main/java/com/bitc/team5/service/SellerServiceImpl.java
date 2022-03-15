@@ -37,7 +37,7 @@ public class SellerServiceImpl implements SellerService {
 		return sellerMapper.selectProductList();
 	}
 
-	// »óÇ°µî·Ï 
+	// ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ 
 	@Override
 	public void insertBoard(ShopDto restBoard, MultipartHttpServletRequest multiFiles) throws Exception {
 		
@@ -76,21 +76,21 @@ public class SellerServiceImpl implements SellerService {
 		
 		}
 		
-//		ºÐ¼®µÈ ÆÄÀÏ ¸®½ºÆ®ÀÇ ³»¿ëÀÌ ÀÖ´ÂÁö È®ÀÎÇÏ°í Mapper¸¦ ÅëÇØ¼­ DB¿¡ ÀúÀå
+//		ï¿½Ð¼ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï°ï¿½ Mapperï¿½ï¿½ ï¿½ï¿½ï¿½Ø¼ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 		if (CollectionUtils.isEmpty(list) == false) {
 			sellerMapper.insertBoardFileList(list);
 		
 		}
 		
 	}
-		// »óÇ°µðÅ×ÀÏ
+		// ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	@Override
 	public ShopDto selectAdminProductDetail(int idx) throws Exception {
 	
 		ShopDto board = sellerMapper.selectBoardDetail(idx);
 		
 		
-//		Ã·ºÎÆÄÀÏ
+//		Ã·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		List<AdminProductFileDto> fileList = sellerMapper.selectBoardFileList(idx);
 		
 		board.setFileList(fileList);

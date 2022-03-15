@@ -20,6 +20,7 @@ public class AdminController {
 	private SellerService sellerService;
 	
 
+	
 	@GetMapping
 	public RedirectView viewAdmin(Model model) throws Exception{
 		return new RedirectView("admin/index");
@@ -57,5 +58,16 @@ public class AdminController {
 		model.addAttribute("template", "admin/productStockList");
 		return "admin/index";
 	}
+	
+	
+	@GetMapping("/marketForm")
+	public String viewForm(Model model) {
+		// View attribute
+		model.addAttribute("template", "admin/marketForm");
+		return "admin/index";
+	}
+	
+	
+	
 	
 }

@@ -1,5 +1,6 @@
 package com.bitc.team5.controller;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,29 +18,29 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bitc.team5.dto.ReplyDto;
 import com.bitc.team5.service.ReplyService;
 
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import net.webjjang.util.PageObject;
 
-//RestController´Â ¼ø¼öÇÑ µ¥ÀÌÅÍ¸¦ Àü´ÞÇÒ‹š »ç¿ëÇÑ´Ù 
+//RestControllerï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò‹ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½ 
 //
 @RestController
-@Log4j
+@Log4j2
 public class ReplyController {
 	
 	@Autowired
 	@Qualifier("replyServiceImpl")
 	private ReplyService service;
-	//´ñ±Û¾²±â
-	// µ¥ÀÌÅÍ¸¦  ¹Þ¾Æ¼­ DB¿¡ ÀúÀå -> CONTENT , WRITER(user_id)
-	// È­¸éÂÊ¿¡¼­ CONTENT , WRITER(user_id)ÀÇ µ¥ÀÌÅÍ¸¦ ¹Þ¾Æ¼­ javaÂÊ(spring)¿¡ ³Ñ±è
-	// java¿¡¼­ ¹Þ¾Æ¿Â°Í dbÂÊÀ¸·Î Àü´Þ 
-	// so ÀÚ¹ÙÂÊÀ¸·Î ³Ñ¾î¿Â µ¥ÀÌÅÍ¸¦ ÀúÀåÇÏ±âÀ§ÇÑ °´Ã¼ so dto(vo)  
+	//ï¿½ï¿½Û¾ï¿½ï¿½ï¿½
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½  ï¿½Þ¾Æ¼ï¿½ DBï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ -> CONTENT , WRITER(user_id)
+	// È­ï¿½ï¿½ï¿½Ê¿ï¿½ï¿½ï¿½ CONTENT , WRITER(user_id)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Þ¾Æ¼ï¿½ javaï¿½ï¿½(spring)ï¿½ï¿½ ï¿½Ñ±ï¿½
+	// javaï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¿Â°ï¿½ dbï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+	// so ï¿½Ú¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¾ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï±ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ so dto(vo)  
 	@PostMapping(value= "/ajax/replyWrite.do",
 			 // contentType:"application/json; charset=utf-8",
 			consumes = "application/json", 
-			// ¸®ÅÏÇØÁÖ´Â µ¥ÀÌÅÍÀÇ Å¸ÀÔ 
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ 
 			produces = MediaType.TEXT_PLAIN_VALUE )
-	// µ¥ÀÌÅÍ¸¦ ±×´ë·Î ¹Þ¾Æ¼­ Ã³¸®ÇÏ±â À§ÇØ ( @RequestBody ReplyDto vo)·Î ¼±¾ð 
+	// ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½×´ï¿½ï¿½ ï¿½Þ¾Æ¼ï¿½ Ã³ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ( @RequestBody ReplyDto vo)ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 	public ResponseEntity<String> write(@RequestBody ReplyDto vo){
 	    
 		log.info(vo);
@@ -52,19 +53,19 @@ public class ReplyController {
 		;	
 	}
 	
-	 // ResponseEntity: µ¥ÀÌÅÍ¿Í ¼­¹öÀÇ Ã³¸®»óÅÂ(»óÅÂ¹øÈ£ ex) 200-Á¤»óÃ³¸® µîµî )¸¦ °°ÀÌ ³Ñ¿©ÁÜ
+	 // ResponseEntity: ï¿½ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½(ï¿½ï¿½ï¿½Â¹ï¿½È£ ex) 200-ï¿½ï¿½ï¿½ï¿½Ã³ï¿½ï¿½ ï¿½ï¿½ï¿½ )ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ñ¿ï¿½ï¿½ï¿½
 	
-	 // Á¦ÀÌÄõ¸®¸¦ ÀÌ¿ëÇØ ´ñ±Û ¹ÞÀ½
+	 // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ì¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	
 	
 	
-	//´ñ±Û¸®½ºµå ¹Þ±â
+	//ï¿½ï¿½Û¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Þ±ï¿½
 			@GetMapping(
 				value= "/ajax/replyList.do",
 				 // contentType:"application/json; charset=utf-8",
 		 //		consumes = "application/json",
-				// ¸®ÅÏÇØÁÖ´Â µ¥ÀÌÅÍÀÇ Å¸ÀÔ 
-				// 2°¡Áö¸¦ ¸®ÅÏ ¸®½ºÆ®¶û pageObject
+				// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ 
+				// 2ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ pageObject
 				produces = { MediaType.APPLICATION_XML_VALUE , MediaType.APPLICATION_JSON_VALUE } )
 		public ResponseEntity<List<ReplyDto>> list(PageObject pageObject, int no){
 		    
@@ -81,23 +82,23 @@ public class ReplyController {
 			
 			
 			
-		// ´ñ±Û ¼öÁ¤ 
+		// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 			@PatchMapping(
 					value= "/ajax/replyUpdate.do",
 					 // contentType:"application/json; charset=utf-8",
 				//	consumes = MediaType.APPLICATION_JSON_UTF8_VALUE, 
-					// ¸®ÅÏÇØÁÖ´Â µ¥ÀÌÅÍÀÇ Å¸ÀÔ 
+					// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å¸ï¿½ï¿½ 
 					produces = MediaType.TEXT_PLAIN_VALUE )
 			public ResponseEntity<String> update(@RequestBody ReplyDto vo){
 			    
 				log.info(vo);
 				
 				int updateCount = service.update(vo);
-				//String msg = "°Ô½ÃÆÇ ±Û¼öÁ¤ÀÌ ¼º°øÀûÀ¸·Î µÇ¾ú½À´Ï´Ù ";
+				//String msg = "ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ";
 				//HttpStatus status = HttpStatus.OK;
 				
 			//	if (result == 0 ) {
-			//		msg = "°Ô½ÃÆÇ ¼öÁ¤ ½ÇÆÐ - Á¤º¸¸¦ È®ÀÎÇØ ÁÖ¼¼¿ä.";
+			//		msg = "ï¿½Ô½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½ï¿½ ï¿½Ö¼ï¿½ï¿½ï¿½.";
 			//		status = HttpStatus.NOT_MODIFIED; 
 				
 			//	
@@ -108,7 +109,7 @@ public class ReplyController {
 			}
 			
 			
-////			// ´ñ±Û »èÁ¦ 
+////			// ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 //				@DeleteMapping(
 //						value= "/ajax/replyDelete.do",
 //					 produces = MediaType.TEXT_PLAIN_VALUE )

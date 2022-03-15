@@ -131,27 +131,32 @@
 							<img src="images/pensu1.jpg" arl="" width="50" class="rounded-circle mr-3">
 							<a href="#" class="text-white">관리자명 </a>
 						</div>
+						<!-- 대쉬보드 -->
 						<ul class="navbar-nav flex-column mt-4">
 							<li class="nav-item">
 								<a th:href="@{/admin}" class="nav-link text-white p-3 mb-2 current">
 									<i class="fas fa-home text-white fa-lg mr-3"></i>Dashboard
 								</a>
 							</li>
+							<!-- 사용자 -->
 							<li class="nav-item">
 								<a th:href="@{/admin/users}" class="nav-link text-white p-3 mb-2 sidebar-link">
 									<i class="fas fa-user text-white fa-lg mr-3"></i>user
 								</a>
 							</li>		
+							<!-- 판매품목 -->
 							<li class="nav-item">
 								<a th:href="@{/admin/productStockList}" class="nav-link text-white p-3 mb-2 sidebar-link">
 									<i class="fas fa-shopping-cart text-white fa-lg mr-3"></i>sales
 								</a>
 							</li>
+							<!-- 폼작성-->
 							<li class="nav-item">
 								<a href="#" class="nav-link text-white p-3 mb-2 sidebar-link">
 									<i class="fas fa-chart-line text-white fa-lg mr-3"></i>analystics
 								</a>
 							</li>
+							<!-- 이벤트 -->
 							<li class="nav-item">
 								<a href="#" class="nav-link text-white p-3 mb-2 sidebar-link">
 									<i class="fas fa-chart-line text-white fa-lg mr-3"></i>evnet
@@ -162,9 +167,10 @@
 									<i class="fas fa-wrench text-white fa-lg mr-3"></i>Settings
 								</a>
 							</li>
+							<!-- 마켓 -->
 							<li class="nav-item">
-								<a href="#" class="nav-link text-white p-3 mb-2 sidebar-link">
-									<i class="fas fa-file-alt text-white fa-lg mr-3"></i>Documentation
+								<a th:href= "@{/admin/marketForm}" class="nav-link text-white p-3 mb-2 sidebar-link">
+									<i class="fas fa-file-alt text-white fa-lg mr-3"></i>마켓 폼 작성
 								</a>
 							</li>		
 						</ul>

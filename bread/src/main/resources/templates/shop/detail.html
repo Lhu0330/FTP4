@@ -175,9 +175,12 @@ $(document).ready(function(){
 			    
 			  // 데이터를 표시할 div > ul 의 내용을 없앤다.
 			  $("#replyListDiv > ul").empty();
-			  
+			 
+
 			    // 데이터가 많으므로 반복문 처리를 한다 .
 			    $(result).each(function(idx, vo){
+			    	
+			    	
 			    	
 			    	var src = "";
 			    	src += "<li class='list-group-item rowData'>";
@@ -196,6 +199,9 @@ $(document).ready(function(){
 		    	   	$("#replyListDiv > ul").append(src);
 		    	   		
 			    });
+		        
+		    		    	
+			 
 			    
 	 	});
 			
@@ -247,7 +253,7 @@ $(document).ready(function(){
 //         });
 
    
-   
+   /*  댓글 삭제 */
    $("#replyListDiv").on("click", ".replyDeleteBtn",
 		
 		   function(){

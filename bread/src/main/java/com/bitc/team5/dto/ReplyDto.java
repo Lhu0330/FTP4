@@ -7,17 +7,17 @@ public class ReplyDto {
 
 
 	private int rno;
-	private int no; // °Ô½Ã±Û ¹øÈ£ board_idx
+	private int no; // ï¿½Ô½Ã±ï¿½ ï¿½ï¿½È£ board_idx
 	private String userId;
 //	private String pw;
 	private String content;
 	
 	//private String date;
 
-	//ÀÔ·ÂÇÒ¶§¸¸ ÀÔ·Â ÆÐÅÏÀ» ÁöÁ¤ÇØÁØ´Ù. Ãâ·ÂÇÒ¶§´Â ÇÊ¿ä¾øÀ½ 
+	//ï¿½Ô·ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½. ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ï¿½ 
 //	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String date;
-	private char deletedYn;
+	// private char deletedYn;
 
 	
 }

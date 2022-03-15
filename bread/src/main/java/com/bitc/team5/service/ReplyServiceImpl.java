@@ -1,5 +1,6 @@
 package com.bitc.team5.service;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +12,11 @@ import com.bitc.team5.dto.ReplyDto;
 import com.bitc.team5.mapper.ReplyMapper;
 
 import lombok.AllArgsConstructor;
-import lombok.extern.log4j.Log4j;
+import lombok.extern.log4j.Log4j2;
 import net.webjjang.util.PageObject;
 
 @Service
-@Log4j
+@Log4j2
 @Qualifier("replyServiceImpl")
 @AllArgsConstructor
 public class ReplyServiceImpl implements ReplyService {
@@ -25,11 +26,11 @@ public class ReplyServiceImpl implements ReplyService {
 	
 	@Override
 	public List<ReplyDto> list(PageObject pageObject, int no) {
-		// ÀüÃ¼ µ¥ÀÌÅÍ¸¦ °¡Á®¿À±âÀ§ÇØ¼­ getrROW ÇÊ¿ä PageObject¿¡ ¼ÂÆÃÇØ¾ß¸¸ ÇÑ´Ù
+		// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ getrROW ï¿½Ê¿ï¿½ PageObjectï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ø¾ß¸ï¿½ ï¿½Ñ´ï¿½
 		pageObject.setTotalRow(mapper.getRow(no));
 		log.info(pageObject);
-		// mybatis¿¡¼­´Â µ¥ÀÌÅÍ¸¦ ÇÑ°³¸¸ ¹Þµµ·Ï ¼³°èµÇ¾îÁ®ÀÖ´Ù.
-		// ³Ñ°Ü¾ßÇÒ°ÍÀº  pageObject¿Í no¸¦ ³Ñ°Ü¾ßÇÑ´Ù -> ÇÏ³ª·Î ¸º¸£¾îÁØ´Ù class ³ª map
+		// mybatisï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½Ñ°ï¿½ï¿½ï¿½ ï¿½Þµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ç¾ï¿½ï¿½ï¿½ï¿½Ö´ï¿½.
+		// ï¿½Ñ°Ü¾ï¿½ï¿½Ò°ï¿½ï¿½ï¿½  pageObjectï¿½ï¿½ noï¿½ï¿½ ï¿½Ñ°Ü¾ï¿½ï¿½Ñ´ï¿½ -> ï¿½Ï³ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø´ï¿½ class ï¿½ï¿½ map
 		Map<String, Object> pageInfo = new HashMap<String, Object>();
 		pageInfo.put("pageObject", pageObject);
 		pageInfo.put("no", no);

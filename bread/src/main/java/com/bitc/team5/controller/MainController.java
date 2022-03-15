@@ -14,6 +14,12 @@ public class MainController {
 	private ReplyService replyService;
 	
 	
+	@RequestMapping("/test")
+	public String test123() throws Exception{
+		return "admin/insertProductMar2";
+	}
+	
+	
 	@RequestMapping("/main")
 	public String test() throws Exception{
 		return "main";

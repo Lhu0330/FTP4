@@ -116,7 +116,7 @@
   		
   			 //댓글 삭제 함수 - delete()는 사용하고 있기 떄문에 재사용시 오류남 함수이름은 remove로 
    		  		function remove(rno, callback, error){
-  				alert("댓글쓰기처리 진행.." + rno);
+  				//alert("댓글쓰기처리 진행.." + rno);
   				$.ajax({ 
   				   url:'/ajax/replyDelete.do?rno=' + rno,
   				   type:'delete',
