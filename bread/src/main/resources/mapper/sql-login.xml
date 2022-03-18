@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitc.team5.mapper.LoginMapper">
+	<!--유저정보 체크-->
+	<select id="selectMemberInfoYn" parameterType="map" resultType="int">
+		<![CDATA[ 
+			SELECT
+				COUNT(*) As cnt
+			FROM
+				b_member
+			WHERE
+				user_id = #{userId}
+			AND
+				user_pw = #{userPw}
+		]]>
+	</select>
+	
+	<!--일반회원 가입-->
+	<insert id="registerUser" parameterType="com.bitc.team5.dto.LoginDto">
+		<![CDATA[ 
+			INSERT INTO b_member
+				(user_id, user_pw, user_phone, user_email, user_addr, user_auth)
+			VALUES
+				(#{userId}, #{userPw}, #{userPhone}, #{userEmail}, #{userAddr}, "U")
+		]]>
+	</insert>
+	
+	<!--판매자 가입-->
+	<insert id="registerSeller" parameterType="com.bitc.team5.dto.LoginDto">
+		<![CDATA[ 
+			INSERT INTO b_member
+				(user_id, user_pw, user_phone, user_email, user_addr, user_auth, store_name, store_desc, store_addr)
+			VALUES
+				(#{userId}, #{userPw}, #{userPhone}, #{userEmail}, #{userAddr}, "S", #{storeName}, #{storeDesc}, #{storeAddr})
+		]]>
+	</insert>
+	
+	<!--일반회원정보 페이지-->
+	<select id="selectMemberDetail" parameterType="String" resultType="com.bitc.team5.dto.LoginDto">
+		<![CDATA[ 
+			SELECT
+				idx, user_id, user_pw, user_phone, user_email, user_addr, user_auth
+			FROM
+				b_member
+			WHERE
+				user_id = #{userId}
+		]]>
+	</select>
+	
+	<!--판매자정보 페이지-->
+	<select id="selectSellerDetail" parameterType="String" resultType="com.bitc.team5.dto.LoginDto">
+		<![CDATA[ 
+			SELECT
+				idx, user_id, user_pw, user_phone, user_email, user_addr, user_auth, store_name, store_desc, store_addr
+			FROM
+				b_member
+			WHERE
+				user_id = #{userId}
+		]]>
+	</select>
+	
+	<!--일반회원 정보수정-->
+	<update id="editMember" parameterType="com.bitc.team5.dto.LoginDto">
+		<![CDATA[ 
+			UPDATE
+				b_member
+			SET
+				user_phone = #{userPhone},
+				user_email = #{userEmail},
+				user_addr = #{userAddr}
+			WHERE
+				user_id = #{userId}
+		]]>
+	</update>
+	
+	<!--일반회원 정보삭제-->
+	<delete id="deleteMember" parameterType="com.bitc.team5.dto.LoginDto">
+		<![CDATA[ 
+			DELETE FROM
+				b_member
+			WHERE
+				user_id = #{userId}
+		]]>
+	</delete>
+	
+	<!--판매자 정보수정-->
+	<update id="editSeller" parameterType="com.bitc.team5.dto.LoginDto">
+		<![CDATA[ 
+			UPDATE
+				b_member
+			SET
+				user_phone = #{userPhone},
+				user_email = #{userEmail},
+				user_addr = #{userAddr},
+				store_name = #{storeName},
+				store_desc = #{storeDesc},
+				store_addr = #{storeAddr}
+			WHERE
+				user_id = #{userId}
+		]]>
+	</update>
+	
+	<!--판매자 정보삭제-->
+	<delete id="deleteSeller" parameterType="com.bitc.team5.dto.LoginDto">
+		<![CDATA[ 
+			DELETE FROM
+				b_member
+			WHERE
+				user_id = #{userId}
+		]]>
+	</delete>
+	
+	<!--유저정보 리스트(관리자전용)-->
+	<select id="selectMemberList" resultType="com.bitc.team5.dto.LoginDto">
+		<![CDATA[ 
+			SELECT
+				idx, user_id, user_phone, user_email, user_addr
+			FROM
+				b_member
+			WHERE
+				user_auth = "U"
+			ORDER By
+				idx DESC
+		]]>
+	</select>
+	
+	<!--판매자정보 리스트(관리자전용)-->
+	<select id="selectSellerList" resultType="com.bitc.team5.dto.LoginDto">
+		<![CDATA[ 
+			SELECT
+				idx, user_id, user_phone, user_email, user_addr, store_name, store_desc, store_addr
+			FROM
+				b_member
+			WHERE
+				user_auth = "S"
+			ORDER By
+				idx DESC
+		]]>
+	</select>
+	
+	<select id="selectMemberUserAuth"  resultType="String">
+		<![CDATA[ 
+			SELECT
+				user_auth
+			FROM
+				b_member
+			WHERE
+				user_id = #{userId}
+			AND
+				user_pw = #{userPw}
+		]]>
+	</select>
+</mapper>

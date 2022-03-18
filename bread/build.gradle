@@ -12,6 +12,10 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	
+	 all {
+        exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+    }
 }
 
 repositories {
@@ -28,6 +32,21 @@ dependencies {
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+		implementation 'com.github.pagehelper:pagehelper-spring-boot-starter:1.4.1'
+	// https://mvnrepository.com/artifact/commons-io/commons-io
+	implementation 'commons-io:commons-io:2.11.0'
+	// https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload
+	implementation 'commons-fileupload:commons-fileupload:1.4'
+	// https://mvnrepository.com/artifact/log4j/log4j
+	
+	implementation 'com.google.code.gson:gson:2.9.0'
+	implementation 'org.apache.tomcat.embed:tomcat-embed-jasper'  
+    implementation 'javax.servlet:jstl:1.2'
+	implementation'org.apache.tiles:tiles-jsp:3.0.4'
+	implementation 'org.springframework.boot:spring-boot-starter-log4j2'
+	implementation files('libs/pageObject.jar')
 }
 
 tasks.named('test') {

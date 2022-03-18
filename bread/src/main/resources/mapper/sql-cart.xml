@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bitc.team5.mapper.SBMapper">
+<!-- 장바구니 목록-->
+	<select id="selectCartList" parameterType="string" resultType="com.bitc.team5.dto.SBDto">
+		<![CDATA[
+			SELECT
+				od.order_detail_idx, od.product_idx, p.product_name,
+				od.cart_qty, (p.product_price * od.cart_qty) AS product_price, 
+				s.delivery_cost, od.checked_yn, s.store_name
+			FROM
+				product p
+			JOIN
+			    orders_detail od
+			ON
+			    p.product_id = od.product_idx
+			JOIN
+			    store s
+			ON
+				p.store_id = s.idx
+			JOIN
+			    orders o
+			ON
+				o.order_idx = od.order_detail_idx
+			WHERE
+			    od.cart_qty > 0
+			AND
+				o.user_id = #{userId}
+			ORDER BY
+				p.product_id DESC
+		]]>
+	</select>
+	<!-- 결제 목록-->
+	<select id="selectPayList" parameterType="string" resultType="com.bitc.team5.dto.SBDto">
+		<![CDATA[
+			SELECT
+				od.order_detail_idx, od.product_idx, p.product_name,
+				od.cart_qty, (p.product_price * od.cart_qty) AS product_price, 
+				s.delivery_cost, od.checked_yn
+			FROM
+				product p
+			JOIN
+			    orders_detail od
+			ON
+			    p.product_id = od.product_idx
+			JOIN
+			    store s
+			ON
+				p.store_id = s.idx
+			JOIN
+			    orders o
+			ON
+				o.order_idx = od.order_detail_idx
+			WHERE
+			    od.cart_qty > 0
+			AND
+			    od.checked_yn = 'Y'
+			AND 
+				o.user_id = #{userId}
+			ORDER BY
+				p.product_id DESC
+			
+		]]>
+	</select>
+	<!-- 주문내역-->
+	<select id="selectSuccessList" parameterType="string" resultType="com.bitc.team5.dto.SBDto">
+		<![CDATA[
+			SELECT
+				od.order_detail_idx, o.order_idx, od.product_idx, p.product_name, od.success_qty,
+				p.product_price, s.delivery_cost, od.checked_yn
+			FROM
+				product p
+			JOIN
+			    orders_detail od
+			ON
+			    p.product_id = od.product_idx
+			JOIN
+			    store s
+			ON
+				p.store_id = s.idx
+			JOIN
+			    orders o
+			ON
+				o.order_idx = od.order_detail_idx
+			WHERE
+			    od.success_qty > 0
+			AND 
+				o.user_id = #{userId}	
+			ORDER BY
+				p.product_id DESC
+			
+		]]>
+	</select>
+	<!-- 장바구니 비용계산-->
+	<select id="selectCostCalculate" resultType="com.bitc.team5.dto.SBDto">
+		<![CDATA[
+			SELECT
+				SUM(p.product_price * od.cart_qty) AS bs_cost, MAX(s.delivery_cost) AS ds_cost,
+				(SUM(p.product_price * od.cart_qty) + MAX(s.delivery_cost)) AS final_cost
+			FROM
+				product p
+			JOIN
+			    orders_detail od
+			ON
+			    p.product_idx = od.product_idx
+			JOIN
+			    store s
+			ON
+				p.store_id = s.idx
+			JOIN
+			    orders o
+			ON
+				o.order_idx = od.order_detail_idx
+			WHERE
+			    od.cart_qty > 0
+			AND
+			    o.checked_yn = 'Y'
+			
+			
+		]]>
+	</select>
+	<!-- 장바구니 삭제-->
+	<update id="deleteCart" parameterType="int">
+		<![CDATA[
+			UPDATE
+				orders_detail
+			SET
+				cart_qty = 0
+			WHERE
+				product_idx = #{productIdx}
+		]]>
+	</update>
+	
+	<update id="checkedCart" parameterType="com.bitc.team5.dto.SBDto">
+		<![CDATA[
+			UPDATE
+				orders_detail
+			SET
+				checked_yn = 'Y'
+			WHERE
+				product_idx = #{productIdx}
+		]]>
+	</update>
+	
+	<update id="checkedNotCart" parameterType="com.bitc.team5.dto.SBDto">
+		<![CDATA[
+			UPDATE
+				orders_detail
+			SET
+				checked_yn = 'N'
+		]]>
+	</update>
+	<!-- 장바구니 수량늘리는 부분-->
+	<update id="increaseCart" parameterType="int">
+		<![CDATA[
+			UPDATE
+				orders_detail
+			SET
+				cart_qty = cart_qty + 1
+			WHERE
+				product_idx = #{productIdx}
+			AND
+				cart_qty < 999
+		]]>
+	</update>
+	<!-- 장바구니 수량 줄이는부분-->
+	<update id="decreaseCart" parameterType="int">
+		<![CDATA[
+			UPDATE
+				orders_detail
+			SET
+				cart_qty = cart_qty - 1
+			WHERE
+				product_idx = #{productIdx}
+			AND
+				cart_qty > 1
+		]]>
+	</update>
+	<!-- 판매수량에 관한부분-->
+	<update id="updateSuccess" parameterType="com.bitc.team5.dto.SBDto">
+		<![CDATA[
+			UPDATE
+				orders_detail
+			SET
+				success_qty = success_qty + cart_qty, cart_qty = 0
+			WHERE
+				cart_qty > 0
+			AND
+			    checked_yn = 'Y'
+		]]>
+	</update>
+	<!--product_stock_cnt = product_stock_cnt - cart_qty, (SET 부분 : 주문 완료 시 주문량만큼 재고량을 감소시키는 구문)-->
+	
+	<insert id="addCart" parameterType="com.bitc.team5.dto.SBDto">
+		<![CDATA[
+			INSERT INTO
+				orders_detail (product_idx, order_cnt, order_sum, cart_qty)
+			VALUES
+				(#{productIdx}, #{orderCnt}, #{orderCnt}, #{cartQty})
+		]]>
+	</insert>
+	
+	<insert id="addCart1" parameterType="String">
+		<![CDATA[
+			INSERT INTO
+				orders (user_id, order_date)
+			VALUES
+				(#{userId}, NOW())
+		]]>
+	</insert>
+	
+</mapper>
