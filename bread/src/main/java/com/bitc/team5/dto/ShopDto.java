@@ -15,7 +15,7 @@ public class ShopDto {
 	private int productPrice;
 	private String productDescription;
 	private int productStockCnt;
-	
+	private int hitCnt;
 	
 	private String storeName;
 	private String storeDescription;

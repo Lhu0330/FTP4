@@ -58,6 +58,10 @@ public interface ShopMapper {
 
 		List<AdminProductFileDto> selectformFileList2(long formId);
 		
+		// 조회수 올리기
+		void updateHitCnt(long productId);
+	
+				
 //  -------		마켓 끝 ----------- 
 		
 		

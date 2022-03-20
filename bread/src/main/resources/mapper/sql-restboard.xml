@@ -28,8 +28,22 @@
 	</insert>-->
 	
 	
+<!-- 조회수 올리기 --> 
 
-   
+		<update id="updateHitCnt" parameterType="long">
+		
+		<![CDATA[
+		
+			UPDATE
+				admin_product
+			SET
+				hit_cnt = hit_cnt + 1
+			WHERE
+				 product_id = #{productId}
+		
+		]]>
+		
+		</update>   
    
    
     

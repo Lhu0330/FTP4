@@ -80,7 +80,11 @@ public class ShopServiceImpl  implements ShopService {
 		@Override
 		public ShopDto selectProductDetail(long productId) throws Exception {
 			
+			// ask
+			shopMapper.updateHitCnt(productId);
 			ShopDto board = shopMapper.selectProductDetail(productId);
+			
+		
 			
 //			첨부파일 (썸네일 )
 			List<AdminProductFileDto> fileList = shopMapper.selectBoardFileList(productId);
