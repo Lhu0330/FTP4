@@ -134,7 +134,10 @@
 
     // initialize the calendar
     // -----------------------------------------------------------------
-
+		
+	var all_events = null;
+	all_events = loadingEvents();
+	
     calendar = new Calendar(calendarEl, {
       headerToolbar: {
         left: 'prev,next today',
@@ -143,6 +146,7 @@
       },
       editable: true,  // 수정가능여부
       droppable: true, // this allows things to be dropped onto the calendar
+ 	  events: all_events,
       drop: function(info) {
         // is the "remove after drop" checkbox checked?
         if (checkbox.checked) {
@@ -191,6 +195,39 @@
 			savedata(jsondata);
 			  
 		  }
+		  
+
+		  function loadingEvents() 
+		  {
+		  	var return_value = null;
+		  	
+		  	
+		  	 $.ajax({
+		  		  type: 'POST',
+		  		  url: "/getevent.do",
+		  		  data: {},
+		  		  dataType: "json",
+		  		  contentType : "application/json; charset=UTF-8",
+		  		  async : false, 
+		  		  success: function(result){
+		  			  return_value= result;
+		  			  alert(result)
+		  			  console.log(result)
+		  			  
+		  			  
+		  		  },
+		  		  error : function(xhr, status, er){
+		  				 	alert(status);
+		  				  	alert(er);
+		  				 }
+		  	  
+		  	
+		  	})
+		  	
+		  	return return_value;
+		  }
+
+
 		  
 		  function savedata(jsondata)
 		  {

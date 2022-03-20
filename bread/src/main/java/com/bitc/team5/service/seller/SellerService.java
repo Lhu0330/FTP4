@@ -67,6 +67,8 @@ public interface SellerService {
 
 		public Object showSchedule() throws Exception;
 
+		public List<MarketDto> formDateList();
+
 
 
 		

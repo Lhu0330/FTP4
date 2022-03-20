@@ -85,9 +85,19 @@ $(document).ready(function() {
 														<h6 class="text-center">일정</h6>
 												</div>
 												<div class="col-sm-5 my-auto">
-														<input type="text" id="productPrice" name="productPrice" class="col-sm-9 form-control" th:value="${marketDto.plan }">
+														<input type="text" id="productPrice" name="productPrice" class="col-sm-9 form-control" th:value="${marketDto.startDate}">
+													
+												</div>
+												<div class="col-sm-1 my-auto">
+														~
+													
+												</div>
+												
+													<div class="col-sm-5 my-auto">
+														<input type="text" id="productPrice" name="productPrice" class="col-sm-9 form-control" th:value="${marketDto.endDate }">
 												</div>
 										</div>
+									
 										<div class="row my-3">
 
 												<div class="col-sm-1 my-auto">

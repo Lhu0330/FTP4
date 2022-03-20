@@ -7,6 +7,7 @@ import lombok.Data;
 @Data
 public class MarketDto {
 	
+	private int id;
 	private int idx; //글번호
 	private String storeId;
 	private String marketName;
@@ -14,9 +15,11 @@ public class MarketDto {
 	private String plan;
 	private long formId;
 	private String marketDetail;
-
+	private String allday; 
 //	private long productId; //��ǰ�ڵ�
 	private int productCateId;
+	private String title; 
+	private String time; 
 
 //	private String productName;
 //	private int productPrice;
@@ -33,6 +36,9 @@ public class MarketDto {
 	private String fileSize;
 	private String fileType;
 	private String deletedYn;
+	
+	private String startDate;
+	private String endDate;
 	
 
 }

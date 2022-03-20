@@ -88,6 +88,8 @@ public interface SellerMapper {
 
 			void addSchedule(SheduleDto dto) throws Exception;
 
+			List<MarketDto> formDateList();
+
 	
 
 

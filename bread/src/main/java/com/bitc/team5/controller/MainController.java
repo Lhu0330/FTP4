@@ -13,8 +13,6 @@ public class MainController {
 	@Autowired
 	private ReplyService replyService;
 	
-
-
 	@RequestMapping("/main")
 	public String test() throws Exception{
 		return "main";
@@ -50,7 +48,7 @@ public class MainController {
 	
 	@RequestMapping("/test5")
 	public String test5() throws Exception{
-		return "shop/detailCalender3";
+		return "shop/detailCalender4";
 	}
 //
 //	

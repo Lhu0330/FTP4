@@ -1,15 +1,17 @@
 package com.bitc.team5.controller.admin;
 
-import java.util.Map;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.bitc.team5.dto.MarketDto;
 import com.bitc.team5.service.seller.SellerService;
 
 @Controller
@@ -38,19 +40,101 @@ public class UsersControllerSchedule {
 //			model.addAttribute("template", "admin/insertProduct");
 //			return "admin/index";
 //		}
+////		
 //		
+//		@PostMapping(value= "/saveSchedata.do",
+//				consumes = "application/json"
+//				)
+//		public ResponseEntity list(@RequestBody Map <String ,Object> map , Model model) {
+//		
+//			 System.out.println(" map");
+//			//List<SheduleDto> sdList = productService.insertSche(sd);
+//			model.addAttribute("template", "admin/insertProduct");
+//			
+//			return new ResponseEntity<>(map, HttpStatus.OK );
+//		}
 		
-		@PostMapping(value= "/saveSchedata.do",
-				consumes = "application/json"
-				)
-		public ResponseEntity list(@RequestBody Map <String ,Object> map , Model model) {
-		
-			 System.out.println(" map");
-			//List<SheduleDto> sdList = productService.insertSche(sd);
-			model.addAttribute("template", "admin/insertProduct");
+
+	
+	//String color = "#" + String.valueOf(Math.round(Math.random() * 0xffffff));
 			
-			return new ResponseEntity<>(map, HttpStatus.OK );
+	
+//	   JSONObject obj = new JSONObject();
+//	   try {
+//	   JSONArray jArray = new JSONArray();//배열이 필요할때
+//	   for (int i = 0; i < databoard.size(); i++)//배열
+//	   {
+//	   JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
+//	   sObject.put("id", databoard.get(i).getIdx());
+//	   sObject.put("title", databoard.get(i).getStoreId());
+//	   sObject.put("start", databoard.get(i).getStartDate());
+//	   sObject.put("end", databoard.get(i).getEndDate());
+//	   sObject.put("allDay", databoard.get(i).getAllday());
+//	   sObject.put("color", color );
+//	   jArray.put(sObject);
+//	   
+//	   }
+//	   
+//	   JSONArray jsonArray = JSONArray.toJSONObject(jArray);
+//
+//	   System.out.println(obj.toString());
+//
+//	   } catch (JSONException e) {
+//	   e.printStackTrace();
+//	   }
+//	   
+	/*
+	 * // ""textColor":"yellow", "backgroundColor":"navy", "borderColor":"navy"
+	 */
+	 
+	//String color = "#" + String.valueOf(Math.round(Math.random() * 3 ));
+
+		@ResponseBody
+		@RequestMapping(value="/getevent.do", method=RequestMethod.POST)
+		public String getformdate( ) throws Exception {
+			
+			
+			List<MarketDto> databoard = productService.formDateList();
+	
+			
+			JSONArray jArray = new JSONArray();
+			   
+			   try {
+				   
+				    for (int i = 0; i < databoard.size(); i++) {
+				        JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
+				       
+				        	sObject.put("id", String.valueOf(databoard.get(i).getIdx()));
+				        	
+						   sObject.put("title", databoard.get(i).getStoreId());
+						   sObject.put("start", databoard.get(i).getStartDate() +"T" + databoard.get(i).getTime() + ":00");
+						//   sObject.put("time", databoard.get(i).getTime());
+						   // sObject.put("end", databoard.get(i).getEndDate());
+						//   sObject.put("end", databoard.get(i).getTime());
+						   //sObject.put("write", "dd");
+						 //  sObject.put("allDay", "false");
+						   sObject.put("color", "#" + String.valueOf(Math.round(Math.random() * 999 )) );
+						   
+				        jArray.put(sObject);
+				    }
+
+				
+				
+			   } catch (JSONException e) {
+				    e.printStackTrace();
+				}
+			   
+			   
+			   var result =   jArray.toString();
+			   
+			   System.out.println(result);
+			   
+			return result;
+
 		}
+		
+//		/getevent.do
+		
 		
 		
 //		

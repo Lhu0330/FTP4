@@ -241,9 +241,9 @@
 	<insert id="insertForm" parameterType="com.bitc.team5.dto.MarketDto" useGeneratedKeys="true" keyProperty="idx">
 		<![CDATA[
 			INSERT INTO market_store_info
-				( form_id , market_name, banking, plan, market_detail , store_id)
+				( form_id , market_name, banking, plan, market_detail , store_id, start_date, end_date, time )
 			VALUES
-				(#{formId}, #{marketName}, #{banking}, #{plan}, #{marketDetail}, #{storeId})
+				(#{formId}, #{marketName}, #{banking}, #{plan}, #{marketDetail}, #{storeId}, #{startDate}, #{endDate} , #{time} )
 		]]>
 	</insert>
 	
@@ -335,6 +335,36 @@
 		]]>
 	</select>
 	
+	
+<!--	<select id="formDateList" resultType="com.bitc.team5.dto.MarketDto">
+      
+      <![CDATA[
+         SELECT
+            idx , store_id  ,  DATE_FORMAT(start_date,'%Y-%m-%dT%H:%i:%s') as start_date , DATE_FORMAT(end_date,'%Y-%m-%dT%H:%i:%s')as end_date , allday
+         FROM
+         	 market_store_info 
+  
+     
+      ]]>
+             
+   </select>-->
+   
+   	<select id="formDateList" resultType="com.bitc.team5.dto.MarketDto">
+      
+      <![CDATA[
+         SELECT
+            idx , store_id  ,  DATE_FORMAT(start_date,'%Y-%m-%d') as start_date , DATE_FORMAT(end_date,'%Y-%m-%d')as end_date , allday, time
+         FROM
+         	 market_store_info 
+  
+     
+      ]]>
+             
+   </select>
+   
+   
+   
+ 
 	<!-- 스케줄 -->
 <!--	<select id="showSchedule" resultType = "ScheduleDTO">
     		SELECT
@@ -403,7 +433,7 @@
 	</insert>
 	-->
 	
-	
+
 	
 	<!--<select id="selectBoardDetail" parameterType="int" resultType="com.bitc.dto.RestBoardDto">
 		<![CDATA[
