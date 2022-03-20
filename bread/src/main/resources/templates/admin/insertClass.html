@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="context-path" th:content="@{/}"/>
+    
+  
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!--  link rel="stylesheet" href="style.css"> -->
+<!--  <script src="script.js"></script> -->
+
+
+<title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"/>
+<style>
+	.makeForm{
+		 margin-left:300px;
+	}
+
+
+	#baseForm2{
+			
+		width:900px; 
+	}
+	
+</style>
+  <script type="text/javascript">
+
+   
+		 
+		 			 
+</script>
+
+</head>
+
+<!-- <body> -->
+<body>
+
+		<div class="container-fluid">
+			<div class="row mb-5 mt-5">
+				<div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+					<div class="row">
+						 <div class="col-12">
+						 		<h3 class="text-muted text-center mb-3">쿠킹 클래스 등록</h3>
+						  </div>
+					</div>
+						  <div class="makeForm">  
+								<form  id="frm" method="post" action="/admin/classInserting" enctype="multipart/form-data">
+								<!-- 타이틀-->
+									<div class="row my-3">										
+										<div class="col-sm-3 my-auto">
+											<h6 class="text-center">쿠킹 클래스 title </h6>
+										</div>
+										<div class="col-sm-6 my-auto">
+											<input type="text" id="className" name="className" class="col-sm-9 form-control" placeholder="ex) 구움과자 세트 마켓 " >
+										</div>
+									</div>
+										<!-- 썸네일 -->
+									<div class="row my-3">										
+										<div class="col-sm-3 my-auto">
+											<h6 class="text-center">클래스 썸네일 첨부   </h6>
+										</div>
+										<div class="col-sm-6 my-auto">
+											<input type="file" id="productImg" name="productImg" class="form-control" multiple >
+										</div>
+									</div>
+									<!-- 클래스가격 -->
+									<div class="row my-3">										
+											<div class="col-sm-3 my-auto">
+												<h6 class="text-center"> 클래스 가격 </h6>
+											</div>
+											<div class="col-sm-6 my-auto">
+												<input type="text" id="classPrice" name="classPrice" class="col-sm-9 form-control" placeholder="ex) 1000원" >
+											</div>
+									</div>
+									<!-- 클래스 -->
+									<div class="row my-3">										
+											<div class="col-sm-3 my-auto">
+												<h6 class="text-center"> 클래스 일정 </h6>
+											</div>
+											<div class="col-sm-6 my-auto">
+												<input type="text" id="classPlan" name="classPlan" class="col-sm-9 form-control" placeholder="ex) 21년 04월 01일 금요일" >
+											</div>
+									</div>
+									<!-- 클래스 -->
+									<div class="row my-3">										
+											<div class="col-sm-3 my-auto">
+												<h6 class="text-center"> 클래스 장소 </h6>
+											</div>
+											<div class="col-sm-6 my-auto">
+												<input type="text" id="classPlace" name="classPlace" class="col-sm-9 form-control" placeholder="ex) ###매장 강남역점" >
+											</div>
+									</div>
+								<!-- 클래스 상세설명 -->
+						  			<div class="row my-3">										
+										<div class="col-sm-3 my-auto">
+											<h6 class="text-center">클래스 상세성명  </h6>
+										</div>
+										<div class="col-sm-6 my-auto">
+											<textarea rows="7" class="form-control h-5" id="classDetail" name="classDetail" placeholder="내용을 입력하세요" ></textarea>
+										</div>
+									</div>
+										<!-- 상세설명 사진 -->
+									<div class="row my-3">										
+										<div class="col-sm-3 my-auto">
+											<h6 class="text-center">상점,상품 썸네일 첨부   </h6>
+										</div>
+										<div class="col-sm-6 my-auto">
+											<input type="file" id="files" name="files" class="form-control" placeholder="제목을 입력해주세요" multiple>
+										</div>
+									</div>
+						  			
+						  				<button type="submit" id="productIn" name="prodcutIn" class="btn btn-secondary mt-3">등록</button>
+						  		</form>
+						  
+						  </div> 	 
+					   </div>
+				  </div>
+			</div>
+		
+		
+
+<!-- 	<div class="content_item" style="border:0px;margin-top:10px;background-color:#ff7676;color:#fff;padding: 20px 50px 20px 50px;cursor:pointer;font-size: 20px;font-weight: 700;" onclick="form_insert();"> -->
+<!-- 										<div style="width:100%;text-align:center;"> -->
+<!-- 										폼 만들기										</div> -->
+										
+										
+<!-- 									</div> -->
+		
+<!-- 		<div id="pre_set" style="display:none"> -->
+<!-- 		   <input type="text" name="test1" value="" style="width:100px">  -->
+<!-- 		   <input type="text" name="test2" value="" style="width:100px">    -->
+<!-- 		   <input type="button" value="삭제" onclick="remove_item(this)"> -->
+<!-- 		</div> -->
+		 
+<!-- 		<div id="field"></div> -->
+		 
+<!-- 		<input type="button" value=" 추가 " onclick="add_item()"><br> -->
+
+
+
+<!-- <div id="tistoryEtcLayer" class="layer_post"></div><div id="tistorySnsLayer" class="layer_post"><div class="bundle_post"><a href="#none" class="btn_mark" data-service="facebook"><span class="ico_sns ico_fb"></span>페이스북으로 공유</a><a href="#none" class="btn_mark" data-service="kakaotalk"><span class="ico_sns ico_kt"></span>카카오톡으로 공유</a><a href="#none" class="btn_mark" data-service="kakaostory"><span class="ico_sns ico_ks"></span>카카오스토리로 공유</a><a href="#none" class="btn_mark" data-service="twitter"><span class="ico_sns ico_tw"></span>트위터로 공유</a><a href="#none" class="btn_mark" data-service="url"><span class="ico_sns ico_url"></span>URL 복사</a><span class="ico_postbtn ico_arrbt"></span></div></div>
+ -->
+
+</body>
+
+</html>

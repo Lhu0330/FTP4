@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>상시판매물품</title>
+ 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!-- 댓글 js 모듈 등록   -->
+<script src="/js/reply.js"></script>
+
+<style>
+	
+	.main{
+	
+		margin:0 auto;
+		width:1050px;
+	
+	}
+
+	.jjim{
+	
+		background: #d4d4d4;
+		border : none;	
+		font-size: 20px;
+		color: white;
+		padding: 10px;
+		border-radius: 4px;
+			
+		}
+		
+	.buy{
+		background: #d4d4d4;
+		border : none;	
+		font-size: 20px;
+		color: white;
+		padding: 10px;
+		border-radius: 4px;
+	
+	}
+	.btn_cart{
+		background: #d4d4d4;
+		border : none;	
+		font-size: 20px;
+		color: white;
+		padding: 10px;
+		border-radius: 4px;
+		
+		
+	}
+	#delivery{
+		font-size: 15px;
+	}
+	#count{
+	
+		font-size: 25px;
+	}
+	
+	.detailPanel{
+		font-family: 'Noto Sans KR', sans-serif;
+	}
+
+	.userMenu {
+	
+/* 	  margin-left:110px; */
+/* 		  margin-right:110px; */
+		  	 font-size: 10px;
+	}
+	
+	 	.userMenu {
+	
+/* 	  margin-left:110px; */
+/* 		  margin-right:110px; */
+		  	 font-size: 10px;
+	}
+	
+	 
+	 .logo{
+/* 	 	 margin-left:110px; */
+/* 		  margin-right:110px; */
+	 }
+	
+		.headerMenu{
+	
+		display: flex;
+		 justify-content: space-between;
+		   align-items: center;
+/* 		  margin-left:110px; */
+/* 		  margin-right:110px; */
+		font-family: 'Noto Sans KR', sans-serif;
+		font-weight:400;
+			 font-size: 22px;
+	}
+	
+ 	.header{
+	
+ 	margin:0 auto; /* div를 중앙정렬합니다. */ 
+ 	width:1050px; 
+	
+	
+	} 
+
+
+	
+	
+ 	.footer{
+	
+		margin:0 auto; /* div를 중앙정렬합니다. */ 
+ 	width:1050px; 
+		font-family: 'Noto Sans KR', sans-serif;
+		
+		
+	}
+	
+	
+	.detailPanel{
+	
+			margin:0 auto;
+		width:1050px;
+		font-family: 'Noto Sans KR', sans-serif;
+		 
+		
+	}
+	
+	.itemDetail{
+		  margin-left:20px; 
+		  margin-right:20px;
+	
+	}
+	/* 이미지 관련 스타일 */
+
+			/* 
+			.carousel-inner > .item > img,
+			  .carousel-inner > .item > a > img {
+			      margin: auto;
+			  }
+			  
+			#myCarousel{
+				max-width: 450px;
+				margin: 0 auto;
+				background: #fff;
+			}
+			
+			#thumbCarousel{
+				max-width: 450px;
+				margin: 0 auto;
+				overflow: hidden;
+				padding: 10px 0;
+			}
+			
+			#thumbCarousel .thumb{
+				float: left;
+				margin-right: 10px;
+				border: 1px solid #ccc;
+				background: #fff;
+			}
+			
+			#thumbCarousel .thumb:last-child{
+				margin-right: 0;
+			}
+			
+			.thumb:hover{
+				cursor: pointer;
+			}
+			
+			.thumb img{
+				opacity: 0.5;
+			}
+			
+			.thumb img:hover{
+				opacity: 1;
+			}
+			
+			.thumb.active img{
+				opacity: 1;
+			  border: 1px solid #1d62b7;
+			} */
+			
+	/* 상품설명  */
+	
+	.detailProductImg{
+	
+		margin:0 auto;
+	
+	}
+	
+
+</style>
+
+
+<script>
+$(document).ready(function(){
+	
+	// 댓글 리스트느 이벤트가 없더라도 뿌려야한다 . 
+	getList(1);
+
+	// 댓글 리스트를 가져오는 함수 선언 - 호출을 해야 실행된다 .
+	function getList(page) {
+		// 기본페이지 처리 
+		if(!page) page = 1;
+		// 데이터 수집 
+		var pageInfo = {};
+		pageInfo.page = page;
+		pageInfo.no = $("#no").text();
+	 // ajax 객체 호출 처리  - get 방식으로 처리할거라면 body에 안들어가고 url 에 포함
+	 	replyService.list( pageInfo , 
+	 			
+	 	  // 성공했을 때의 함수 - 콜백함수
+	 		function(result){
+	 		//	alert("리스트가져오기 성공");
+	 		   // 샘플데이터 찍어보기 - [object: object] , [object: object],  [object: object]  
+			   //alert(JSON.stringify(result));
+			  // alert(result[0].rno);
+			    
+			  // 데이터를 표시할 div > ul 의 내용을 없앤다.
+			  $("#replyListDiv > ul").empty();
+			  
+			    // 데이터가 많으므로 반복문 처리를 한다 .
+			    $(result).each(function(idx, vo){
+			    	
+			    	var src = "";
+			    	src += "<li class='list-group-item rowData'>";
+		    	   	src += "	<span class='rno'  style='display:none'>" + vo.rno 
+		    	   				+ "</span> <span class='content'>" + vo.content + "</span>"; 
+		    	   	src += "	<span class='badge' style='background : none;'>";
+		    	   	src += "		<button class='replyUpdateBtn btn btn-default'>수정</button>";
+		    	    src += "		<button class='replyDeleteBtn btn btn-default'>삭제</button>";
+		    	    src += " 	</span>";
+		    	   	src += "	<br><br>";
+		    	   	src += 		"<span class='userId'>" + vo.userId + "</span> (" 		    	   			
+		    	   	          +  "</span>" + vo.date + ")"; 
+		    	   	src += "	<hr>"; 
+		    	   	src +=	"  </li>";
+		    	   	
+		    	   	//작성이 된 li 태그를 위치할 곳에(replyListDiv 안에 uㅣ 태그) 추가시킨다 
+		    	   	$("#replyListDiv > ul").append(src);
+		    	   		
+			    });
+			    
+	 	});
+			
+
+	}
+
+     //Show carousel-control
+     
+     $("#myCarousel").mouseover(function(){
+         $("#myCarousel .carousel-control").show();
+     });
+
+     $("#myCarousel").mouseleave(function(){
+         $("#myCarousel .carousel-control").hide();
+     });
+     
+     //Active thumbnail
+     
+     $("#thumbCarousel .thumb").on("click", function(){
+         $(this).addClass("active");
+         $(this).siblings().removeClass("active");
+     
+     });
+     
+     //When the carousel slides, auto update
+     
+     $('#myCarousel').on('slid.bs.carousel', function(){
+        var index = $('.carousel-inner .item.active').index();
+        //console.log(index);
+        var thumbnailActive = $('#thumbCarousel .thumb[data-slide-to="'+index+'"]');
+        thumbnailActive.addClass('active');
+        $(thumbnailActive).siblings().removeClass("active");
+        //console.log($(thumbnailActive).siblings()); 
+     });
+     
+     
+     
+     
+   //댓글삭제
+	
+//    replyDeleteBtn.on("click", function(e) {
+	   
+//             var rno = modal.data("rno");
+//             replyService.remove(rno, function(result) {
+//                alert(result);
+//                 alert("REMOVED");
+//                 getList(1);
+//             });
+//         });
+
+   
+   
+   $("#replyListDiv").on("click", ".replyDeleteBtn",
+		
+		   function(){
+	  	
+						
+			var rowData = $(this).closest(".rowData");
+			// alert(rowData.find(".rno").text());
+			$("#rno").val(rowData.find(".rno").text());
+			
+			alert($("#rno").val());
+			var rno = $("#rno").val();
+			
+			replyService.delete(rno,
+					 function(result) {
+            		 alert(result);               
+					 getList();
+					 $("#myModal").modal("hide");
+					
+			});							
+				
+ 	  	});
+  
+
+     
+		/* 댓글 수정을 위한 모달창 여는  이벤트  */
+		
+//      	$("#replyUpdateBtn").click(function(){
+//      		alert("댓글 수정 버튼이 클릭됨");
+//      		// on 함수써야한단 이미 이 이베트처리하기에 늦음  
+     		
+//      	});
+ 
+			$("#replyListDiv").on("click", ".replyUpdateBtn",
+					
+				function(){
+					// alert("댓글 수정 버튼이 클릭됨");
+					$("#myModal").find(".modal-title").text("댓글수정");
+					
+					
+					//수정데이터 셋팅 
+					var rowData = $(this).closest(".rowData");
+					// alert(rowData.find(".rno").text());
+					$("#rno").val(rowData.find(".rno").text());
+					$("#content").val(rowData.find(".content").text());
+					$("#userId").val(rowData.find(".userId").text());
+					
+					$("#replyWriteProcessBtn").hide();
+					$("#replyUpdateProcessBtn").show();
+					
+					$("#myModal").modal("show");
+					
+				
+			}							
+				
+			
+			);
+			
+			/* 입력한 댓글 댓글 수정 처리 이벤트  */
+			
+			$("#replyUpdateProcessBtn").click(function(){
+				  // 데이터 수집 - form 밖에 button이므로 submin이 일어나지 않는다 
+				  // submit이 일어나면 페이지 바뀐다 
+				 var reply = {};
+				 
+				 reply.rno = $("#rno").val();
+				 reply.content = $("#content").val();
+				 reply.userId = $("#userId").val(); 
+				 
+				 //alert(reply);
+				//  alert(JSON.stringify(reply));
+				  
+				 replyService.update(reply, 
+					 function(result){
+					 	// alert(result);
+					 	
+					 
+					 	 $("#myModal").modal("hide"); 
+				 		// 모달창 입력란 초기화 -> 데이터가 없는 것으로 셋팅한다.
+						getList();
+				 		
+				 		$("#content").val("");
+						 $("#userId").val(""); 
+						 // 모달창 안보이기 - 닫기  토글창 써도 된다 
+						
+						 alert('리뷰등록 완료');
+						 // 댓글이 달리면 댓글 리스트를 다시 뿌린다.
+					
+				
+				
+				 // 처리호출 - JSON형식의 문자열로 변환
+// 				 replyService.update(JSON.stringify(reply), 
+// 					 function(replyPage){
+// 					 	alert(replyPage)
+// 				 		// 모달창 입력란 초기화 -> 데이터가 없는 것으로 셋팅한다.
+// 						 $("#content").val("");
+// 						 $("#userId").val(""); 
+// 						 // 모달창 안보이기 - 닫기  토글창 써도 된다 
+// 						 $("#myModal").modal("hide"); 
+// 						 alert('리뷰등록 완료');
+// 						 // 댓글이 달리면 댓글 리스트를 다시 뿌린다.
+// 						 getList(replyPage);
+				 
+				 });
+					 
+			}); // 댓글 달기 처리 이벤트 끝 
+			
+			
+			
+		
+  		
+// 댓글 달기 모달창을 여는 이벤트 
+
+	$("#replyWriteBtn").click(function(){
+			$("#myModal").find(".modal-title").text("댓글쓰기");
+			// 데이터 비우기 - 수정시 내용이 남아있음
+			
+			$("#rno").val(""); 
+			$("#content").val(""); 
+			$("#userId").val(""); 
+			// 버튼처리 
+			$("#replyWriteProcessBtn").show();
+			$("#replyUpdateProcessBtn").hide();
+			
+			
+	});
+	
+		/* 댓글달기 처리 이벤트  */
+	
+	$("#replyWriteProcessBtn").click(function(){
+		  // 데이터 수집 - form 밖에 button이므로 submin이 일어나지 않는다 
+		  // submit이 일어나면 페이지 바뀐다 
+		 var reply = {};
+		 
+		 reply.no = $("#no").text();
+		 reply.content = $("#content").val();
+		 reply.userId = $("#userId").val(); 
+		 //alert(reply);
+		//  alert(JSON.stringify(reply));
+		  
+		  
+		 // 처리호출 - JSON형식의 문자열로 변환
+		 replyService.add(JSON.stringify(reply), 
+			 function(){
+		 		// 모달창 입력란 초기화 -> 데이터가 없는 것으로 셋팅한다.
+				 $("#content").val("");
+				 $("#userId").val(""); 
+				 // 모달창 안보이기 - 닫기  토글창 써도 된다 
+				 $("#myModal").modal("hide"); 
+				 alert('리뷰등록 완료');
+				 // 댓글이 달리면 댓글 리스트를 다시 뿌린다.
+				 getList(1);
+		 
+		 });
+			 
+	}); // 댓글 달기 처리 이벤트 끝 
+
+     
+     
+     
+  });
+
+			
+	$(function(){
+		$('#decreaseQuantity').click(function(e){
+		e.preventDefault();
+		var stat = $('#numBox').text();
+		var num = parseInt(stat,10);
+		num--;
+		if(num<=0){
+		alert('더이상 줄일수 없습니다.');
+		num =1;
+		}
+		$('#numBox').text(num);
+		});
+		$('#increaseQuantity').click(function(e){
+		e.preventDefault();
+		var stat = $('#numBox').text();
+		var num = parseInt(stat,10);
+		num++;
+		
+		if(num>30){
+		alert('더이상 늘릴수 없습니다.');
+		num=30;
+		}
+		$('#numBox').text(num);
+		});
+		});
+		
+
+</script>
+
+</head>
+<body>
+	<header th:include="layout/header :: header"></header>
+	
+<main>
+	
+		
+	<!--  사진크기 450* 400-->
+	<!-- 아이템 썸네일 구매  -->
+	
+		<main class="row main">
+	<!-- 아이템 썸네일 구매  -->
+		  <div class="row p-0 classImg">
+		  		<div class="col-8 mt-5 left">
+			  		<div>
+			  			<img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" alt="XZ"  style="height: 400px">
+			  		</div>		  	
+		  		</div>
+		  		
+		  	
+		  	<div class="col-4 mt-5 p-0 right">
+		  		<div class="rtop">
+		  			<img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block" alt="XZ"  style="width:366px;height: 200px">
+		  		</div>
+		  		<div class="row mt-2 d-flex justify-content-between">
+		  			<div class="p-2 rbl" style="width:175px;">
+		  				<img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block" alt="XZ"  style="width:181px;height: 195px">
+		  			</div>
+		  			<div class="p-2 rbr" style="width:175px;">
+		  				<img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block" alt="XZ"  style="width:181px;height: 195px">
+		  			</div>
+		  		</div>
+		  	
+		  	</div>
+		  
+		  </div>
+		  
+		<div class="row">
+			<section class="col-8 p-4 content" id="content">
+          <form action="#">
+                    <!-- 클래스소개 -->
+	    	<div >
+				<div>
+					<a name="detailProduct"></a>
+				 ​  <ul class="nav justify-content-center nav-tabs">
+	    		        <li class="nav-item">   
+	                        <a href="#detailProduct" class="nav-link link-dark active" data-target="1">클래스소개</a>
+	                    </li>
+	                    <li class="nav-item">
+	                        <a href="#showReview" class="nav-link link-dark ">후기</a>
+	                    </li>
+	                    <li class="nav-item">
+	                        <a href="#showQna" class="nav-link link-dark">문의</a>
+	                    </li>
+	                   
+                   </ul>
+	    	   </div>
+	    	   
+	    	   <div class="mt-5 detailProductImg" style="text-align: center" >
+	    	   
+	    	    <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="XZ" style="width: 500px; height: 700px;">
+	    	   
+	    	   </div>
+	   		</div>	
+	   		
+	   		   <!--  모달창 -->
+	     <div id="myModal" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <!-- 댓글달기를 클릭하면 리뷰쓰기로 댓글수정을 클릭하면 리뷰수정을 제목 변경 -->
+                        <h4 class="modal-title">리뷰</h4>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                                <!-- btn-class: 창 끄기 버튼      bs-dismiss : 어느거 닫을껀지 설정하는거 -->
+                    </div>
+                    <div class="modal-body">
+                       <p>
+                        	<form id="replyWriteForm">
+                        		<!-- 댓글 수정할떄는 댓글번호가 필요하다 .  -->
+                        		<input type="hidden" id="rno" />
+                        		<div class="form-group">
+                        			<label for="content">내용</label>
+                        			<textarea class="form-control" rows="5" id="content">
+                        			</textarea> <!--textarea를 직접 넘길라면 name필요  -->
+                           		</div>
+                        		<div class="form-group">
+                        			<label for="writer">ID:</label>
+                        			<input type="text" class="form-control" id="userId">
+                        		</div>
+                        	</form>
+                        </p>
+                    </div>
+                    <div class="modal-footer">
+                       <button type="button" id="replyWriteProcessBtn" class="btn btn-primary">등록</button>
+                    	  <button type="button" id="replyUpdateProcessBtn" class="btn btn-primary">수정</button>
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">닫기</button>
+                     </div>
+                </div>
+            </div>
+        </div>
+	    	  <!--  모달창 end -->  
+	   		
+	    	      	<!-- 댓글처리를 위한 버튼 div -->
+	    	   <div class="reviewBtn">
+	    	  	       	  	   	
+	    	  	   	 <button type="button" class="btn btn-samll border" data-bs-toggle="modal" data-bs-target="#myModal"
+	    	  	   	  id="replyWriteBtn">리뷰쓰기</button>
+	    	  	   	  <span id="replyPage"></span>
+	    	   </div>
+	    	   
+	    	   <!--  리뷰리스트-->
+	    	   <div id="replyListDiv" >
+	    	   		<ul class="list-group">
+	    	   			<li class="list-group-item rowData">
+	    	   				<span class="rno">번호</span> .내용 입력 
+	    	   				<span class="badge" style="background : none;">
+	    	   					<button class="replyUpdateBtn btn btn-default">수정</button>
+	    	   					<button class="replyDeleteBtn btn btn-default">삭제</button>
+	    	   				</span>
+	    	   				
+	    	   				
+	    	   				이름(작성일)
+	    	   				
+	    	   			</li>
+	    	   		</ul>
+	    	   				
+	    	   </div>
+	    	   
+			
+		
+						
+			
+			<!-- 배송교환환불 -->
+			<div class="mt-5">
+				<div>
+				<a name="deliverInfo"></a>
+				 ​  <ul class="nav justify-content-center nav-tabs">
+	    		        <li class="nav-item">   
+	                        <a href="#detailProduct" class="nav-link link-dark">상품상세</a>
+	                    </li>
+	                    <li class="nav-item">
+	                        <a href="#showReview" class="nav-link link-dark ">상품후기</a>
+	                    </li>
+	                  
+	                     <li class="nav-item">
+	                        <a href="#deliverInfo" class="nav-link link-dark  active">배송/교환/환불</a>
+	                    </li>
+                   </ul>
+	    	   </div>
+	    	   <div class="deliveryInfo ">
+	    	   	 <div class="mt-5" style="width: 80%;margin:0 auto;" >
+	    	   	 	<div class="row" >
+	    	   			<div class="col-3 text-center align-self-center" style="height: 100px;">배송</div>
+	    	   			<div class="col-8" >
+	    	   			배송기간은 주문일(무통장입금은 결제완료일)로부터 1일(24시간) ~ 5일정도 걸립니다.<br>
+						업체조건배송 상품은 해당 브랜드 배송기준으로 배송비가 부여됩니다. 업체착불배송 상품은 해당 브랜드 배송기준 및 배송지에 따라 배송비가 착불로 부과됩니다.<br>
+						해외배송 표시가 되어 있는 상품은 해외 주소로 배송이 가능합니다. (배송방법 : EMS)
+							    	   			
+	    	   			</div>
+	    	   		
+	    	   		</div>
+	    	   		<div class="row mt-3" >
+	    	   			<div class="col-3 text-center">교환/환불</div>
+	    	   			<div class="col-8">
+	    	   			교환/반품 신청은 배송완료 후 7일 이내 가능합니다.<br>
+						변심 반품의 경우 왕복배송비를 차감한 금액이 환불되며, 제품 및 포장 상태가 재판매 가능하여야 합니다.<br>
+						상품 불량인 경우는 배송비를 포함한 전액이 환불됩니다.<br>
+						출고 이후 환불요청 시 상품 회수 후 처리됩니다.<br>
+						상품페이지에 교환/환불/AS에 대한 브랜드 개별기준이 있는 경우에는 해당 내용이 우선 적용 됩니다.<br>
+													    	   			
+	    	   			</div>
+	    	   		
+	    	   		</div>
+	    	   	 </div>
+	    	   		
+	    	   </div>
+			
+			</div>
+			
+			</form>
+			
+			</section>
+				  <aside class="col-4 p-4 sidebar" id="sidebar">
+            	<div class="sidebar__inner">
+ 					<h4 class="text">가게이름</h4> 
+	
+					<h2 class="text" th:text="${board.className}" ></h2>
+					
+	                <div class="my-3 border rounded p-2">
+	                   
+	                    <div class="row border-bottom p-2">
+	                        <div class="col">
+	                            <p class="m-0">수강료</p>
+	                           
+	                        </div>
+ 					 	<h5 id="no" th:text="${board.idx}" style="display:none"></h5>  
+	                        <div class="col clearfix">
+	                            <p class="float-end m-0" th:text="${board.classPrice}"></p>
+	                        </div>
+	                    </div>
+	                    <div class="row border-bottom p-2">
+	                        <div class="col" th:text="${board.classPlace}">    </div>	                             
+	                    </div>
+	                    <div class="row border-bottom p-2 text-success">
+	                        <div class="col">
+	                            <p class="m-0" th:text="${board.classPlan}"></p>
+	                         
+	                        </div>
+	                        
+	                    </div>
+	                   
+	                </div>
+	                <div class="my-3 border rounded p-2">
+	                   
+	                          <button type="button" class="btn btn-secondary">신청하기</button>
+	                     
+	                    
+	                </div>
+            	
+            	</div>
+                
+            </aside>
+			
+			
+				</div>
+			</main>
+			
+		
+	
+	
+
+		
+	
+	
+	<footer th:include="layout/footer:: footer"></footer>
+	
+
+	
+	
+</body>
+</html>

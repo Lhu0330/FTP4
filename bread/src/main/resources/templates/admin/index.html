@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="context-path" th:content="@{/}"/>
+    
+    <title>HM & SB Blog - Admin</title>
+    
+</head>
+<body>
+  
+ 
+    <div class="wrapper">
+		     <!-- Sidebar Holder -->
+        <nav th:replace="admin/sidebar"></nav>
+ 
+        <div id="content" class="content">
+<!--             <button type="button" id="sidebarCollapse" class="navbar-btn"><i class="fas fa-bars"></i></button> -->
+            <hr>
+            <!-- Page Content Holder -->
+            <div th:replace="${template}"></div>
+        </div>
+        <div class="userMenu">
+            <ul class="nav justify-content-end">
+                <li class="nav-item">
+                    <p><a th:if="${session.userId} == null" href="/login/login" style="text-decoration:none" class="pe-3 nav-link link-dark">로그인</a></p>
+                </li>
+                <li class="nav-item">
+                    <p><a th:unless="${session.userId} == null" href="/login/logout" style="text-decoration:none" class="nav-link link-dark">로그아웃</a></p>
+                </li>
+                <li class="nav-item">
+                	<p><a th:if="${session.userId} == null" href="/login/register" style="text-decoration:none" class="nav-link link-dark">회원가입</a></p>
+                </li>
+                <li class="nav-item">
+                    <p><a href="#" class="nav-link link-dark">고객센터</a></p>
+                </li>
+            </ul>
+        </div>   
+    </div>
+</body>
+</html>
