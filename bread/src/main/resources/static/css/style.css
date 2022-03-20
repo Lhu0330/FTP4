@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+	/*  헤더  */ 
+
+	
+ 	.header{
+	
+ 	margin:0 auto; /* div를 중앙정렬합니다. */ 
+ 	width:1050px; 
+ 	font-family: 'Noto Sans KR', sans-serif;
+
+	} 
+	
+	.userMenu {
+	
+/* 	  margin-left:110px; */
+/* 		  margin-right:110px; */
+	 font-size: 12px;
+	height:47px;
+	}
+	
+	
+	
+
+ .logo> active{
+			
+		margin-top:0px;
+			
+	 }
+	
+	
+	
+	
+		
+	.headerMenu{
+	
+		display: flex;
+		 justify-content: space-between;
+		   align-items: center;
+ 		  margin:0px; 
+/* 		  margin-right:110px; */
+		font-weight:400;
+			 font-size: 22px;
+	}
+	
+	
+	
+	
+	/*  메인  */ 
+	
+
+ 
+ 	.footer{
+	
+		margin:0 auto; /* div를 중앙정렬합니다. */ 
+ 		width:1050px; 
+		font-family: 'Noto Sans KR', sans-serif;
+		
+		
+	}
