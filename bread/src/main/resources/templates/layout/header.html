@@ -24,8 +24,9 @@
 	<div class="container-fluid header">
 		
 		<div class="userMenu">
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
+            <ul class="nav d-flex">            
+            
+                <li class="nav-item ms-auto">
                     <p><a th:if="${session.userId} == null" href="/login/login" style="text-decoration:none" class="pe-3 nav-link link-dark">로그인</a></p>
                 </li>
                 <li class="nav-item">
@@ -39,15 +40,18 @@
                 </li>
             </ul>
         </div>
-        <a href="/main" style="text-decoration : none"> <img src="homeimage1.jpg"  th:src="@{/img/bread/LOGO.PNG}" alt="" ></a>
+        <div  style="text-align:center;">
+        	        <a href="/main" style="text-decoration : none" > <img src="homeimage1.jpg"  th:src="@{/img/bread/LOGO.PNG}" alt="" ></a>
+        	
+        </div>
          
-         <div class= "headerMenu">
-	         <ul class="nav">
+        
+	         <ul class="nav headerMenu" >
 	                <li class="nav-item">
-	                    <a href="/shop/1" class="nav-link link-dark">메뉴 1</a>
+	                    <a href="/shop/1" class="nav-link link-dark">BREAD</a>
 	                </li>
 	                <li class="nav-item">
-	                    <a href="/shop/market" class="nav-link link-dark">메뉴 2</a>
+	                    <a href="/shop/market" class="nav-link link-dark ">마켓</a>
 	                </li>
 	                <li class="nav-item">
 	                    <a href="/class" class="nav-link link-dark">쿠킹클래스</a>
@@ -58,13 +62,17 @@
 	                 <li class="nav-item">
 	                    <a href="/shop/5" class="nav-link link-dark">커뮤니티</a>
 	                </li>
+	                   <li class="nav-item">
+	                    <a href="#" class="nav-link link-dark">찜</a>
+	                </li>
+	                   <li class="nav-item">
+	                    <a href="#" class="nav-link link-dark">장바구니</a>
+	                </li>
+	                   <li class="nav-item">
+	                    <a href="/mypage"class="nav-link link-dark px-4">마이페이지</a>
+	                </li>
 	            </ul>
-         	<div>검색</div>
-	         <div>찜</div>
-	         <div>장바구니</div>
-	          <a href="/mypage" class="nav-link link-dark">마이페이지</a>
-		
-       </div>
+
  
     
          

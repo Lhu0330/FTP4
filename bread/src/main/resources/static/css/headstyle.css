@@ -13,7 +13,7 @@
 	
  	margin:0 auto; /* div를 중앙정렬합니다. */ 
  	width:1050px; 
- 	 	font-family: 'Noto Sans KR', sans-serif;
+ 	font-family: 'Noto Sans KR', sans-serif;
  	
 	
 	
@@ -23,12 +23,13 @@
 		.headerMenu{
 	
 		display: flex;
-		 justify-content: space-between;
+	 	 justify-content: space-between; 
 		   align-items: center;
 /* 		  margin-left:110px; */
 /* 		  margin-right:110px; */
 		font-weight:400;
 		font-size: 22px;
+		
 	}
 
 	
