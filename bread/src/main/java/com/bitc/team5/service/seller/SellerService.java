@@ -65,11 +65,10 @@ public interface SellerService {
 			// 스케쥴
 		public void addSchedule(SheduleDto dto)  throws Exception;
 
-		public Object showSchedule() throws Exception;
 
 		public List<MarketDto> formDateList();
-
-
+		public List<classDto> classDateList();
+		
 
 		
 

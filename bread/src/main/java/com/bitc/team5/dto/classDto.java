@@ -15,9 +15,10 @@ public class classDto {
 	private String className;
 	private String classDetail;
 	private String storeId;
+	private String allday; 
 	
 	private List<AdminProductFileDto> fileList;
-	
+	private List<AdminProductFileDto> fileList2;
 	
 	private int fileIdx; // �ø����Ϲ�ȣ seq
 	private int boardIdx; //�Խñ۹�ȣ 
@@ -27,5 +28,11 @@ public class classDto {
 	private String fileSize;
 	private String fileType;
 	private String deletedYn;
+
+	
+	private String startDate;
+	private String endDate;
+	private String time;
+
 
 }

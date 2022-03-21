@@ -43,7 +43,7 @@ public class MainController {
 	
 	@RequestMapping("/test4")
 	public String test4() throws Exception{
-		return "shop/detailCalender2";
+		return "shop/detailCalenderClass";
 	}
 	
 	@RequestMapping("/test5")

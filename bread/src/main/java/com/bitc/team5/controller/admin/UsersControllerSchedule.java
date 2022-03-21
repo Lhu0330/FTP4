@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.bitc.team5.dto.MarketDto;
+import com.bitc.team5.dto.classDto;
 import com.bitc.team5.service.seller.SellerService;
 
 @Controller
@@ -106,10 +107,10 @@ public class UsersControllerSchedule {
 				       
 				        	sObject.put("id", String.valueOf(databoard.get(i).getIdx()));
 				        	
-						   sObject.put("title", databoard.get(i).getStoreId());
+						   sObject.put("title", databoard.get(i).getStoreId()  + ":" + databoard.get(i).getMarketName() );
 						   sObject.put("start", databoard.get(i).getStartDate() +"T" + databoard.get(i).getTime() + ":00");
 						//   sObject.put("time", databoard.get(i).getTime());
-						   // sObject.put("end", databoard.get(i).getEndDate());
+						    sObject.put("end", databoard.get(i).getEndDate() + "T24:00:00" );
 						//   sObject.put("end", databoard.get(i).getTime());
 						   //sObject.put("write", "dd");
 						 //  sObject.put("allDay", "false");
@@ -134,6 +135,50 @@ public class UsersControllerSchedule {
 		}
 		
 //		/getevent.do
+		
+		@ResponseBody
+		@RequestMapping(value="/getclassevent.do", method=RequestMethod.POST)
+		public String getclassdate( ) throws Exception {
+			
+			
+			List<classDto> databoard = productService.classDateList();
+	
+			
+			JSONArray jArray = new JSONArray();
+			   
+			   try {
+				   
+				    for (int i = 0; i < databoard.size(); i++) {
+				        JSONObject sObject = new JSONObject();//배열 내에 들어갈 json
+				       
+				        	sObject.put("id", String.valueOf(databoard.get(i).getIdx()));
+				        	
+						   sObject.put("title", databoard.get(i).getStoreId() + ":" + databoard.get(i).getClassName() );
+						   sObject.put("start", databoard.get(i).getStartDate() +"T" + databoard.get(i).getTime() + ":00");
+						//   sObject.put("time", databoard.get(i).getTime());
+						  sObject.put("end", databoard.get(i).getEndDate() + "T24:00:00");
+						//   sObject.put("end", databoard.get(i).getTime());
+						   //sObject.put("write", "dd");
+						 // sObject.put("allDay", "true");
+						   sObject.put("color", "#" + String.valueOf(Math.round(Math.random() * 999 )) );
+						   
+				        jArray.put(sObject);
+				    }
+
+				
+				
+			   } catch (JSONException e) {
+				    e.printStackTrace();
+				}
+			   
+			   
+			   var result =   jArray.toString();
+			   
+			   System.out.println(result);
+			   
+			return result;
+
+		}
 		
 		
 		

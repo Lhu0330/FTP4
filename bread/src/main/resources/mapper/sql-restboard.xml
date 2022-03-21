@@ -263,7 +263,33 @@
    </select>
    
 
-
+	<select id="selectclassFileList" parameterType="long" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path, file_type,class_id, 
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				class_file
+			WHERE
+				 class_id = #{classId}  and file_type = 'T' 
+			
+		
+		]]>
+	</select>
+	
+	<!-- 상세설명 이미지 -->
+		<select id="selectclassFileList2" parameterType="long" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path, class_id, file_type ,
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				class_file
+			WHERE
+				 class_id = #{classId} and file_type = 'D'
+			
+		]]>
+	</select>
 	
    
    

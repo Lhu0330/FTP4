@@ -35,13 +35,19 @@ public interface ShopMapper {
 	//	
 	//	
 //		ProductFileDto selectBoardFileInfo(int fileIdx, int boardIdx) throws Exception;
-
+// 클래스 
 			//강좌 가져오기 
 		Page<classDto> selectClass() throws Exception;
 		
 			 //강좌 상세화면
 		classDto selectClassDetail(long classId);
+		
+		List<AdminProductFileDto> selectclassFileList(long classId);
 
+		List<AdminProductFileDto> selectclassFileList2(long classId);
+		
+
+// 마켓폼
 		// 마켓 폼 list
 		Page<MarketDto> selectdformList();
 

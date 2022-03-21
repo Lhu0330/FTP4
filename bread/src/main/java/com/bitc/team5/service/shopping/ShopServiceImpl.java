@@ -114,10 +114,10 @@ public class ShopServiceImpl  implements ShopService {
 			classDto board = shopMapper.selectClassDetail(classId);
 			
 //			첨부파일 (썸네일 )
-//			List<AdminProductFileDto> fileList = shopMapper.selectBoardFileList(classId);
-//			List<AdminProductFileDto> fileList2 = shopMapper.selectBoardFileList2(classId);
-//			board.setFileList(fileList);
-//			board.setFileList2(fileList2);
+			List<AdminProductFileDto> fileList = shopMapper.selectclassFileList(classId);
+			List<AdminProductFileDto> fileList2 = shopMapper.selectclassFileList2(classId);
+			board.setFileList(fileList);
+			board.setFileList2(fileList2);
 			
 			return board;
 

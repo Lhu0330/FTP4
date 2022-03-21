@@ -59,9 +59,23 @@
 	
 	}
 	
+	.card{
+	
+		border:none;
+	}
+	
+	
 	.joinPlease{
 		 background: #d4d4d4;
 		
+	}
+	
+	.reciptimg{
+		
+		border-radius: 70%;
+		object-fit: cover;
+		
+    	
 	}
 	
 	
@@ -212,7 +226,7 @@
 		</div>
 		<br>
 		<!-- 오픈 예정 클래스 / 인기판매상품 -->
-		<div class="rankingStore">
+		<!-- <div class="rankingStore">
 			<div class="rankingStorePanel" >
 				<div class="my-5 text-center sectionTitle">  이번달 인기 클래스	</div>
 				<div class="row justify-content-between">
@@ -242,28 +256,28 @@
 					</div>	
 				</div>					
 			</div>		
-		</div>
+		</div> -->
 		<br>
 		<div class="rankingStore">
 			<div class="rankingStorePanel" >
 				<div class="my-5 text-center sectionTitle">  Bread Recipe </div>
 				<div class="row justify-content-between mx-5">
 					<div class="card" style="width: 290px;">
-						 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="" class="card-img-top w-100" style="height: 200px;" >
+						 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="" class="card-img-top mx-auto reciptimg" style="height: 250px;width: 250px" >
 						 <div class="card-body">
-						 	<h5 class="card-title">제목</h5>
+						 	<h4 class="card-title text-center">제목</h4>
 					 	 </div>
 					</div>	
 					<div class="card" style="width: 290px;">
-						 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="" class="card-img-top w-100" style="height: 200px;">
+						 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="" class="card-img-top mx-auto reciptimg" style="height: 250px;width: 250px" >
 						 <div class="card-body">
-						 	<h4 class="card-title">제목</h4>
+						 	<h4 class="card-title text-center">제목</h4>
 					 	 </div>
 					</div>	
 					<div class="card" style="width: 290px;">
-						 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="" class="card-img-top w-100" style="height: 200px;">
+						 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="" class="card-img-top mx-auto reciptimg" style="height: 250px;width: 250px" >
 						 <div class="card-body">
-						 	<h4 class="card-title">제목</h4>
+						 	<h4 class="card-title text-center">제목</h4>
 					 	 </div>
 					</div>	
 				

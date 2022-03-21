@@ -22,9 +22,9 @@
 <style>
 	
 	.main{
-	
+		
 		margin:0 auto;
-		width:1050px;
+		width:950px;
 	
 	}
 
@@ -193,8 +193,53 @@
 		margin:0 auto;
 	
 	}
-	
+				
+				.clearfix:after {
+			  content:'';
+			  display:block;
+			  clear:both;
+			}
+			
+			
+			.wrapper {
+			  margin:0 auto;
+			width:1050px;
+					font-family: 'Noto Sans KR', sans-serif;
+			
+			}
+			
+			main {
+			 margin:0 auto;
+			width:1050px;
+			font-family: 'Noto Sans KR', sans-serif;
+			
+			}
+			
+			
+			
+			/* Sticky styles */
+			.sticky-wrapper {
+			  position: relative;
+			}
+			.sticky.stuck {
+			  position: fixed;
+			  top: 0;
+			}
+			.sticky.bottom {
+			  position: absolute;
+			  bottom: 0;
+/* 			  right: 0; */
+			}
+			/* Sticky styles end */
 
+
+		.submitclass{
+		
+			background-color:  rgba(241, 166, 105, 0.616);
+			color:white;
+			 font-size: 15px;
+			 font-weight:400;
+		}
 </style>
 
 
@@ -486,7 +531,47 @@ $(document).ready(function(){
 		});
 		});
 		
+	$(document).ready(function(){
 
+
+		function stickySidebar(mainBlk, sidebarWrapper, sidebarBlk) {
+
+		    var main = $(mainBlk); //Our sticky block will scroll next to this one
+		    
+		    var stickyWrapper = $(sidebarWrapper); // General position relative wrapper for main and sticky block
+
+		    var stickyBlk = $(sidebarBlk); // Our sticky block
+
+		    var startPos = stickyBlk.offset().top; // Starting position where the block should stick
+
+		    var finishPos = main.height() - stickyBlk.innerHeight(); // Starting position where the block should stick
+
+		    stickyWrapper.height(main.height()); // Set height of sticky wrapper equal to the height of main block that we are scrolling next to
+
+		    $(window).scroll(function(){ 
+		      var currentScrollPos = $(document).scrollTop();  // Get current position of scroll
+		      console.log(currentScrollPos)
+		      if ((currentScrollPos > startPos) && (currentScrollPos <= finishPos)) { // Check if current scroll position is in range of main block height, add class stuck
+		        stickyBlk.removeClass('bottom');
+		        stickyBlk.addClass('stuck');
+		      }
+		      else if (currentScrollPos > finishPos) {
+		        stickyBlk.removeClass('stuck');
+		        stickyBlk.addClass('bottom');
+		      }  // if block current scroll is further, add class bottom
+		      else {
+		        stickyBlk.removeClass('stuck');
+		        stickyBlk.removeClass('bottom');
+		      } // in other cases do nothing
+		    });
+
+		  };
+
+		  stickySidebar ('.stick-next-to', '.sticky-wrapper', '.sticky');
+		  
+
+
+		});
 </script>
 
 </head>
@@ -499,35 +584,28 @@ $(document).ready(function(){
 	<!--  사진크기 450* 400-->
 	<!-- 아이템 썸네일 구매  -->
 	
-		<main class="row main">
+		<div class="row main">
 	<!-- 아이템 썸네일 구매  -->
-		  <div class="row p-0 classImg">
-		  		<div class="col-8 mt-5 left">
-			  		<div>
-			  			<img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" alt="XZ"  style="height: 400px">
+		  <div class="row p-0 classImg mx-auto">
+		  		<div class="col-7 mt-5 left">
+			  		<div  th:each ="files : ${board.fileList2[0]}">
+			  			<img src="homeimage1.jpg" th:src="@{${files.storedFilePath}}" class="d-block w-100" alt="XZ"  style="height: 400px">
 			  		</div>		  	
 		  		</div>
 		  		
 		  	
-		  	<div class="col-4 mt-5 p-0 right">
-		  		<div class="rtop">
-		  			<img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block" alt="XZ"  style="width:366px;height: 200px">
+		  	<div class="col-5 mt-5 p-0 right">
+		  		<div class="rtop" th:each ="files : ${board.fileList}">
+		  			<img src="homeimage1.jpg"  th:src="@{${files.storedFilePath}}" class="d-block w-100 my-2" alt="XZ"  style="height: 195px">
 		  		</div>
-		  		<div class="row mt-2 d-flex justify-content-between">
-		  			<div class="p-2 rbl" style="width:175px;">
-		  				<img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block" alt="XZ"  style="width:181px;height: 195px">
-		  			</div>
-		  			<div class="p-2 rbr" style="width:175px;">
-		  				<img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block" alt="XZ"  style="width:181px;height: 195px">
-		  			</div>
-		  		</div>
-		  	
+		  
 		  	</div>
 		  
 		  </div>
-		  
-		<div class="row">
-			<section class="col-8 p-4 content" id="content">
+		 </div>
+		
+		<div class="row clearfix wrapper">
+			<main class="col-8 p-4 stick-next-to" id="stick-next-to">
           <form action="#">
                     <!-- 클래스소개 -->
 	    	<div >
@@ -549,7 +627,10 @@ $(document).ready(function(){
 	    	   
 	    	   <div class="mt-5 detailProductImg" style="text-align: center" >
 	    	   
-	    	    <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="XZ" style="width: 500px; height: 700px;">
+	    	     <div class="item" th:each ="files : ${board.fileList2}">
+ 				             <img src="homeimage1.jpg"  th:src="@{${files.storedFilePath}}"  alt="XZ" style="width: 500px; height: 700px">
+ 				 </div> 
+	    	   
 	    	   
 	    	   </div>
 	   		</div>	
@@ -670,16 +751,27 @@ $(document).ready(function(){
 			
 			</form>
 			
-			</section>
-				  <aside class="col-4 p-4 sidebar" id="sidebar">
-            	<div class="sidebar__inner">
- 					<h4 class="text">가게이름</h4> 
+			</main>
+				  <aside class="col-4 p-4  sticky-wrapper" id="sticky-wrapper">
+            	<div class="border sticky"  style="width:300px;">
+ 					<h4 class="text text-center">가게이름</h4> 
 	
-					<h2 class="text" th:text="${board.className}" ></h2>
+					<h2 class="text text-center" th:text="${board.className}" ></h2>
 					
 	                <div class="my-3 border rounded p-2">
 	                   
-	                    <div class="row border-bottom p-2">
+	                   
+	                    <div class="row  p-2">
+	                        <div class="col text-center" th:text="${board.classPlace}">    </div>	                             
+	                    </div>
+	                    <div class="rowp-2 text-success">
+	                        <div class="col">
+	                            <p class="m-0" th:text="${board.classPlan}"></p>
+	                         
+	                        </div>
+	                        
+	                    </div>
+	                     <div class="row p-2">
 	                        <div class="col">
 	                            <p class="m-0">수강료</p>
 	                           
@@ -689,21 +781,11 @@ $(document).ready(function(){
 	                            <p class="float-end m-0" th:text="${board.classPrice}"></p>
 	                        </div>
 	                    </div>
-	                    <div class="row border-bottom p-2">
-	                        <div class="col" th:text="${board.classPlace}">    </div>	                             
-	                    </div>
-	                    <div class="row border-bottom p-2 text-success">
-	                        <div class="col">
-	                            <p class="m-0" th:text="${board.classPlan}"></p>
-	                         
-	                        </div>
-	                        
-	                    </div>
 	                   
 	                </div>
-	                <div class="my-3 border rounded p-2">
+	                <div class="my-3  rounded p-2">
 	                   
-	                          <button type="button" class="btn btn-secondary">신청하기</button>
+	                          <button type="button" class="btn w-100 submitclass">신청하기</button>
 	                     
 	                    
 	                </div>
@@ -714,7 +796,6 @@ $(document).ready(function(){
 			
 			
 				</div>
-			</main>
 			
 		
 	

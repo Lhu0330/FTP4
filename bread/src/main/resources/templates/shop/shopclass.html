@@ -38,6 +38,22 @@
 	 background:rgb(249, 249, 249) ; 
 	
 	}
+	
+	
+	.listItem{
+	
+	border-radius: 5%;
+	
+	}
+	
+	
+	
+	.classname{
+		
+		font-size:20px;
+		font-weight:400;
+		
+	}
 
 </style>
 </head>
@@ -47,53 +63,27 @@
 	<main>
 		<div class="container shopPanel">
 			<div>
-				<div class="mt-5 my-5 bestRankWrap">
+					<div>
 				
-					<div class="bestRankBackgroud">
-						<h4 class="text-center"> BEST</h4>
-						<div class="row d-flex justify-content-between bestRank">
-							<div class ="border BestItem " style="width: 200px;">
-							<div class="mt-2 itemImg"> 
-								  <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" style="height: 240px;width: 240px;">
-							</div>						
-							<div class="마켓"> 이름 </div>
-							<div class="price">가격 </div>
-							<div class="detail">설명 </div>
-						
-						</div>
-						<div class ="borderBestItem" style="width: 200px;">
-						<div class="mt-2 itemImg"> 
-								  <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" style="height: 240px;width: 240px;">
-							</div>								<div class="마켓"> 이름 </div>
-							<div class="price">가격 </div>
-							<div class="detail">설명 </div>
-						
-						</div>
-						<div class ="border BestItem" style="width: 200px;">
-							<div class="mt-2 itemImg"> 
-								  <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" style="height: 240px;width: 240px;">
-							</div>								<div class="마켓"> 이름 </div>
-							<div class="price">가격 </div>
-							<div class="detail">설명 </div>
+						<h4 class="text-center mt-5"> 일정 </h4>
+						<div> 캘린더 넣기 </div>
 					
-					</div>
+				
+					
 				</div>
 					
-					</div>
-					
-		
-				</div>
 				<div class="listWrap">
 					<div class="listBack">
 						<div class="row list">
-							<div class ="border mt-3 my-3 listItem" style="width: 250px;" th:each="list : ${classList.getList()}">
-							<div class="border mt-2 itemImg"> 
+							<div class ="mt-3 my-3 mx-auto shadow p-0 listItem" style="width: 250px;" th:each="list : ${classList.getList()}">
+							<div class="mt-2 itemImg"> 
 								  <img src="homeimage1.jpg"  th:src="${list.storedFilePath}"class="d-block w-100" style="height: 240px;width: 240px;">
 							</div>
-							<div class="마켓" th:text="${list.className}"> </div>
-							<div class="price" th:text="${list.classPrice}"></div>
+							<a  href = "/class/detail/"  th:text="${list.className}"  class="card-text nav-link link-dark text-center classname" th:attrappend="href=${list.classId}"></a>
+							<div class="text-center storename" th:text="${list.storeId}"> </div>
+							<div class="text-center price" th:text="${list.classPrice}"></div>
 <!-- 							<div class="detail" th:text="${list.productDescription}"></div> -->
-							<a  href = "/class/detail/"  th:text="${list.className}"  class="card-text nav-link link-dark" th:attrappend="href=${list.classId}"></a>
+							
 							
 
 <!--  					  <a href="/shop/detail/"  class="card-text nav-link link-dark" th:text="${list.productName}" th:attrappend="href=${list.productId}"></a>  -->

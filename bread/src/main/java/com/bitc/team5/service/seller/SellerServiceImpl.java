@@ -319,17 +319,18 @@ public class SellerServiceImpl implements SellerService {
 
 		
 		
-		public List<SheduleDto> showSchedule() throws Exception {
-			return sellerMapper.showSchedule();
-		}
-
+// 캘린더 
 		@Override
 		public List<MarketDto> formDateList() {
 			// TODO Auto-generated method stub
 			return sellerMapper.formDateList();
 		}
 		
-		
+		@Override
+		public List<classDto> classDateList() {
+			// TODO Auto-generated method stub
+			return sellerMapper.classDateList();
+		}
 		
 	//	
 	//	

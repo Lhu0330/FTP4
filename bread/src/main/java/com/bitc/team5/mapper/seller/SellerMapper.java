@@ -90,6 +90,8 @@ public interface SellerMapper {
 
 			List<MarketDto> formDateList();
 
+			List<classDto> classDateList();
+
 	
 
 
