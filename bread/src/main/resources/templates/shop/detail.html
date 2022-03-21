@@ -191,7 +191,7 @@
 </style>
 
 
-<script>
+<script th:inline="javascript">
 $(document).ready(function(){
     
     // 장바구니 버튼 클릭
@@ -498,9 +498,14 @@ $(document).ready(function(){
 		 
 		 reply.no = $("#no").text();
 		 reply.content = $("#content").val();
-		 reply.userId = $("#userId").val(); 
+		 
+		 /*<!CDATA[*/
+		 	var customerId  = /*[[${session.userId}]]*/
+		 	/*]]*/
+		 
+		 reply.userId = customerId 
 		 //alert(reply);
-		//  alert(JSON.stringify(reply));
+		 alert(JSON.stringify(reply));
 		  
 		  
 		 // 처리호출 - JSON형식의 문자열로 변환
@@ -713,8 +718,9 @@ $(document).ready(function(){
                         			</textarea> <!--textarea를 직접 넘길라면 name필요  -->
                            		</div>
                         		<div class="form-group">
-                        			<label for="userId">ID:</label>
-                        			<p th:text="${session.userId}" class="form-control" id="userId">
+                        			<label>ID:</label>
+                        			<p id="userId" th:text="${session.userId}" th:value="${session.userId}">
+               
                         		</div>
                         	</form>
                         </p>
