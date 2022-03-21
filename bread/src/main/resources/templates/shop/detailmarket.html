@@ -636,7 +636,7 @@ $(document).ready(function(){
 						<div class="row">
 							<div th:each="item : ${formPro}" >
 							<div class="col-sm-3">
-								<h4 class="pname" th:text="${item.productName}"> </h4>
+								<h4 class="pname" th:text="${item.productName}" th:value="${board.formId}"> </h4>
 							</div>
 							
 								<div class="button_quantity col-sm-5 container d-flex p-0" id="count">

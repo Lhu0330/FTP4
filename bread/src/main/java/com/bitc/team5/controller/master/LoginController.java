@@ -59,7 +59,7 @@ public class LoginController {
 			String userId = (String)session.getAttribute("userId");
 			model.addAttribute("userId", userId);
 						
-			return "/main";
+			return "redirect:/main";
 		}
 		else {
 			return "/login/loginFail";
@@ -78,7 +78,7 @@ public class LoginController {
 		session.removeAttribute("userId");
 		session.invalidate();
 		
-		return "/main";
+		return "redirect:/main";
 	}
 	
 //	로그인 실패 페이지

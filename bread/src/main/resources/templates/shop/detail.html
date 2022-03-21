@@ -713,8 +713,8 @@ $(document).ready(function(){
                         			</textarea> <!--textarea를 직접 넘길라면 name필요  -->
                            		</div>
                         		<div class="form-group">
-                        			<label for="writer">ID:</label>
-                        			<input type="text" class="form-control" id="userId">
+                        			<label for="userId">ID:</label>
+                        			<p th:text="${session.userId}" class="form-control" id="userId">
                         		</div>
                         	</form>
                         </p>
