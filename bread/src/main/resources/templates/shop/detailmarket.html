@@ -197,6 +197,55 @@
 
 <script>
 $(document).ready(function(){
+    
+    $("#pp").on("click",function() {
+		
+		
+		let pi = [];
+		let cq = [];
+		let idx = [];
+		let pidx = [];
+		
+		$(".pname").each( (index,item) => pi[index] = item.getAttribute( 'value' ));
+		$(".productStockCnt").each( (index,item) => cq[index] =  item.value);
+		$(".idx").each( (index,item) => idx[index] = item.getAttribute( 'value' ));
+				
+		for (var i=0; i<pi.length; i++) {
+			
+			pidx[i] = pi[i] + idx[i]
+			
+			if (cq[i] == '0' || cq[i] == null){
+				 
+			} else {
+				var datas = {
+					cartQty : cq[i],
+					productIdx : pidx[i]
+				};
+		
+				$.ajax({
+					url : "/paypass",
+					type : "post",
+					data : datas,
+					success : function(data) {
+						if (data == "success") {
+							
+						} else {
+							alert("오류!");
+							location.reload();
+						}
+		
+					},
+					// ajax 통신이 실패 시 동작하는 콜백 함수
+					error : function() {
+						alert("오류!");
+					}
+				});
+			}
+		
+		}
+		alert("상품을 구매했습니다.");
+		location.href = "/history.do";
+	});	
 	
 	// 댓글 리스트느 이벤트가 없더라도 뿌려야한다 . 
 	getList(1);
@@ -598,7 +647,8 @@ $(document).ready(function(){
 		     					<span id="numBox" class="numBox">1</span>
 		    				
 							<a href="#" id="increaseQuantity"  class="btn border">+</a> -->
-									<input type="text" id="productStockCnt" name="productStockCnt" class="col-sm-9 form-control" placeholder="구매수량을 입력해주세요">
+									<input type="text" id="productStockCnt" name="productStockCnt" class="col-sm-9 form-control productStockCnt" placeholder="구매수량을 입력해주세요">
+                                    <input type="hidden" class="idx" th:value="${item.idx}">
 									
 								</span>
 		
@@ -617,7 +667,7 @@ $(document).ready(function(){
 						<p> 총 결제금액</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">결제</button>
+                        <button type="button" class="btn btn-primary" id="pp" data-bs-dismiss="modal">결제</button>
                     </div>
                 </div>
             </div>

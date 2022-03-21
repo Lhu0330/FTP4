@@ -193,6 +193,78 @@
 
 <script>
 $(document).ready(function(){
+    
+    // 장바구니 버튼 클릭
+	$("#btn_cart").on("click",function() {
+
+		var cq = Number ( $("#numBox").text() );
+		
+		var pi = $("#productIdx").val();
+
+		var datas = {
+			cartQty : cq,
+			productIdx : pi
+		}; //자바스크립트의 object 타입으로 데이터 넘긴다
+
+		$.ajax({
+			url : "/jr41/addcart",
+			type : "post",
+			data : datas,
+			success : function(data) {
+				if (data == "success") {
+					if ($("#cart-qty").val() < 1 || $("#cart-qty").val() > 999) {
+						alert("숫자를 잘못 입력하셨습니다.");
+						location.reload();
+					} else {
+						alert("해당 상품이 장바구니에 담겼습니다.");
+						location.href = "/cart.do";
+					}
+				} else {
+					alert("오류!");
+				}
+
+			},
+			// ajax 통신이 실패 시 동작하는 콜백 함수
+			error : function() {
+				alert("오류!");
+			}
+		});
+	});
+	// 구매하기 버튼 클릭
+	$("#btn_pay").on("click",function() {
+
+		var cq = Number ( $("#numBox").text() );
+		
+		var pi = $("#productIdx").val();
+
+		var datas = {
+			cartQty : cq,
+			productIdx : pi
+		}; //자바스크립트의 object 타입으로 데이터 넘긴다
+
+		$.ajax({
+			url : "/jr41/addcart2",
+			type : "post",
+			data : datas,
+			success : function(data) {
+				if (data == "success") {
+					if ($("#cart-qty").val() < 1 || $("#cart-qty").val() > 999) {
+						alert("숫자를 잘못 입력하셨습니다.");
+						location.reload();
+					} else {
+						location.href = "/order.do";
+					}
+				} else {
+					alert("오류!");
+				}
+
+			},
+			// ajax 통신이 실패 시 동작하는 콜백 함수
+			error : function() {
+				alert("오류!");
+			}
+		});
+	});
 	
 	// 댓글 리스트느 이벤트가 없더라도 뿌려야한다 . 
 	getList(1);
@@ -563,7 +635,8 @@ $(document).ready(function(){
 						
 						<h5 id="no" th:text="${board.idx}" style="display:none"></h5> 
 					
-				<input type="text" class="form-control" name="hitCnt" readonly value="0" th:value="${board.hitCnt}">					
+				<input type="text" class="form-control" name="hitCnt" readonly value="0" th:value="${board.hitCnt}">
+				<input type="hidden" id="productIdx" th:value = "${board.productId}">					
 			
 					</div>
 					<div class="mt-5 itemButt">

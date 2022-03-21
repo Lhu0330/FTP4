@@ -112,6 +112,7 @@
 
 </head>
 <body>
+   
 
 <!-- navbar -->
 	<nav class="navbar navbar-expand-md navbar-light">
@@ -133,42 +134,42 @@
 						<!-- 대쉬보드 -->
 						<ul class="navbar-nav flex-column mt-4">
 							<li class="nav-item">
-								<a th:href="@{/admin}" class="nav-link text-white p-3 mb-2 current">
+								<a th:href="@{/master}" class="nav-link text-white p-3 mb-2 current">
 									<i class="fas fa-home text-white fa-lg mr-3"></i>Dashboard
 								</a>
 							</li>
 							<!-- 사용자 -->
 							<li class="nav-item">
-								<a th:href="@{/admin/users}" class="nav-link text-white p-3 mb-2 sidebar-link">
+								<a th:href="@{/master/users}" class="nav-link text-white p-3 mb-2 sidebar-link">
 									<i class="fas fa-user text-white fa-lg mr-3"></i>user
 								</a>
 							</li>		
 							<!-- 판매품목 -->
 							<li class="nav-item">
-								<a th:href="@{/admin/productStockList}" class="nav-link text-white p-3 mb-2 sidebar-link">
-									<i class="fas fa-shopping-cart text-white fa-lg mr-3"></i>sales
+								<a th:href="@{/master/sellers}" class="nav-link text-white p-3 mb-2 sidebar-link">
+									<i class="fas fa-shopping-cart text-white fa-lg mr-3"></i>seller
 								</a>
 							</li>
-							<!-- 분석 -->
+							<!-- 폼작성-->
 							<li class="nav-item">
-								<a th:href="@{/admin/analystics}" class="nav-link text-white p-3 mb-2 sidebar-link">
+								<a href="#" class="nav-link text-white p-3 mb-2 sidebar-link">
 									<i class="fas fa-chart-line text-white fa-lg mr-3"></i>analystics
 								</a>
 							</li>
 							<!-- 이벤트 -->
 							<li class="nav-item">
-								<a th:href="@{/admin/event}" class="nav-link text-white p-3 mb-2 sidebar-link">
+								<a href="#" class="nav-link text-white p-3 mb-2 sidebar-link">
 									<i class="fas fa-chart-line text-white fa-lg mr-3"></i>evnet
 								</a>
 							</li>
 							<li class="nav-item">
-								<a th:href= "@{/admin/classList}" class="nav-link text-white p-3 mb-2 sidebar-link">
-									<i class="fas fa-wrench text-white fa-lg mr-3"></i>쿠킹클래스
+								<a href="#" class="nav-link text-white p-3 mb-2 sidebar-link">
+									<i class="fas fa-wrench text-white fa-lg mr-3"></i>Settings
 								</a>
 							</li>
 							<!-- 마켓 -->
 							<li class="nav-item">
-								<a th:href= "@{/admin/marketForm}" class="nav-link text-white p-3 mb-2 sidebar-link">
+								<a th:href= "@{/master/marketForm}" class="nav-link text-white p-3 mb-2 sidebar-link">
 									<i class="fas fa-file-alt text-white fa-lg mr-3"></i>마켓 폼 작성
 								</a>
 							</li>		
@@ -198,7 +199,7 @@
 							<ul class="navbar-nav">
 								<li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li>
 								<li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a></li>
-								<li class="nav-item ml-md-auto"><a href="#" class="nav-link" data-toggle="modal" data-target="#sign-out"><i class="fas fa-sign-out-alt text-danger fa-lg"></i></a></li>
+								<li class="nav-item ml-md-auto"><a href="/login/logout" class="nav-link" ><i class="fas fa-sign-out-alt text-danger fa-lg"></i></a></li>
 							
 							</ul>
 						</div>
