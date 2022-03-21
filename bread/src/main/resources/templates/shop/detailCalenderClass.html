@@ -118,17 +118,24 @@
 	}
 	
 
-html, body {
-overflow: hidden;
-font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
-font-size: 14px;
-}
-/* 캘린더 위의 해더 스타일(날짜가 있는 부분) */
-.fc-header-toolbar {
-padding-top: 1em;
-padding-left: 1em;
-padding-right: 1em;
-}
+	 /*요일*/
+  .fc-col-header-cell-cushion {
+	color: #000;
+  }
+  .fc-col-header-cell-cushion:hover {
+	text-decoration: none;
+	color:#000;
+  }
+  
+  
+  
+  /*일자*/
+  .fc-daygrid-day-number{
+	color: #000;
+	font-size:1em;
+  }
+  
+
 
 
 </style>
@@ -155,8 +162,8 @@ function loadingEvents()
 		  async : false, 
 		  success: function(result){
 			  return_value= result;
-			  alert(result)
-			  console.log(result)
+		//	  alert(result)
+		//	  console.log(result)
 			  
 			  
 		  },
@@ -202,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		events: all_events,
 		// 이벤트명 : function(){} : 각 날짜에 대한 이벤트를 통해 처리할 내용..
 		select: function(arg) { 
-			console.log(arg);
+		//	console.log(arg);
 		
 		var title = prompt('입력할 일정:'); // title 값이 있을때, 화면에 calendar.addEvent() json형식으로 일정을 추가
 
@@ -223,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
 		eventClick: function(arg) {
 			// 있는 일정 클릭시, 
 			console.log("#등록된 일정 클릭#");
-			console.log(arg.event);
+		//	console.log(arg.event);
 			
 			if (confirm('Are you sure you want to delete this event?')) { 
 				arg.event.remove() 
@@ -260,9 +267,16 @@ document.addEventListener('DOMContentLoaded', function() {
 		
 		<main class="main">
 		
+		<div style="width:800px;" class="mx-auto" th:fragment="calendar">
+		<div style="height:30px;text-align:center;margin-bottom:30px; font-weight:bold">
 		
-				
-			<div id='calendar'></div>
+			<div style="text-align:center;">	클래스 일정 </div>
+			
+		</div>
+			
+		<div id='calendar'></div>
+	</div>
+			
 		
 		
 		</main>

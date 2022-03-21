@@ -34,6 +34,10 @@ public class ShopController {
 		PageInfo<ShopDto> ProductList = new PageInfo<> (shopService.selectProductList(pageNum,productCateId),5);
 		  mv.addObject("ProductList", ProductList);
 		  
+		  List <ShopDto> ranking3 = shopService.selectRankingList(productCateId);
+		  mv.addObject("ranking3", ranking3);
+		  
+		  
 		//  List<AdminProductFileDto> fileList = shopService.selectMenuFileList(productCateId);
 		  
 		//  mv.addObject("fileList", fileList);

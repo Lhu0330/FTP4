@@ -39,6 +39,10 @@ public interface ShopMapper {
 			//강좌 가져오기 
 		Page<classDto> selectClass() throws Exception;
 		
+		// 랭킹가져오기
+		List<ShopDto> selectRankingList(int productCateId);
+		
+		
 			 //강좌 상세화면
 		classDto selectClassDetail(long classId);
 		
@@ -64,8 +68,15 @@ public interface ShopMapper {
 
 		List<AdminProductFileDto> selectformFileList2(long formId);
 		
-		// 조회수 올리기
+		// 일반상품 조회수 올리기
 		void updateHitCnt(long productId);
+		
+		// 마켓랭킹
+		List<MarketDto> selectRankingformList();
+			// 마켓 조회수 
+		void updateHitCnt2(long formId);
+
+		
 	
 				
 //  -------		마켓 끝 ----------- 
@@ -73,7 +84,7 @@ public interface ShopMapper {
 		
 // 달력
 		
-
+	
 		
 		
 		

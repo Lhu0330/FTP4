@@ -76,6 +76,14 @@ public class ShopServiceImpl  implements ShopService {
 		}
 
 		
+		@Override
+		public List<ShopDto> selectRankingList(int productCateId) {
+			
+			return shopMapper.selectRankingList(productCateId);
+			
+		}
+
+		
 		 // 상품상세화면
 		@Override
 		public ShopDto selectProductDetail(long productId) throws Exception {
@@ -135,6 +143,8 @@ public class ShopServiceImpl  implements ShopService {
 		@Override
 		public MarketDto selectclassDetail(long formId) {
 			
+			
+			shopMapper.updateHitCnt2(formId);
 			MarketDto board = shopMapper.selectformDetail(formId);
 			
 			// 첨부파일 (썸네일 )
@@ -153,6 +163,13 @@ public class ShopServiceImpl  implements ShopService {
 			return shopMapper.selectformDetail2(formId);
 		}
 
+		@Override
+		public List<MarketDto> selectRankingList() {
+			// TODO Auto-generated method stub
+			return shopMapper.selectRankingformList();
+		}
+
+		
 
 		
 		

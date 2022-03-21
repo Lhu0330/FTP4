@@ -20,7 +20,7 @@ public class MarketDto {
 	private int productCateId;
 	private String title; 
 	private String time; 
-
+	private int hitCnt;
 //	private String productName;
 //	private int productPrice;
 	private String productDescription;

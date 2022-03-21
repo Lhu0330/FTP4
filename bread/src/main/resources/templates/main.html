@@ -190,30 +190,13 @@
 			<div class="rankingStorePanel" >
 				<div class="my-5 text-center sectionTitle">  이번달 인기 마켓 	</div>
 				<div class="row justify-content-between">
-					<div class="card" style="width: 200px;">
-						 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="" class="card-img-top w-100" style="height: 200px;" >
-						 <div class="card-body">
-						 	<h4 class="card-title">가게명</h4>
+					<div class="card" style="width: 200px;"  th:each="item : ${ranking3}" >
+						 <img src="homeimage1.jpg"   th:src="${item.storedFilePath}"alt="" class="card-img-top w-100" style="height: 200px;" >
+						 <div class="card-body shadow">
+							 <a href="/shop/detail/"  class="card-text nav-link link-dark text-center storename" th:text="${item.storeId}" th:attrappend="href=${item.formId}"></a>  
 					 	 </div>
 					</div>	
-					<div class="card" style="width: 200px;">
-						 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="" class="card-img-top w-100" style="height: 200px;">
-						 <div class="card-body">
-						 	<h4 class="card-title">가게명</h4>
-					 	 </div>
-					</div>	
-					<div class="card" style="width: 200px;">
-						 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="" class="card-img-top w-100" style="height: 200px;">
-						 <div class="card-body">
-						 	<h4 class="card-title">가게명</h4>
-					 	 </div>
-					</div>	
-					<div class="card" style="width: 200px;">
-						 <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" alt="" class="card-img-top w-100" style="height: 200px;">
-						 <div class="card-body">
-						 	<h4 class="card-title">가게명</h4>
-					 	 </div>
-					</div>	
+					
 				</div>					
 			</div>		
 		</div>

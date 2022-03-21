@@ -84,35 +84,20 @@
 						<h3 class="text-center"><i class="fas fa-crown"></i> </h3>
 						<h4 class="text-center">    BEST</h4> 
 						
+<!-- 						ranking3 -->
 						
-						
-						<div class="row d-flex justify-content-between bestRank">
-							<div class ="shadow BestItem " style="width: 200px;" >
+						<div class="row d-flex justify-content-between bestRank" >
+							<div class ="shadow BestItem" style="width: 250px;"   th:each="item : ${ranking3}" >
 							<div class="mt-2 itemImg"> 
-								  <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" style="height: 240px;width: 240px;">
+								  <img src="homeimage1.jpg" th:src="${item.storedFilePath}" class="d-block w-100" style="height: 220px;width: 240px;">
 							</div>						
-							<div class="마켓"> 이름 </div>
-							<div class="price">가격 </div>
-							<div class="detail">설명 </div>
+							<a  th:href="@{|/shop/detail/${item.productCateId}/${item.productId}|}"  th:text="${item.productName}"  class="card-text text-center nav-link link-dark itemname"></a>
+							<div class="text-center sotrename"  th:text="${item.storeId}"></div>
+							<div class="text-center price" style="margin-bottom:15px" th:text="${item.productPrice} + '원' "></div>
 						
 						</div>
-						<div class ="shadow BestItem" style="width: 200px;">
-						<div class="mt-2 itemImg"> 
-								  <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" style="height: 240px;width: 240px;">
-							</div>								
-							<div class="마켓"> 이름 </div>
-							<div class="price">가격 </div>
-							<div class="detail">설명 </div>
 						
-						</div>
-						<div class ="shadow BestItem" style="width: 200px;">
-							<div class="mt-2 itemImg"> 
-								  <img src="homeimage1.jpg"  th:src="@{/img/homeimage3.jpg}" class="d-block w-100" style="height: 240px;width: 240px;">
-							</div>								<div class="마켓"> 이름 </div>
-							<div class="price">가격 </div>
-							<div class="detail">설명 </div>
 					
-					</div>
 				</div>
 					
 					</div>

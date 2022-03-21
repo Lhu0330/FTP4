@@ -155,7 +155,7 @@ function loadingEvents()
 		  async : false, 
 		  success: function(result){
 			  return_value= result;
-			  alert(result)
+			//  alert(result)
 			  console.log(result)
 			  
 			  
@@ -258,11 +258,31 @@ document.addEventListener('DOMContentLoaded', function() {
 <body>
 		<header th:include="layout/header :: header"></header>
 		
-		<main class="main">
+		<main class="main" >
 		
 		
+<!-- 				<div  th:fragment="calendar"> -->
 				
-			<div id='calendar'></div>
+<!-- 					<div id='calendar' style="width:900px;height:100px;" ></div> -->
+					
+				
+<!-- 				</div> -->
+			
+			
+	<div style="width:800px;" class="mx-auto" th:fragment="calendar">
+		<div style="height:30px;text-align:center;margin-bottom:30px; font-weight:bold">
+		
+			<div style="text-align:center;">	 마켓 폼 일정 </div>
+			
+		</div>
+			
+		<div id='calendar'></div>
+	</div>
+			
+			
+			
+				
+<!-- 			<div id='calendar' ></div> -->
 		
 		
 		</main>

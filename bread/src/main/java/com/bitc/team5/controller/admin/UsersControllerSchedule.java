@@ -174,7 +174,7 @@ public class UsersControllerSchedule {
 			   
 			   var result =   jArray.toString();
 			   
-			   System.out.println(result);
+			   //System.out.println(result);
 			   
 			return result;
 

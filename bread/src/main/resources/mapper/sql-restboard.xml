@@ -45,7 +45,28 @@
 		
 		</update>   
    
-   
+   <select id="selectRankingList" parameterType="int" resultType="com.bitc.team5.dto.ShopDto">
+		 
+		  <![CDATA[
+         SELECT
+            *
+         FROM
+            admin_product as a
+         JOIN
+         	product_file as b
+         ON
+               b.product_id = a.product_id
+    	and
+    			b.file_Type = 'D'
+    	and 
+             a.product_cate_id = #{productCateId}
+              
+       	order by hit_cnt desc limit 3
+      
+      ]]>
+           
+      
+   </select>
     
    <!-- 일반상품관련 -->
    	 <!-- 메뉴별 화면 -->

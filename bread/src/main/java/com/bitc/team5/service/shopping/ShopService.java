@@ -14,6 +14,8 @@ public interface ShopService {
 	 // 메뉴별 화면 
 	Page<ShopDto> selectProductList(int pageNum, int productCateId) throws Exception;
 	
+	// 랭킹뽑기
+	List <ShopDto> selectRankingList(int productCateId);
 	
 	// 상품상세 화면 
 	ShopDto selectProductDetail( long productId) throws Exception;
@@ -36,6 +38,11 @@ public interface ShopService {
 
 
 	List<AdminProductFileDto> selectMenuFileList(int productCateId);
+
+	List<MarketDto> selectRankingList();
+
+
+
 
 //	 //메인화면 	
 //		List<ProjectDto> selectJrList() throws Exception;
