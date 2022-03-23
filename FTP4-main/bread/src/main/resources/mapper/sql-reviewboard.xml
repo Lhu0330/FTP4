@@ -1,0 +1,652 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bitc.team5.mapper.review.ReviewMapper">
+
+
+		<insert id="storeinsert" parameterType="com.bitc.team5.dto.ReviewDto">
+				<![CDATA[
+				
+					INSERT INTO
+						review	( place_name , address_name , road_address_name , x , y , user_id, review_code )
+					VALUES
+						(	#{placeName}, #{addressName}, #{roadAddressName}, #{x}, #{y} , #{userId} , #{reviewCode} )
+				]]>
+				
+	
+	   </insert>
+	   
+	   	<!-- 리뷰 등록-->
+	<insert id="writeReview" parameterType="com.bitc.team5.dto.ReviewDto" useGeneratedKeys="true" keyProperty="idx">
+		<![CDATA[
+			INSERT INTO b_review
+				(title, user_id, contents , review_code)
+			VALUES
+				(#{title}, #{userId}, #{contents}, #{reviewCode} )
+		]]>
+	</insert>
+	
+		<insert id="insertReviewFileList" parameterType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			INSERT INTO review_file
+				( board_idx, original_file_name, stored_file_path, file_size, user_id, file_type, review_code )
+			VALUES
+		]]>
+		<foreach collection="list" item="item" separator=",">
+		(	#{item.boardIdx}, 
+			#{item.originalFileName},
+			#{item.storedFilePath},
+			#{item.fileSize},
+			#{item.userId},
+			#{item.fileType},
+			#{item.reviewCode} )
+			
+		</foreach>
+	</insert>
+	
+	
+	
+	<!-- 리뷰 리스트-->
+	<select id="selectReviewList" resultType="com.bitc.team5.dto.ReviewDto">
+		<![CDATA[ 
+		SELECT
+           a.idx, a.user_id, a.title, a.contents, a.review_code, b.place_name
+           
+         FROM
+            b_review as a
+            
+         join
+         	
+         	review as b
+         
+         ON
+            b.idx= a.idx
+    	
+    		
+     
+		]]>
+	</select>
+	
+	<!-- 내 리뷰 리스트-->
+	<select id="selectMyReview" resultType="com.bitc.team5.dto.ReviewDto">
+		<![CDATA[ 
+			SELECT
+           a.idx, a.user_id, a.title, a.contents, a.review_code, b.place_name, b.road_address_name , b.y , b.x
+           
+         FROM
+            b_review as a
+            
+         join
+         	
+         	review as b
+         
+         ON
+            b.idx= a.idx
+            
+		and	
+			a.user_id = #{userId}
+	
+		]]>
+	</select>
+	
+	<!-- 상세 리뷰글 -->
+	<select id="selectReview"  parameterType="int" resultType="com.bitc.team5.dto.ReviewDto">
+		
+		<![CDATA[ 
+		
+		 SELECT
+           a.idx, a.user_id, a.title, a.contents, a.review_code, b.place_name, b.address_name, b.x , b.y , b.road_address_name
+         FROM
+            b_review as a
+         JOIN
+         	 review as b
+         ON
+             b.idx= a.idx
+         and 
+         	a.idx = #{idx}
+         	
+    
+      
+		]]>
+		
+	</select>
+	
+	<!--	SELECT
+				idx, title, contents
+			FROM
+				b_review
+			WHERE
+				idx = #{idx}
+				-->
+				
+	
+	
+		<!-- (file_size / 1024) -> kb로 표현할라고  -->
+	<select id="showReviewList"  resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path,
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				review_file as a
+				
+			JOIN
+         	 review	as b
+			
+			on
+				a. review_code = b.review_code 
+			and
+			 a.user_id = b.user_id
+			and
+				 b.idx = #{idx}
+			
+			
+		]]>
+	</select>
+
+	<!--리뷰 수정-->
+	<update id="updateReview" parameterType="com.bitc.team5.dto.ReviewDto">
+		<![CDATA[ 
+			UPDATE
+				b_review
+			SET
+				title = #{title},
+				contents = #{contents}
+			WHERE
+				idx = #{idx}
+		]]>
+	</update>
+	
+	<!--리뷰 삭제-->
+	<delete id="deleteReview" parameterType="com.bitc.team5.dto.ReviewDto">
+		<![CDATA[ 
+			DELETE FROM
+				b_review
+			WHERE
+				idx = #{idx}
+		]]>
+	</delete>
+
+<!--	<select id="getUsers" resultType="com.bitc.team2.dto.UserDtoo">
+		<![CDATA[
+			SELECT
+				idx, title, creator_id, hit_cnt,
+				DATE_FORMAT(created_date, '%Y.%m.%d %H:%i:%s') AS created_date
+			FROM
+				t_board
+			WHERE
+				deleted_yn = 'N'
+			ORDER BY
+				idx DESC
+		]]>
+	</select>-->
+	
+<!-- 사용자 렁오기-->
+	<!--<select id="getUsers" resultType="com.bitc.team5.dto.UsersDto">
+		<![CDATA[
+			SELECT
+				*
+			FROM
+				b_member
+			where
+				user_auth = 'U'
+		
+		]]>
+	</select>-->
+
+<!-- 상품 들고오기 -->
+	<!--<select id="selectProductList" resultType="com.bitc.team5.dto.ShopDto">
+		
+		<![CDATA[
+		
+			SELECT
+				*
+			FROM
+				admin_product
+			
+			
+		]]>
+	</select>
+	-->
+	 <!-- 클래스리스트 가져오기 -->
+	<!--
+		<select id="selectclassList" resultType="com.bitc.team5.dto.classDto">
+		<![CDATA[
+		
+			SELECT
+				*
+			FROM
+				class
+			
+			
+		]]>
+	</select>-->
+	
+	 <!-- 폼리스트 가져오기 -->
+	
+	<!--	<select id="selectformList" resultType="com.bitc.team5.dto.MarketDto">
+		<![CDATA[
+		
+			SELECT
+				*
+			FROM
+				market_store_info
+			
+			
+		]]>
+	</select>
+	-->
+	
+	
+	
+	
+	<!-- 일반 상품 등록-->
+	<!--<insert id="insertBoard" parameterType="com.bitc.team5.dto.ShopDto" useGeneratedKeys="true" keyProperty="idx">
+		<![CDATA[
+			INSERT INTO admin_product
+				(product_id , product_cate_id, product_name, product_price, product_description, product_stock_cnt, store_id)
+			VALUES
+				(#{productId}, #{productCateId}, #{productName}, #{productPrice}, #{productDescription}, #{productStockCnt}, #{storeId})
+		]]>
+	</insert>-->
+	
+	<!-- 상품 썽네일 등록 -->
+
+	<!--<insert id="insertBoardFileList" parameterType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			INSERT INTO product_file
+				( board_idx, original_file_name, stored_file_path, file_size, store_id, file_type, product_id)
+			VALUES
+		]]>
+		<foreach collection="list" item="item" separator=",">
+		(	#{item.boardIdx}, 
+			#{item.originalFileName},
+			#{item.storedFilePath},
+			#{item.fileSize},
+			#{item.storeId},
+			#{item.fileType},
+			#{item.productId}
+			)
+			
+		</foreach>
+	</insert>-->
+	
+	
+	<!-- tkdvnadlfma -->
+	<!--<update id="insertshop" parameterType="long">
+	
+	<![CDATA[
+	
+		UPDATE admin_product
+
+            INNER JOIN b_member ON admin_product.store_id = b_member.user_id
+			SET  admin_product.store_id = b_member.store_name
+
+			]]>
+
+	
+	</update>
+	-->
+	
+	
+		<!-- 클래스 등록-->
+<!--	<insert id="insertClass" parameterType="com.bitc.team5.dto.classDto" useGeneratedKeys="true" keyProperty="idx">
+		<![CDATA[
+			INSERT INTO class
+				( class_id , class_name, class_detail, class_plan , class_place ,class_price, store_id,  start_date, end_date, time )
+			VALUES
+				(#{classId}, #{className},  #{classDetail}, #{classPlan} , #{classPlace} ,#{classPrice} ,#{storeId}, #{startDate}, #{endDate} , #{time}  )
+		]]>
+	</insert>-->
+	
+	<!-- 클래스 썽네일 등록 -->
+
+	<!--<insert id="insertBoardFileList2" parameterType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			INSERT INTO class_file
+				( board_idx, original_file_name, stored_file_path, file_size, creator_id, file_type, class_id)
+			VALUES
+		]]>
+		<foreach collection="list" item="item" separator=",">
+		(	#{item.boardIdx}, 
+			#{item.originalFileName},
+			#{item.storedFilePath},
+			#{item.fileSize},
+			'nickname5',
+			#{item.fileType},
+			#{item.classId} )
+			
+		</foreach>
+	</insert>
+	
+	
+	-->
+      
+<!-- 일반상품 상세화면 -->
+    <!--  <select id="selectBoardDetail" parameterType="int" resultType="com.bitc.team5.dto.ShopDto">
+      <![CDATA[
+         SELECT
+            *
+         FROM
+             admin_product
+        WHERE
+             idx = #{idx}
+         
+      ]]>
+      
+   </select>-->
+   
+   <!-- 지정한 글번호에 첨부된 파일 목록 불러오기 -->
+	<!-- (file_size / 1024) -> kb로 표현할라고  -->
+	<!--<select id="selectBoardFileList" parameterType="int" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path,
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				product_file
+			WHERE
+				board_idx = #{idx}
+			
+		]]>
+	</select>
+-->
+   
+  <!-- <select id="selectBoardFileInfo" parameterType="map" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				original_file_name, stored_file_path, file_size
+			FROM
+				product_file
+			WHERE
+				file_idx = #{fileIdx}
+			AND
+				board_idx = #{boardIdx}
+			
+		]]>
+	</select>-->
+	
+	
+	        <!-- 클래스 상세보기 -->
+<!--
+      <select id="selectclassDetail" parameterType="int" resultType="com.bitc.team5.dto.classDto">
+      <![CDATA[
+         SELECT
+            *
+         FROM
+             class
+        WHERE
+             idx = #{idx}
+         
+      ]]>
+      
+   </select>
+   -->
+
+	<!-- 클래스 사진 가져오기 -->
+	<!--<select id="selectBoardFileList2" parameterType="int" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path,
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				class_file
+			WHERE
+				board_idx = #{idx}
+			
+		]]>
+	</select>-->
+	
+	
+	
+	<!-- 오픈마켓폼 관련  -->
+	
+		<!-- 일반 상품 등록-->
+	<!--<insert id="insertForm" parameterType="com.bitc.team5.dto.MarketDto" useGeneratedKeys="true" keyProperty="idx">
+		<![CDATA[
+			INSERT INTO market_store_info
+				( form_id , market_name, banking, plan, market_detail , store_id, start_date, end_date, time )
+			VALUES
+				(#{formId}, #{marketName}, #{banking}, #{plan}, #{marketDetail}, #{storeId}, #{startDate}, #{endDate} , #{time} )
+		]]>
+	</insert>
+	-->
+	<!-- 상품 썽네일 등록 -->
+
+	<!--<insert id="insertBoardFileList3" parameterType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			INSERT INTO form_file
+				( board_idx, original_file_name, stored_file_path, file_size, creator_id, file_type, form_id, store_id )
+			VALUES
+		]]>
+		<foreach collection="list" item="item" separator=",">
+		(	#{item.boardIdx}, 
+			#{item.originalFileName},
+			#{item.storedFilePath},
+			#{item.fileSize},
+			'nickname5',
+			#{item.fileType},
+			#{item.formId},
+			#{item.storeId} )
+			
+		</foreach>
+	</insert>-->
+	
+	<!-- 동적 input  상품들 등록기-->
+		<!--<insert id="insertForm2"  parameterType="com.bitc.team5.dto.ShopDto">
+		
+		<![CDATA[
+		insert into product_market
+				(form_id , product_cate_id, product_name, product_price, product_stock_cnt, store_id)
+		values 
+		]]>
+		<foreach collection="list" item="item" separator=",">
+		(#{item.formId}, #{item.productCateId}, #{item.productName}, #{item.productPrice},#{item.productStockCnt}, #{item.storeId})
+		
+		</foreach>
+		
+		
+
+	
+	</insert>
+	
+	-->
+	<!--  마켓상세화면 -->
+	    
+	<!--
+	  <select id="selectformDetail2" parameterType="long" resultType="com.bitc.team5.dto.ShopDto">
+      <![CDATA[
+         SELECT
+            *
+         FROM
+             product_market
+        WHERE
+            form_id = #{formId}
+             
+         
+      ]]>
+      
+   </select>
+	-->
+	<!-- 상세화면 -->
+	    
+<!-- 상세화면 -->
+    <!--  <select id="selectformDetail" parameterType="long" resultType="com.bitc.team5.dto.MarketDto">
+      <![CDATA[
+         SELECT
+            *
+         FROM
+             market_store_info
+        WHERE
+            form_id = #{formId}
+         
+      ]]>
+      
+   </select>-->
+   
+   <!-- 지정한 글번호에 첨부된 파일 목록 불러오기 -->
+	<!-- (file_size / 1024) -> kb로 표현할라고  -->
+	<!--<select id="selectBoardFileList3" parameterType="long" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path,
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				form_file
+			WHERE
+				 form_id = #{formId}
+			
+		]]>
+	</select>-->
+	
+	
+<!--	<select id="formDateList" resultType="com.bitc.team5.dto.MarketDto">
+      
+      <![CDATA[
+         SELECT
+            idx , store_id  ,  DATE_FORMAT(start_date,'%Y-%m-%dT%H:%i:%s') as start_date , DATE_FORMAT(end_date,'%Y-%m-%dT%H:%i:%s')as end_date , allday
+         FROM
+         	 market_store_info 
+  
+     
+      ]]>
+             
+   </select>-->
+   
+   <!--	<select id="formDateList" resultType="com.bitc.team5.dto.MarketDto">
+      
+      <![CDATA[
+         SELECT
+            idx , store_id  ,  market_name, DATE_FORMAT(start_date,'%Y-%m-%d') as start_date , DATE_FORMAT(end_date,'%Y-%m-%d')as end_date , allday, time
+         FROM
+         	 market_store_info 
+  
+     
+      ]]>
+             
+   </select>
+   
+   
+   <select id="classDateList" resultType="com.bitc.team5.dto.classDto">
+      
+      <![CDATA[
+         SELECT
+            idx , store_id ,  class_name, DATE_FORMAT(start_date,'%Y-%m-%d') as start_date , DATE_FORMAT(end_date,'%Y-%m-%d')as end_date , allday, time
+         FROM
+         	 class
+  
+     
+      ]]>
+             
+   </select>
+   -->
+   
+   
+ 
+	<!-- 스케줄 -->
+<!--	<select id="showSchedule" resultType = "ScheduleDTO">
+    		SELECT
+    			title,start,end,allday
+    		FROM
+    			schedule
+    		
+    	</select>
+    	
+    	<insert id="addSchedule" parameterType = "ScheduleDTO">
+	    	INSERT INTO
+	    		schedule(title,start,end,allday)
+	    	VALUES
+	    		(#{title},#{start},#{end},#{allday})
+    	</insert>-->
+	
+	
+	
+	<!--<insert id="insertMarket" parameterType="com.bitc.team5.dto.MarketDto" useGeneratedKeys="true" keyProperty="idx">
+		<![CDATA[
+			INSERT INTO market_store_info
+				( store_id, market_info , banking, plan)
+			VALUES
+				(  #{storeId}, #{maketInfo), #{banking}, #{plan} )
+		]]>
+	</insert>
+
+
+	
+	<insert id="insertMarketStock" parameterType="com.bitc.team5.dto.ShopDto">
+		
+		<![CDATA[
+		
+			INSERT INTO admin_product
+				(product_id , product_cate_id, product_name, product_price, product_stock_cnt, store_id)
+			VALUES
+		
+		]]>
+		<foreach collection="list" item="item" separator=",">
+			(#{item.productId}, #{item.productName}, #{item.productPrice}, #{item.productStockCnt},#{item.storeId} )
+		</foreach>
+		
+	
+	
+	</insert>
+
+		
+
+
+	<insert id="insertMarketFileList" parameterType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			INSERT INTO product_file
+				( board_idx, original_file_name, stored_file_path, file_size, creator_id, file_type, product_id)
+			VALUES
+		]]>
+		<foreach collection="list" item="item" separator=",">
+		(	#{item.boardIdx}, 
+			#{item.originalFileName},
+			#{item.storedFilePath},
+			#{item.fileSize},
+			'nickname5',
+			#{item.fileType},
+			#{item.productId} )
+			
+		</foreach>
+	</insert>
+	-->
+	
+
+	
+	<!--<select id="selectBoardDetail" parameterType="int" resultType="com.bitc.dto.RestBoardDto">
+		<![CDATA[
+			SELECT
+				idx, title, contents, creator_id, update_id, hit_cnt,
+				DATE_FORMAT(created_date, '%Y.%m.%d %H:%i:%s') AS created_date,
+				DATE_FORMAT(updated_date, '%Y.%m.%d %H:%i:%s') AS updated_date
+			FROM
+				t_board
+			WHERE
+				idx = #{idx}
+		]]>
+	</select>
+	
+<update id="deleteBoard" parameterType="int">
+		<![CDATA[ 
+			UPDATE 
+				t_board
+			SET
+				deleted_yn = 'Y'
+			WHERE
+				idx = #{idx}
+		]]>
+	</update >
+	
+	<update id="updateBoard" parameterType="com.bitc.dto.RestBoardDto">
+		<![CDATA[ 
+			UPDATE
+				t_board
+			SET
+				title = #{title}, contents = #{contents}, update_id = #{creatorId}, updated_date = NOW()
+			WHERE
+				idx = #{idx}
+			AND
+				deleted_yn = 'N'
+		]]>		
+	</update >-->
+	
+</mapper>

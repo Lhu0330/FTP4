@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="context-path" th:content="@{/}"/>
+    
+  
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!--  link rel="stylesheet" href="style.css"> -->
+<!--  <script src="script.js"></script> -->
+
+
+<title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.23/css/jquery.dataTables.min.css"/>
+  <script type="text/javascript">
+
+           var count = 0;
+
+          
+
+           function addForm(){
+
+                     var addedFormDiv = document.getElementById("addedFormDiv");
+
+                    
+
+                     var str = "";
+
+                     str+="상품명"+count+" <input type='text' name='tb1_"+count+"'>";
+
+                     str+="가격"+count+" <input type='text' name='tb2_"+count+"'>";
+
+                     str+="재고"+count+" <input type='text' name='tb3_"+count+"'>";
+
+                      str+= "<input type='button' value='삭제' onclick='remove(this)'>";                    
+ 					// 추가할 폼(에 들어갈 HTML)
+
+                    
+
+                     var addedDiv = document.createElement("div"); // 폼 생성
+
+                     addedDiv.id = "added_"+count; // 폼 Div에 ID 부여 (삭제를 위해)
+
+                     addedDiv.innerHTML  = str; // 폼 Div안에 HTML삽입
+
+                     addedFormDiv.appendChild(addedDiv); // 삽입할 DIV에 생성한 폼 삽입
+
+          
+
+                     count++;
+
+                     document.baseForm.count.value=count;
+
+                     // 다음 페이지에 몇개의 폼을 넘기는지 전달하기 위해 히든 폼에 카운트 저장
+
+           }
+
+           const remove = (obj) => {
+               document.getElementById('addedFormDiv').removeChild(obj.parentNode);
+           }
+
+           function delForm(){
+
+                     var addedFormDiv = document.getElementById("addedFormDiv");
+
+          
+
+                     if(count >1){ // 현재 폼이 두개 이상이면
+
+                                var addedDiv = document.getElementById("added_"+(--count));
+
+                                // 마지막으로 생성된 폼의 ID를 통해 Div객체를 가져옴
+
+                                addedFormDiv.removeChild(addedDiv); // 폼 삭제 
+
+                     }else{ // 마지막 폼만 남아있다면
+
+                                document.baseForm.reset(); // 폼 내용 삭제
+
+                     }
+
+           }
+
+		 function add_item(){
+		          // pre_set 에 있는 내용을 읽어와서 처리..
+		          var div = document.createElement('div');
+		          div.innerHTML = document.getElementById('pre_set').innerHTML;
+		          document.getElementById('field').appendChild(div);
+		     }
+		     function remove_item(obj){
+		          // obj.parentNode 를 이용하여 삭제
+		          document.getElementById('field').removeChild(obj.parentNode);
+		     }
+
+		     
+	     
+		     
+// 		     var goods_cnt = 1;
+// 		     var goods_name=new Array();
+// 		     var goods_price=new Array();
+// 		     var goods_quantity=new Array();
+// 		  
+
+// 		     function add_goods(n){
+
+// 		     	if((n==0 && goods_cnt<Number('999999')) || (n!=0)) {
+// 		     		for(var i=0;i<goods_cnt;i++){
+// 		     			goods_name[i] = document.getElementById("goods_name"+(i+1)).value;
+// 		     			goods_price[i] = document.getElementById("goods_price"+(i+1)).value;
+// 		     			goods_quantity[i] = document.getElementById("goods_quantity"+(i+1)).value;
+// 		     			goods_limit[i] = document.getElementById("goods_limit"+(i+1)).value;
+
+// 		     			if(document.getElementById("limitcheck"+(i+1)).checked) {
+// 		     				goods_limit_check[i] = 'checked';
+// 		     				goods_limit_disabled[i] = '';
+// 		     				goods_limit_check_value[i] =  1;
+// 		     			}
+// 		     			else {
+// 		     				goods_limit_check[i] = '';
+// 		     				goods_limit_disabled[i] = 'disabled';
+// 		     				goods_limit_check_value[i] =  0;
+// 		     			}
+		     			
+// 		     		}
+// 		     		if(n>0) {
+// 		     			goods_name.splice((n-1),1);
+// 		     			goods_price.splice((n-1),1);
+// 		     			goods_quantity.splice((n-1),1);
+// 		     			goods_limit.splice((n-1),1);
+// 		     			goods_limit_check.splice((n-1),1);
+// 		     			goods_limit_disabled.splice((n-1),1);
+// 		     			goods_limit_check_value.splice((n-1),1);
+
+// 		     			$("#goods_idx"+n).remove();
+
+// 		     			for(var j=0;j<$("#goods_div2 input").length;j++){
+// 		     				$("#goods_div2 input:eq("+j+")").attr("name","goods_idx[]");
+// 		     				$("#goods_div2 input:eq("+j+")").attr("id","goods_idx"+(j+1));
+
+
+// 		     			}
+
+		     
+		     
+		     
+		     
+</script>
+
+</head>
+
+<!-- <body> -->
+<body onload="addForm();">
+
+
+
+<form name="baseForm" action="" method="post">
+
+           <input type="hidden" name="count" value="0">
+
+           <div id="addedFormDiv"></div><BR> <!-- 폼을 삽입할 DIV -->
+
+           <input type="Button" value="추가" onclick="addForm()">
+
+           <input type="Button" value="삭제" onclick="delForm()">
+
+           <input type="Submit" value="완료">
+
+</form>
+<div class="content_item" style="border:0px;margin-top:10px;background-color:#ff7676;color:#fff;padding: 20px 50px 20px 50px;cursor:pointer;font-size: 20px;font-weight: 700;" onclick="form_insert();">
+										<div style="width:100%;text-align:center;">
+										폼 만들기										</div>
+										
+										
+									</div>
+		
+<!-- 		<div id="pre_set" style="display:none"> -->
+<!-- 		   <input type="text" name="test1" value="" style="width:100px">  -->
+<!-- 		   <input type="text" name="test2" value="" style="width:100px">    -->
+<!-- 		   <input type="button" value="삭제" onclick="remove_item(this)"> -->
+<!-- 		</div> -->
+		 
+<!-- 		<div id="field"></div> -->
+		 
+<!-- 		<input type="button" value=" 추가 " onclick="add_item()"><br> -->
+
+
+
+<!-- <div id="tistoryEtcLayer" class="layer_post"></div><div id="tistorySnsLayer" class="layer_post"><div class="bundle_post"><a href="#none" class="btn_mark" data-service="facebook"><span class="ico_sns ico_fb"></span>페이스북으로 공유</a><a href="#none" class="btn_mark" data-service="kakaotalk"><span class="ico_sns ico_kt"></span>카카오톡으로 공유</a><a href="#none" class="btn_mark" data-service="kakaostory"><span class="ico_sns ico_ks"></span>카카오스토리로 공유</a><a href="#none" class="btn_mark" data-service="twitter"><span class="ico_sns ico_tw"></span>트위터로 공유</a><a href="#none" class="btn_mark" data-service="url"><span class="ico_sns ico_url"></span>URL 복사</a><span class="ico_postbtn ico_arrbt"></span></div></div>
+ -->
+
+</body>
+
+</html>

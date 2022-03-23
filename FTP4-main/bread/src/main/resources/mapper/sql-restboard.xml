@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.bitc.team5.mapper.shoppinig.ShopMapper">
+
+	<!--<select id="selectBoardList" resultType="com.bitc.dto.RestBoardDto">
+		<![CDATA[
+			SELECT
+				idx, title, creator_id, hit_cnt,
+				DATE_FORMAT(created_date, '%Y.%m.%d %H:%i:%s') AS created_date
+			FROM
+				t_board
+			WHERE
+				deleted_yn = 'N'
+			ORDER BY
+				idx DESC
+		]]>
+	</select>-->
+	
+<!--	<insert id="create" parameterType="com.bitc.team5.dto.reviewDto">
+		<![CDATA[
+			INSERT INTO review
+				( userId, pw , content , date)
+			VALUES
+				( #{userId}, #{pw} , #{content} , #{date} )
+		]]>
+	</insert>-->
+	
+	
+<!-- 조회수 올리기 --> 
+
+		<update id="updateHitCnt" parameterType="long">
+		
+		<![CDATA[
+		
+			UPDATE
+				admin_product
+			SET
+				hit_cnt = hit_cnt + 1
+			WHERE
+				 product_id = #{productId}
+		
+		]]>
+		
+		</update>   
+   
+   <select id="selectRankingList" parameterType="int" resultType="com.bitc.team5.dto.ShopDto">
+		 
+		  <![CDATA[
+         SELECT
+            *
+         FROM
+            admin_product as a
+         JOIN
+         	product_file as b
+         ON
+               b.product_id = a.product_id
+    	and
+    			b.file_Type = 'D'
+    	and 
+             a.product_cate_id = #{productCateId}
+              
+       	order by hit_cnt desc limit 3
+      
+      ]]>
+           
+      
+   </select>
+    
+   <!-- 일반상품관련 -->
+   	 <!-- 메뉴별 화면 -->
+   <select id="selectProductList" parameterType="int" resultType="com.bitc.team5.dto.ShopDto">
+      
+      <![CDATA[
+         SELECT
+            *
+         FROM
+            admin_product as a
+         JOIN
+         	product_file as b
+         ON
+               b.product_id = a.product_id
+    	and
+    			b.file_Type = 'D'
+    	and 
+             a.product_cate_id = #{productCateId} 
+      
+      
+      ]]>
+           
+      
+   </select>
+<!-- 일반 상품 상세화면 -->
+    <select id="selectProductDetail" parameterType="long" resultType="com.bitc.team5.dto.ShopDto">
+      <![CDATA[
+         SELECT
+            *
+         FROM
+            admin_product
+         WHERE
+             product_id = #{productId}
+         
+      ]]>
+      
+   </select>
+   
+      <!-- 지정한 글번호에 첨부된 파일 목록 불러오기 -->
+	<!-- (file_size / 1024) -> kb로 표현할라고  -->
+	<select id="selectBoardFileList" parameterType="long" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path, file_type,product_id, 
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				product_file
+			WHERE
+				product_id = #{productId}  and file_type = 'T' 
+			
+		
+		]]>
+	</select>
+	
+	<!-- 상세설명 이미지 -->
+		<select id="selectBoardFileList2" parameterType="long" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path, product_id, file_type ,
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				product_file
+			WHERE
+				product_id = #{productId} and file_type = 'D'
+			
+		]]>
+	</select>
+	
+   
+   <!-- apwb-->
+   	<select id="selectMenuFileList" parameterType="int" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path, file_type,product_id, 
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				product_file
+			WHERE
+				file_type = 'T' 
+			
+		
+		]]>
+	</select>
+   
+   
+   <!-- 마켓관련  -->
+   <!--마켓폼 리스트-->
+   
+      <select id="selectdformList" resultType="com.bitc.team5.dto.MarketDto">
+      
+      <![CDATA[
+         SELECT
+            *
+         FROM
+         	 market_store_info as a
+         join 
+         	form_file as b
+        on  	 
+        	a.form_id = b.form_id
+    	
+    	and
+    		b.file_Type = 'D'
+      
+      
+      ]]>
+           
+      
+   </select>
+      
+    	
+   
+   
+   
+      <!-- 폼 상세화면 -->
+       <select id="selectformDetail2" parameterType="long" resultType="com.bitc.team5.dto.ShopDto">
+     
+      <![CDATA[
+         SELECT
+            *
+         FROM
+           	product_market
+         where
+              form_id = #{formId}
+       
+         
+      ]]>
+      
+   </select>
+   <!-- 폼 상세화면 -->
+       <select id="selectformDetail" parameterType="long" resultType="com.bitc.team5.dto.MarketDto">
+     
+      <![CDATA[
+         SELECT
+            *
+         FROM
+             market_store_info
+         where
+            form_id = #{formId}
+       
+         
+      ]]>
+      
+   </select>
+   
+   
+   	<select id="selectformFileList" parameterType="long" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path, file_type, form_id, 
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				form_file
+			WHERE
+				form_id = #{formId}  and file_type = 'T' 
+			
+		
+		]]>
+	</select>
+	
+	<!-- 상세설명 이미지 -->
+		<select id="selectformFileList2" parameterType="long" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path, form_id, file_type ,
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				form_file
+			WHERE
+				form_id = #{formId} and file_type = 'D'
+			
+		]]>
+	</select>
+   
+   <!-- ============== 마켓폼 끝 =============-->
+   
+   
+   
+   <!-- 클래스관련 -->
+   <!-- 클래스 리스트 -->
+  <select id="selectClass"  resultType="com.bitc.team5.dto.classDto">
+      
+      <![CDATA[
+         SELECT
+            *
+         FROM
+            class as a
+        
+         join 
+         	class_file as b
+        on  	 
+        	a.class_id = b.class_id
+    	
+    	and
+    		b.file_Type = 'D'
+    	     
+      ]]>
+      
+   </select>
+
+   
+   <!--클래스  상세화면 -->
+    <select id="selectClassDetail" parameterType="long" resultType="com.bitc.team5.dto.classDto">
+     
+      <![CDATA[
+         SELECT
+            *
+         FROM
+            class
+            
+           WHERE
+             class_id = #{classId}
+       
+      ]]>
+      
+   </select>
+   
+
+	<select id="selectclassFileList" parameterType="long" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path, file_type,class_id, 
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				class_file
+			WHERE
+				 class_id = #{classId}  and file_type = 'T' 
+			
+		
+		]]>
+	</select>
+	
+	<!-- 상세설명 이미지 -->
+		<select id="selectclassFileList2" parameterType="long" resultType="com.bitc.team5.dto.AdminProductFileDto">
+		<![CDATA[
+			SELECT
+				file_idx, board_idx, original_file_name, stored_file_path, class_id, file_type ,
+				FORMAT(ROUND(file_size / 1024), 0) AS file_size
+			FROM
+				class_file
+			WHERE
+				 class_id = #{classId} and file_type = 'D'
+			
+		]]>
+	</select>
+	
+   
+   
+    <!--  <select id="selectBoardFileList" parameterType="int" resultType="com.bitc.dto.ProjectDto">
+      <![CDATA[
+         SELECT
+            file_idx, product_idx, original_file_name, stored_file_path,
+            FORMAT(ROUND(file_size / 1024), 0) AS file_size
+         FROM
+            product_file
+         WHERE
+            product_idx = #{productIdx}
+
+      ]]>
+   </select>
+   -->
+   <!-- 지정한 글번호에 첨부된 파일 목록 불러오기 -->
+  <!-- <select id="selectBoardFileInfo" parameterType="map" resultType="com.bitc.dto.ProjectDto">
+      <![CDATA[
+         SELECT
+            original_file_name, stored_file_path, file_size
+         FROM
+            product_file
+         WHERE
+            product_idx = #{productIdx}
+         
+      ]]>
+   </select>
+	-->
+	
+	
+	
+	
+	
+	
+	
+	<!--<select id="selectBoardDetail" parameterType="int" resultType="com.bitc.dto.RestBoardDto">
+		<![CDATA[
+			SELECT
+				idx, title, contents, creator_id, update_id, hit_cnt,
+				DATE_FORMAT(created_date, '%Y.%m.%d %H:%i:%s') AS created_date,
+				DATE_FORMAT(updated_date, '%Y.%m.%d %H:%i:%s') AS updated_date
+			FROM
+				t_board
+			WHERE
+				idx = #{idx}
+		]]>
+	</select>
+	
+<update id="deleteBoard" parameterType="int">
+		<![CDATA[ 
+			UPDATE 
+				t_board
+			SET
+				deleted_yn = 'Y'
+			WHERE
+				idx = #{idx}
+		]]>
+	</update >
+	
+	<update id="updateBoard" parameterType="com.bitc.dto.RestBoardDto">
+		<![CDATA[ 
+			UPDATE
+				t_board
+			SET
+				title = #{title}, contents = #{contents}, update_id = #{creatorId}, updated_date = NOW()
+			WHERE
+				idx = #{idx}
+			AND
+				deleted_yn = 'N'
+		]]>		
+	</update >-->
+	
+</mapper>

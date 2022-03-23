@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="context-path" th:content="@{/}"/>
+    
+  
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<!--  link rel="stylesheet" href="style.css"> -->
+<!--  <script src="script.js"></script> -->
+
+
+<title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap" rel="stylesheet">
+<style>
+	.sidebar{
+		height: 100vh;
+		background : linear-gradient( rgba(0,0,0,.7), rgba(0,0,0,0.9));
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+		box-shadow : 5px 7ps 25pw #999;
+	}
+	
+	.bottom-border {
+		border-bottom: 2px groove #eee;
+	 
+	}
+	
+	.sidebar-link{
+		transition: all .4s;
+	}
+	
+	.sidebar-link:hover {
+		background-color: #444;
+		border-radius: 5px;
+	}
+	
+	
+	.current {
+		background-color: #f44336;
+		border-radius: 7px;
+		box-shadow : 2px 5px 10px #111;
+		transition: translateY(-1px);
+	}
+	
+	.search-input{
+		background: transparent;
+		border: none;
+		border-radius: 0;
+		border-bottom: 2px solid #999;
+		transition: all .4s;
+	}
+	
+	.search-button{
+		border-radius: 50%;
+		padding: 10px 16px;
+		transition: all .4s;
+	
+	}
+	
+	
+	.search-button{
+		background-color: #eee;
+		transform: translateY(-1px);
+	
+	}
+	
+	.icon-bullet{
+	
+		position: relative;
+	}
+	
+	.icon-bullet::after{
+		content: "";
+		position: absolute;
+		top: 7px;
+		left: 15px;
+		height: 12px;
+		width: 12px;
+		background-color: #f44336;
+		border-radius: 50%;
+		
+	}
+	
+	@media (max-width: 768px){
+		.sidebar{
+			position: static;
+			height: auto;
+		}
+		
+		.top-navbar {
+			position: static;
+
+		}
+	}
+	
+</style>
+
+</head>
+<body>
+
+<!-- navbar -->
+	<nav class="navbar navbar-expand-md navbar-light">
+		<button class="navbar-toggler ml-auto mb-2 bg-light" type="button" data-toggler="collapse" data-target="#sidebar">
+			<span class="navbar-toggler-icon"></span>
+		
+		</button>
+		<div class="collapse navbar-collapse" id="sidebar">
+			<div class="container-fluid">
+				<div class="row">
+				<!--SIDEBAR  -->
+				<div class="col-xl-2 col-lg-3 sidebar fixed-top">
+					<a href="/main" class="navbar-brand text-white text-center d-block mx-auto py-3 mb-4 bottom-border">UplucSystem</a>
+						<!-- 판매자아이디 -->
+						<div class="bottom-bodrder pb-3">
+							<img src="images/pensu1.jpg" arl="" width="50" class="rounded-circle mr-3">
+							<a href="#" class="text-white">관리자명 </a>
+						</div>
+						<!-- 대쉬보드 -->
+						<ul class="navbar-nav flex-column mt-4">
+							<li class="nav-item">
+								<a th:href="@{/admin}" class="nav-link text-white p-3 mb-2 current">
+									<i class="fas fa-home text-white fa-lg mr-3"></i>Dashboard
+								</a>
+							</li>
+							<!-- 사용자 -->
+							<li class="nav-item">
+								<a th:href="@{/admin/users}" class="nav-link text-white p-3 mb-2 sidebar-link">
+									<i class="fas fa-user text-white fa-lg mr-3"></i>user
+								</a>
+							</li>		
+							<!-- 판매품목 -->
+							<li class="nav-item">
+								<a th:href="@{/admin/productStockList}" class="nav-link text-white p-3 mb-2 sidebar-link">
+									<i class="fas fa-shopping-cart text-white fa-lg mr-3"></i>sales
+								</a>
+							</li>
+							<!-- 분석 -->
+							<li class="nav-item">
+								<a th:href="@{/admin/analystics}" class="nav-link text-white p-3 mb-2 sidebar-link">
+									<i class="fas fa-chart-line text-white fa-lg mr-3"></i>analystics
+								</a>
+							</li>
+							<!-- 이벤트 -->
+							<li class="nav-item">
+								<a th:href="@{/admin/event}" class="nav-link text-white p-3 mb-2 sidebar-link">
+									<i class="fas fa-chart-line text-white fa-lg mr-3"></i>evnet
+								</a>
+							</li>
+							<li class="nav-item">
+								<a th:href= "@{/admin/classList}" class="nav-link text-white p-3 mb-2 sidebar-link">
+									<i class="fas fa-wrench text-white fa-lg mr-3"></i>쿠킹클래스
+								</a>
+							</li>
+							<!-- 마켓 -->
+							<li class="nav-item">
+								<a th:href= "@{/admin/marketForm}" class="nav-link text-white p-3 mb-2 sidebar-link">
+									<i class="fas fa-file-alt text-white fa-lg mr-3"></i>마켓 폼 작성
+								</a>
+							</li>		
+						</ul>
+						
+			</div>
+					
+			<!-- end of sidebar -->
+				<!-- top navbar -->
+				<div class="col-xl-10 col-lg-9 ml-auto bg-dark fixed-top py-2 top-navbar">
+					<div class="row aligh-items-center">
+						<div class="col-md-4">
+							<h4 class="text-light text-uppercase mb-0">Dashboard</h4>						
+						</div>
+						<div class="col-md-5">
+							<form action="">
+								<div class="input-group">
+									<input type="text" class="form-control search-input" placeholder="Serach...">
+									<button type="button" class="btn btn-light search-button">
+										<i class="fas fa-search text-danger"></i>
+									</button>
+								</div>
+								
+							</form>
+						</div>
+						<div class="col-md-3">
+							<ul class="navbar-nav">
+								<li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li>
+								<li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a></li>
+								<li class="nav-item ml-md-auto"><a href="#" class="nav-link" data-toggle="modal" data-target="#sign-out"><i class="fas fa-sign-out-alt text-danger fa-lg"></i></a></li>
+							
+							</ul>
+						</div>
+							
+					
+					</div>
+				
+				</div>
+				<!-- end of top navbar -->
+				
+				</div>
+				
+			</div> 
+		
+		</div>
+		
+	</nav>
+
+
+</body>
+</html>

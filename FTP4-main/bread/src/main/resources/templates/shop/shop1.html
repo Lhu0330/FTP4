@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>상시판매물품</title>
+ 
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400&display=swap" rel="stylesheet">
+<!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+ <link rel="stylesheet" type="text/css" href="../css/headstyle.css">
+ <!-- 아잌  -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet"> 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+<style>
+
+	
+	.main{
+		
+		margin: 0 auto;
+		width:1050px;
+		font-family: 'Noto Sans KR', sans-serif;
+		
+	}
+	
+	
+	.bestRankWrap{
+	
+	  margin-left:50px; 
+	 margin-right:50px;
+	
+	}
+	
+	
+
+	
+	.bestRankBackgroud{
+	  
+	  padding-bottom:20px;
+	   padding-left:100px; 
+	  padding-right:100px; 
+	
+	
+	}
+	
+	.listItem{
+	
+	border-radius: 5%;
+	
+	}
+	
+	.itemname{
+	
+		font-size:20px;
+		font-weight:400;
+		
+	}
+	
+	.fa-crown {
+		  color: red;
+		  
+		  margin-bottom:-5px;
+		}
+
+</style>
+</head>
+<body>
+	<header th:include="layout/header :: header"></header>
+	
+	<main class="main">
+		<div class="container shopPanel">
+			<div class="productList">
+				<div class="mt-5 my-5 bestRankWrap">
+				
+					<div class="bestRankBackgroud">
+						<h3 class="text-center"><i class="fas fa-crown"></i> </h3>
+						<h4 class="text-center">    BEST</h4> 
+						
+<!-- 						ranking3 -->
+						
+						<div class="row d-flex justify-content-between bestRank" >
+							<div class ="shadow BestItem" style="width: 250px;"   th:each="item : ${ranking3}" >
+							<div class="mt-2 itemImg"> 
+								  <img src="homeimage1.jpg" th:src="${item.storedFilePath}" class="d-block w-100" style="height: 220px;width: 240px;">
+							</div>						
+							<a  th:href="@{|/shop/detail/${item.productCateId}/${item.productId}|}"  th:text="${item.productName}"  class="card-text text-center nav-link link-dark itemname"></a>
+							<div class="text-center sotrename"  th:text="${item.storeId}"></div>
+							<div class="text-center price" style="margin-bottom:15px" th:text="${item.productPrice} + '원' "></div>
+						
+						</div>
+						
+					
+				</div>
+					
+					</div>
+					
+				
+				</div>
+				<div class="listWrap">
+					<div class="listBack">
+						<div class="row list">
+							<div class =" mt-3 my-3 mx-auto shadow  p-0 listItem" style="width: 250px;" th:each="list : ${ProductList.getList()}">
+							<div class="mt-2 itemImg"> 
+								  <img src="homeimage1.jpg" th:src="${list.storedFilePath}"  class="d-block w-100 rounded" style="height: 240px;width: 240px;">
+								   
+							</div>
+							<a  th:href="@{|/shop/detail/${list.productCateId}/${list.productId}|}"  th:text="${list.productName}"  class="card-text text-center nav-link link-dark itemname"></a>
+							<div class="text-center sotrename"  th:text="${list.storeId}"></div>
+							<div class="text-center price" style="margin-bottom:15px" th:text="${list.productPrice} + '원' "></div>
+							
+							
+							
+
+<!--  					  <a href="/shop/detail/"  class="card-text nav-link link-dark" th:text="${list.productName}" th:attrappend="href=${list.productId}"></a>  -->
+						
+						</div>
+						
+					
+						</div> 
+					</div>				
+				</div>
+				
+			
+			</div>		
+			
+			  <div class="mt-5">
+			<ul class="pagination justify-content-center">
+				<li class="page-item" th:classappend="${ProductList.getPrePage() == 0} ? 'disabled'">
+					<a class="page-link" th:href="@{|/shop/${productCateId}|(pageNum=${ProductList.getPrePage()})}">Prev</a>
+				</li>
+				<li class="page-item" th:each="page : ${#numbers.sequence(ProductList.getNavigateFirstPage(), ProductList.getNavigateLastPage())}" th:classappend="${page == ProductList.getPageNum()} ? 'active'">
+					<a class="page-link" th:text="${page}" th:href="@{|/shop/${productCateId}|(pageNum=${page})}"></a>
+				</li>
+				<!-- <li th:classappend="${users.getNextPage() == 0} ? 'disabled'">
+					<a th:href="@{/page(pageNum=${users.getNextPage()})}">Next</a>
+				</li> -->
+				<li class="page-item" th:classappend="${ProductList.getNextPage() == 0} ? 'disabled'">
+					<a class="page-link" th:href="@{|/shop/${productCateId}|(pageNum=${ProductList.getNextPage()})}">Next</a>
+				</li>
+			</ul>
+		</div>
+			
+			
+		</div>
+	
+	
+	
+	
+	
+	</main>
+	
+	
+	<footer th:include="layout/footer:: footer"></footer>
+	
+
+	
+	
+
+	
+	
+</body>
+</html>
