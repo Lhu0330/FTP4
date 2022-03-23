@@ -89,6 +89,6 @@ public class SBServiceImpl implements SBService {
 
 	@Override
 	public void addCart4(SBDto cart) throws Exception {
-		SBMapper.addCart(cart);
+		SBMapper.addCart4(cart);
 	}
 }
